@@ -1,0 +1,418 @@
+[WARNING]: 2023-10-16 20:10:32,576 Setting up a new session...
+[INFO]: 2023-10-16 20:10:32,582 Socket refused connection, running socketless
+[ERROR]: 2023-10-16 20:10:32,582 [Errno 111] Connection refused
+[ERROR]: 2023-10-16 20:10:32,582 error from callback <function Visdom.setup_socket.<locals>.on_close at 0x7f6d7bdcf0d0>: on_close() takes 1 positional argument but 3 were given
+[ERROR]: 2023-10-16 20:10:32,583 on_close() takes 1 positional argument but 3 were given
+[INFO]: 2023-10-16 20:10:32,684 Preloading imdb.
+[INFO]: 2023-10-16 20:10:33,951 weighted respectively as 1.05 and 0.00
+[INFO]: 2023-10-16 20:10:33,952 Found 3534 foreground and 178 empty images
+[INFO]: 2023-10-16 20:10:36,522 Labels not used in training.. ['DontCare', 'Truck', 'Tram', 'Misc', 'Person_sitting']
+[INFO]: 2023-10-16 20:10:36,525 conf: {
+    model:                  densenet121_3d_dilate_depth_aware       
+    solver_type:            sgd                                     
+    lr:                     0.004                                   
+    momentum:               0.9                                     
+    weight_decay:           0.0005                                  
+    max_iter:               50000                                   
+    snapshot_iter:          10000                                   
+    display:                250                                     
+    do_test:                True                                    
+    lr_policy:              poly                                    
+    lr_steps:               None                                    
+    lr_target:              4e-08                                   
+    rng_seed:               2                                       
+    cuda_seed:              2                                       
+    image_means:            [0.485, 0.456, 0.406]                   
+    image_stds:             [0.229, 0.224, 0.225]                   
+    feat_stride:            16                                      
+    has_3d:                 True                                    
+    test_scale:             512                                     
+    crop_size:              [512, 1760]                             
+    mirror_prob:            0.5                                     
+    distort_prob:           -1                                      
+    dataset_test:           kitti_split1                            
+    datasets_train:         [{'anno_fmt': 'kitti_det',
+                             'im_ext': '.png',
+                             'name': 'kitti_split1',
+                             'scale': 1}]
+    use_3d_for_2d:          True                                    
+    percent_anc_h:          [0.0625, 0.75]                          
+    min_gt_h:               32.0                                    
+    max_gt_h:               384.0                                   
+    min_gt_vis:             0.65                                    
+    ilbls:                  ['Van', 'ignore']                       
+    lbls:                   ['Car', 'Pedestrian', 'Cyclist']        
+    batch_size:             2                                       
+    fg_image_ratio:         1.0                                     
+    box_samples:            0.2                                     
+    fg_fraction:            0.2                                     
+    bg_thresh_lo:           0                                       
+    bg_thresh_hi:           0.5                                     
+    fg_thresh:              0.5                                     
+    ign_thresh:             0.5                                     
+    best_thresh:            0.35                                    
+    nms_topN_pre:           3000                                    
+    nms_topN_post:          40                                      
+    nms_thres:              0.4                                     
+    clip_boxes:             False                                   
+    test_protocol:          kitti                                   
+    test_db:                kitti                                   
+    test_min_h:             0                                       
+    min_det_scales:         [0, 0]                                  
+    cluster_anchors:        0                                       
+    even_anchors:           0                                       
+    expand_anchors:         0                                       
+    anchors:                [[-0.5, -8.5, 15.5, 23.5, 51.969, 0.531,
+                             1.713, 1.025, -0.799],
+                            [-8.5, -8.5, 23.5, 23.5, 52.176, 1.618,
+                             1.6, 3.811, -0.453],
+                            [-16.5, -8.5, 31.5, 23.5, 48.334,
+                             1.644, 1.529, 3.966, 0.673],
+                            [-2.528, -12.555, 17.528, 27.555,
+                             44.781, 0.534, 1.771, 0.971, 0.093],
+                            [-12.555, -12.555, 27.555, 27.555,
+                             44.704, 1.599, 1.569, 3.814, -0.187],
+                            [-22.583, -12.555, 37.583, 27.555,
+                             43.492, 1.621, 1.536, 3.91, 0.719],
+                            [-5.069, -17.638, 20.069, 32.638,
+                             34.666, 0.561, 1.752, 0.967, -0.384],
+                            [-17.638, -17.638, 32.638, 32.638,
+                             35.35, 1.567, 1.591, 3.81, -0.511],
+                            [-30.207, -17.638, 45.207, 32.638,
+                             37.128, 1.602, 1.529, 3.904, 0.452],
+                            [-8.255, -24.01, 23.255, 39.01, 28.771,
+                             0.613, 1.76, 0.98, 0.067],
+                            [-24.01, -24.01, 39.01, 39.01, 28.331,
+                             1.543, 1.592, 3.66, -0.811],
+                            [-39.764, -24.01, 54.764, 39.01,
+                             30.541, 1.626, 1.524, 3.908, 0.312],
+                            [-12.248, -31.996, 27.248, 46.996,
+                             23.011, 0.606, 1.758, 0.996, 0.208],
+                            [-31.996, -31.996, 46.996, 46.996,
+                             22.948, 1.51, 1.599, 3.419, -1.076],
+                            [-51.744, -31.996, 66.744, 46.996,
+                             25.0, 1.628, 1.527, 3.917, 0.334],
+                            [-17.253, -42.006, 32.253, 57.006,
+                             18.479, 0.601, 1.747, 1.007, 0.347],
+                            [-42.006, -42.006, 57.006, 57.006,
+                             18.815, 1.487, 1.599, 3.337, -0.862],
+                            [-66.759, -42.006, 81.759, 57.006,
+                             20.576, 1.623, 1.532, 3.942, 0.323],
+                            [-23.527, -54.553, 38.527, 69.553,
+                             15.035, 0.625, 1.744, 0.917, 0.41],
+                            [-54.553, -54.553, 69.553, 69.553,
+                             15.346, 1.29, 1.659, 3.083, -0.275],
+                            [-85.58, -54.553, 100.58, 69.553,
+                             16.326, 1.613, 1.527, 3.934, 0.268],
+                            [-31.39, -70.281, 46.39, 85.281,
+                             12.265, 0.631, 1.747, 0.954, 0.317],
+                            [-70.281, -70.281, 85.281, 85.281,
+                             11.878, 1.044, 1.67, 2.415, -0.211],
+                            [-109.171, -70.281, 124.171, 85.281,
+                             13.58, 1.621, 1.539, 3.961, 0.189],
+                            [-41.247, -89.994, 56.247, 104.994,
+                             9.932, 0.61, 1.771, 0.934, 0.486],
+                            [-89.994, -89.994, 104.994, 104.994,
+                             8.949, 0.811, 1.766, 1.662, 0.08],
+                            [-138.741, -89.994, 153.741, 104.994,
+                             11.043, 1.61, 1.533, 3.899, 0.04],
+                            [-53.602, -114.704, 68.602, 129.704,
+                             8.389, 0.604, 1.793, 0.95, 0.806],
+                            [-114.704, -114.704, 129.704, 129.704,
+                             8.071, 1.01, 1.751, 2.19, -0.076],
+                            [-175.806, -114.704, 190.806, 129.704,
+                             9.184, 1.606, 1.526, 3.869, -0.066],
+                            [-69.089, -145.677, 84.089, 160.677,
+                             6.923, 0.627, 1.791, 0.96, 0.784],
+                            [-145.677, -145.677, 160.677, 160.677,
+                             6.784, 1.384, 1.615, 2.862, -1.035],
+                            [-222.266, -145.677, 237.266, 160.677,
+                             7.863, 1.617, 1.55, 3.948, -0.071],
+                            [-88.5, -184.5, 103.5, 199.5, 5.189,
+                             0.66, 1.755, 0.841, 0.173],
+                            [-184.5, -184.5, 199.5, 199.5, 4.388,
+                             0.743, 1.728, 1.381, 0.642],
+                            [-280.5, -184.5, 295.5, 199.5, 5.583,
+                             1.583, 1.547, 3.862, -0.072]]
+    bbox_means:             [[-0.0, 0.002, 0.064, -0.093, 0.011,
+                             -0.067, 0.192, 0.059, -0.021, 0.069,
+                             -0.004]]
+    bbox_stds:              [[0.14, 0.126, 0.247, 0.239, 0.163,
+                             0.132, 3.621, 0.382, 0.102, 0.503,
+                             1.855]]
+    anchor_scales:          [32.0, 40.11, 50.276, 63.019, 78.991,
+                            99.012, 124.106, 155.561, 194.989,
+                            244.409, 306.354, 384.0]
+    anchor_ratios:          [0.5, 1.0, 1.5]                         
+    hard_negatives:         True                                    
+    focal_loss:             0                                       
+    cls_2d_lambda:          1                                       
+    iou_2d_lambda:          1                                       
+    bbox_2d_lambda:         0                                       
+    bbox_3d_lambda:         1                                       
+    bbox_3d_proj_lambda:    0.0                                     
+    hill_climbing:          True                                    
+    bins:                   32                                      
+    visdom_port:            8100                                    
+    pretrained:             'output/kitti_3d_multi_warmup/weights/model_50000_pkl'
+}
+[INFO]: 2023-10-16 20:13:10,228 iter: 250, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1561, cls: 0.0462, iou: 0.1175), misc (ry: 0.21, z: 0.53), dt: 0.61, eta: 8.5h
+[INFO]: 2023-10-16 20:15:46,483 iter: 500, acc (bg: 1.00, fg: 0.87, iou: 0.81), loss (bbox_3d: 0.7080, cls: 0.1783, iou: 0.2169), misc (ry: 0.65, z: 1.09), dt: 0.62, eta: 8.5h
+[INFO]: 2023-10-16 20:18:17,476 iter: 750, acc (bg: 1.00, fg: 0.86, iou: 0.79), loss (bbox_3d: 0.8543, cls: 0.1767, iou: 0.2431), misc (ry: 0.86, z: 1.17), dt: 0.61, eta: 8.4h
+[INFO]: 2023-10-16 20:20:53,230 iter: 1000, acc (bg: 1.00, fg: 0.92, iou: 0.83), loss (bbox_3d: 0.5714, cls: 0.1109, iou: 0.1986), misc (ry: 0.57, z: 0.99), dt: 0.62, eta: 8.4h
+[INFO]: 2023-10-16 20:23:25,435 iter: 1250, acc (bg: 1.00, fg: 0.95, iou: 0.84), loss (bbox_3d: 0.4973, cls: 0.0826, iou: 0.1821), misc (ry: 0.59, z: 0.85), dt: 0.61, eta: 8.3h
+[INFO]: 2023-10-16 20:25:59,233 iter: 1500, acc (bg: 1.00, fg: 0.94, iou: 0.85), loss (bbox_3d: 0.4093, cls: 0.0851, iou: 0.1729), misc (ry: 0.46, z: 0.79), dt: 0.62, eta: 8.3h
+[INFO]: 2023-10-16 20:28:31,788 iter: 1750, acc (bg: 1.00, fg: 0.96, iou: 0.86), loss (bbox_3d: 0.3796, cls: 0.0700, iou: 0.1567), misc (ry: 0.44, z: 0.77), dt: 0.61, eta: 8.2h
+[INFO]: 2023-10-16 20:31:06,062 iter: 2000, acc (bg: 1.00, fg: 0.96, iou: 0.85), loss (bbox_3d: 0.3938, cls: 0.0717, iou: 0.1629), misc (ry: 0.52, z: 0.76), dt: 0.61, eta: 8.2h
+[INFO]: 2023-10-16 20:33:40,819 iter: 2250, acc (bg: 1.00, fg: 0.96, iou: 0.86), loss (bbox_3d: 0.3630, cls: 0.0707, iou: 0.1591), misc (ry: 0.50, z: 0.70), dt: 0.62, eta: 8.2h
+[INFO]: 2023-10-16 20:36:15,990 iter: 2500, acc (bg: 1.00, fg: 0.96, iou: 0.86), loss (bbox_3d: 0.3683, cls: 0.0666, iou: 0.1525), misc (ry: 0.48, z: 0.70), dt: 0.62, eta: 8.1h
+[INFO]: 2023-10-16 20:38:49,614 iter: 2750, acc (bg: 1.00, fg: 0.96, iou: 0.86), loss (bbox_3d: 0.3194, cls: 0.0663, iou: 0.1514), misc (ry: 0.44, z: 0.65), dt: 0.62, eta: 8.1h
+[INFO]: 2023-10-16 20:41:25,308 iter: 3000, acc (bg: 1.00, fg: 0.96, iou: 0.87), loss (bbox_3d: 0.3299, cls: 0.0681, iou: 0.1492), misc (ry: 0.41, z: 0.69), dt: 0.62, eta: 8.0h
+[INFO]: 2023-10-16 20:43:59,889 iter: 3250, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2773, cls: 0.0607, iou: 0.1467), misc (ry: 0.35, z: 0.63), dt: 0.62, eta: 8.0h
+[INFO]: 2023-10-16 20:46:35,371 iter: 3500, acc (bg: 1.00, fg: 0.96, iou: 0.87), loss (bbox_3d: 0.2804, cls: 0.0629, iou: 0.1422), misc (ry: 0.39, z: 0.60), dt: 0.62, eta: 8.0h
+[INFO]: 2023-10-16 20:49:10,292 iter: 3750, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2709, cls: 0.0600, iou: 0.1433), misc (ry: 0.36, z: 0.62), dt: 0.62, eta: 7.9h
+[INFO]: 2023-10-16 20:51:45,315 iter: 4000, acc (bg: 1.00, fg: 0.96, iou: 0.86), loss (bbox_3d: 0.3191, cls: 0.0666, iou: 0.1531), misc (ry: 0.41, z: 0.73), dt: 0.62, eta: 7.9h
+[INFO]: 2023-10-16 20:54:21,045 iter: 4250, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2561, cls: 0.0556, iou: 0.1401), misc (ry: 0.31, z: 0.63), dt: 0.62, eta: 7.8h
+[INFO]: 2023-10-16 20:56:57,707 iter: 4500, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2207, cls: 0.0577, iou: 0.1352), misc (ry: 0.32, z: 0.56), dt: 0.62, eta: 7.8h
+[INFO]: 2023-10-16 20:59:33,807 iter: 4750, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2123, cls: 0.0558, iou: 0.1323), misc (ry: 0.27, z: 0.56), dt: 0.62, eta: 7.8h
+[INFO]: 2023-10-16 21:02:09,330 iter: 5000, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2175, cls: 0.0544, iou: 0.1287), misc (ry: 0.27, z: 0.58), dt: 0.62, eta: 7.7h
+[INFO]: 2023-10-16 21:04:44,516 iter: 5250, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2711, cls: 0.0593, iou: 0.1411), misc (ry: 0.39, z: 0.59), dt: 0.62, eta: 7.7h
+[INFO]: 2023-10-16 21:07:18,437 iter: 5500, acc (bg: 1.00, fg: 0.96, iou: 0.87), loss (bbox_3d: 0.3004, cls: 0.0698, iou: 0.1490), misc (ry: 0.40, z: 0.65), dt: 0.62, eta: 7.6h
+[INFO]: 2023-10-16 21:09:53,760 iter: 5750, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2554, cls: 0.0605, iou: 0.1368), misc (ry: 0.39, z: 0.56), dt: 0.62, eta: 7.6h
+[INFO]: 2023-10-16 21:12:30,901 iter: 6000, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2733, cls: 0.0585, iou: 0.1401), misc (ry: 0.42, z: 0.61), dt: 0.62, eta: 7.6h
+[INFO]: 2023-10-16 21:15:05,972 iter: 6250, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2372, cls: 0.0553, iou: 0.1335), misc (ry: 0.31, z: 0.60), dt: 0.62, eta: 7.5h
+[INFO]: 2023-10-16 21:17:39,342 iter: 6500, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2230, cls: 0.0598, iou: 0.1346), misc (ry: 0.33, z: 0.57), dt: 0.62, eta: 7.5h
+[INFO]: 2023-10-16 21:20:13,641 iter: 6750, acc (bg: 1.00, fg: 0.96, iou: 0.87), loss (bbox_3d: 0.3215, cls: 0.0666, iou: 0.1472), misc (ry: 0.51, z: 0.64), dt: 0.62, eta: 7.4h
+[INFO]: 2023-10-16 21:22:48,971 iter: 7000, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2797, cls: 0.0533, iou: 0.1359), misc (ry: 0.45, z: 0.55), dt: 0.62, eta: 7.4h
+[INFO]: 2023-10-16 21:25:23,768 iter: 7250, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2085, cls: 0.0544, iou: 0.1265), misc (ry: 0.33, z: 0.49), dt: 0.62, eta: 7.3h
+[INFO]: 2023-10-16 21:28:00,134 iter: 7500, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2181, cls: 0.0553, iou: 0.1311), misc (ry: 0.32, z: 0.58), dt: 0.62, eta: 7.3h
+[INFO]: 2023-10-16 21:30:35,032 iter: 7750, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.1979, cls: 0.0506, iou: 0.1288), misc (ry: 0.30, z: 0.55), dt: 0.62, eta: 7.3h
+[INFO]: 2023-10-16 21:33:13,115 iter: 8000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1908, cls: 0.0520, iou: 0.1224), misc (ry: 0.30, z: 0.49), dt: 0.62, eta: 7.2h
+[INFO]: 2023-10-16 21:35:47,560 iter: 8250, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1886, cls: 0.0496, iou: 0.1235), misc (ry: 0.26, z: 0.56), dt: 0.62, eta: 7.2h
+[INFO]: 2023-10-16 21:38:21,427 iter: 8500, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1724, cls: 0.0457, iou: 0.1196), misc (ry: 0.25, z: 0.54), dt: 0.62, eta: 7.1h
+[INFO]: 2023-10-16 21:40:55,919 iter: 8750, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1634, cls: 0.0466, iou: 0.1179), misc (ry: 0.25, z: 0.47), dt: 0.62, eta: 7.1h
+[INFO]: 2023-10-16 21:43:30,190 iter: 9000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1509, cls: 0.0457, iou: 0.1148), misc (ry: 0.22, z: 0.50), dt: 0.62, eta: 7.1h
+[INFO]: 2023-10-16 21:46:04,611 iter: 9250, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1486, cls: 0.0473, iou: 0.1159), misc (ry: 0.26, z: 0.45), dt: 0.62, eta: 7.0h
+[INFO]: 2023-10-16 21:48:36,931 iter: 9500, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1539, cls: 0.0444, iou: 0.1126), misc (ry: 0.24, z: 0.48), dt: 0.62, eta: 7.0h
+[INFO]: 2023-10-16 21:51:17,161 iter: 9750, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1513, cls: 0.0466, iou: 0.1144), misc (ry: 0.25, z: 0.45), dt: 0.62, eta: 6.9h
+[INFO]: 2023-10-16 21:53:59,628 iter: 10000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1587, cls: 0.0466, iou: 0.1123), misc (ry: 0.24, z: 0.46), dt: 0.62, eta: 6.9h
+[INFO]: 2023-10-16 21:56:39,320 testing 1000/3769, dt: 0.155, eta: 7.1m
+[INFO]: 2023-10-16 21:59:16,694 testing 2000/3769, dt: 0.156, eta: 4.6m
+[INFO]: 2023-10-16 22:01:49,532 testing 3000/3769, dt: 0.155, eta: 2.0m
+[INFO]: 2023-10-16 22:03:55,537 test_iter 10000 2d car --> easy: 0.8880, mod: 0.8229, hard: 0.6676
+[INFO]: 2023-10-16 22:03:55,538 test_iter 10000 gr car --> easy: 0.2412, mod: 0.1825, hard: 0.1658
+[INFO]: 2023-10-16 22:03:55,538 test_iter 10000 3d car --> easy: 0.1835, mod: 0.1426, hard: 0.1271
+[INFO]: 2023-10-16 22:03:55,539 test_iter 10000 2d pedestrian --> easy: 0.6446, mod: 0.5601, hard: 0.4826
+[INFO]: 2023-10-16 22:03:55,540 test_iter 10000 gr pedestrian --> easy: 0.0483, mod: 0.0465, hard: 0.0423
+[INFO]: 2023-10-16 22:03:55,540 test_iter 10000 3d pedestrian --> easy: 0.0406, mod: 0.0372, hard: 0.0366
+[INFO]: 2023-10-16 22:03:55,541 test_iter 10000 2d cyclist --> easy: 0.6261, mod: 0.3937, hard: 0.3840
+[INFO]: 2023-10-16 22:03:55,541 test_iter 10000 gr cyclist --> easy: 0.0502, mod: 0.0411, hard: 0.0411
+[INFO]: 2023-10-16 22:03:55,542 test_iter 10000 3d cyclist --> easy: 0.0441, mod: 0.0303, hard: 0.0303
+[INFO]: 2023-10-16 22:06:43,897 iter: 10250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1531, cls: 0.0422, iou: 0.1104), misc (ry: 0.23, z: 0.48), dt: 0.68, eta: 7.5h
+[INFO]: 2023-10-16 22:09:21,296 iter: 10500, acc (bg: 1.00, fg: 0.97, iou: 0.89), loss (bbox_3d: 0.1551, cls: 0.0508, iou: 0.1160), misc (ry: 0.25, z: 0.47), dt: 0.68, eta: 7.4h
+[INFO]: 2023-10-16 22:11:54,771 iter: 10750, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1670, cls: 0.0493, iou: 0.1226), misc (ry: 0.25, z: 0.51), dt: 0.68, eta: 7.4h
+[INFO]: 2023-10-16 22:14:28,858 iter: 11000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1728, cls: 0.0478, iou: 0.1169), misc (ry: 0.29, z: 0.51), dt: 0.68, eta: 7.3h
+[INFO]: 2023-10-16 22:17:03,612 iter: 11250, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.2005, cls: 0.0467, iou: 0.1216), misc (ry: 0.35, z: 0.51), dt: 0.67, eta: 7.3h
+[INFO]: 2023-10-16 22:19:38,020 iter: 11500, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1442, cls: 0.0465, iou: 0.1134), misc (ry: 0.23, z: 0.47), dt: 0.67, eta: 7.2h
+[INFO]: 2023-10-16 22:22:14,083 iter: 11750, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2544, cls: 0.0571, iou: 0.1377), misc (ry: 0.37, z: 0.58), dt: 0.67, eta: 7.1h
+[INFO]: 2023-10-16 22:24:47,261 iter: 12000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1952, cls: 0.0474, iou: 0.1241), misc (ry: 0.29, z: 0.53), dt: 0.67, eta: 7.1h
+[INFO]: 2023-10-16 22:27:21,468 iter: 12250, acc (bg: 1.00, fg: 0.97, iou: 0.89), loss (bbox_3d: 0.1866, cls: 0.0524, iou: 0.1198), misc (ry: 0.24, z: 0.52), dt: 0.67, eta: 7.0h
+[INFO]: 2023-10-16 22:29:58,233 iter: 12500, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1553, cls: 0.0472, iou: 0.1139), misc (ry: 0.24, z: 0.49), dt: 0.67, eta: 7.0h
+[INFO]: 2023-10-16 22:32:32,388 iter: 12750, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1441, cls: 0.0426, iou: 0.1051), misc (ry: 0.25, z: 0.44), dt: 0.67, eta: 6.9h
+[INFO]: 2023-10-16 22:35:05,775 iter: 13000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1704, cls: 0.0497, iou: 0.1211), misc (ry: 0.28, z: 0.48), dt: 0.67, eta: 6.9h
+[INFO]: 2023-10-16 22:37:42,193 iter: 13250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1414, cls: 0.0453, iou: 0.1113), misc (ry: 0.23, z: 0.45), dt: 0.67, eta: 6.8h
+[INFO]: 2023-10-16 22:40:17,325 iter: 13500, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1316, cls: 0.0452, iou: 0.1102), misc (ry: 0.22, z: 0.45), dt: 0.67, eta: 6.7h
+[INFO]: 2023-10-16 22:42:53,824 iter: 13750, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1393, cls: 0.0450, iou: 0.1107), misc (ry: 0.22, z: 0.46), dt: 0.66, eta: 6.7h
+[INFO]: 2023-10-16 22:45:28,426 iter: 14000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1259, cls: 0.0409, iou: 0.1021), misc (ry: 0.23, z: 0.40), dt: 0.66, eta: 6.6h
+[INFO]: 2023-10-16 22:47:59,920 iter: 14250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1229, cls: 0.0418, iou: 0.1069), misc (ry: 0.21, z: 0.47), dt: 0.66, eta: 6.6h
+[INFO]: 2023-10-16 22:50:36,439 iter: 14500, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1637, cls: 0.0431, iou: 0.1117), misc (ry: 0.26, z: 0.52), dt: 0.66, eta: 6.5h
+[INFO]: 2023-10-16 22:53:09,768 iter: 14750, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1593, cls: 0.0502, iou: 0.1129), misc (ry: 0.27, z: 0.43), dt: 0.66, eta: 6.5h
+[INFO]: 2023-10-16 22:55:41,575 iter: 15000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1402, cls: 0.0444, iou: 0.1100), misc (ry: 0.23, z: 0.45), dt: 0.66, eta: 6.4h
+[INFO]: 2023-10-16 22:58:15,548 iter: 15250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1279, cls: 0.0400, iou: 0.1028), misc (ry: 0.21, z: 0.46), dt: 0.66, eta: 6.4h
+[INFO]: 2023-10-16 23:00:48,147 iter: 15500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1068, cls: 0.0386, iou: 0.0985), misc (ry: 0.20, z: 0.41), dt: 0.66, eta: 6.3h
+[INFO]: 2023-10-16 23:03:24,843 iter: 15750, acc (bg: 1.00, fg: 0.99, iou: 0.90), loss (bbox_3d: 0.1195, cls: 0.0400, iou: 0.1044), misc (ry: 0.20, z: 0.43), dt: 0.66, eta: 6.3h
+[INFO]: 2023-10-16 23:05:56,857 iter: 16000, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1101, cls: 0.0369, iou: 0.1015), misc (ry: 0.19, z: 0.41), dt: 0.66, eta: 6.2h
+[INFO]: 2023-10-16 23:08:31,441 iter: 16250, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.0994, cls: 0.0392, iou: 0.0980), misc (ry: 0.18, z: 0.37), dt: 0.66, eta: 6.2h
+[INFO]: 2023-10-16 23:11:05,274 iter: 16500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1102, cls: 0.0386, iou: 0.1002), misc (ry: 0.21, z: 0.41), dt: 0.66, eta: 6.1h
+[INFO]: 2023-10-16 23:13:40,189 iter: 16750, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1166, cls: 0.0409, iou: 0.1036), misc (ry: 0.21, z: 0.40), dt: 0.66, eta: 6.1h
+[INFO]: 2023-10-16 23:16:16,453 iter: 17000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1523, cls: 0.0450, iou: 0.1091), misc (ry: 0.24, z: 0.41), dt: 0.66, eta: 6.0h
+[INFO]: 2023-10-16 23:18:50,316 iter: 17250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1354, cls: 0.0431, iou: 0.1037), misc (ry: 0.25, z: 0.44), dt: 0.65, eta: 6.0h
+[INFO]: 2023-10-16 23:21:25,494 iter: 17500, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1148, cls: 0.0386, iou: 0.0976), misc (ry: 0.21, z: 0.39), dt: 0.65, eta: 5.9h
+[INFO]: 2023-10-16 23:24:00,139 iter: 17750, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1134, cls: 0.0417, iou: 0.1008), misc (ry: 0.20, z: 0.37), dt: 0.65, eta: 5.9h
+[INFO]: 2023-10-16 23:26:36,147 iter: 18000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1126, cls: 0.0462, iou: 0.1042), misc (ry: 0.21, z: 0.38), dt: 0.65, eta: 5.8h
+[INFO]: 2023-10-16 23:29:11,078 iter: 18250, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1143, cls: 0.0403, iou: 0.1009), misc (ry: 0.19, z: 0.41), dt: 0.65, eta: 5.8h
+[INFO]: 2023-10-16 23:31:41,984 iter: 18500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1042, cls: 0.0392, iou: 0.1004), misc (ry: 0.19, z: 0.42), dt: 0.65, eta: 5.7h
+[INFO]: 2023-10-16 23:34:16,181 iter: 18750, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1034, cls: 0.0385, iou: 0.0972), misc (ry: 0.20, z: 0.39), dt: 0.65, eta: 5.7h
+[INFO]: 2023-10-16 23:36:51,615 iter: 19000, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1030, cls: 0.0395, iou: 0.0965), misc (ry: 0.20, z: 0.37), dt: 0.65, eta: 5.6h
+[INFO]: 2023-10-16 23:39:25,049 iter: 19250, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0934, cls: 0.0382, iou: 0.0919), misc (ry: 0.17, z: 0.39), dt: 0.65, eta: 5.6h
+[INFO]: 2023-10-16 23:41:58,274 iter: 19500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0929, cls: 0.0367, iou: 0.0926), misc (ry: 0.18, z: 0.38), dt: 0.65, eta: 5.5h
+[INFO]: 2023-10-16 23:44:35,973 iter: 19750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0827, cls: 0.0367, iou: 0.0905), misc (ry: 0.17, z: 0.35), dt: 0.65, eta: 5.5h
+[INFO]: 2023-10-16 23:47:08,806 iter: 20000, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0958, cls: 0.0345, iou: 0.0917), misc (ry: 0.22, z: 0.37), dt: 0.65, eta: 5.4h
+[INFO]: 2023-10-16 23:49:39,007 testing 1000/3769, dt: 0.145, eta: 6.7m
+[INFO]: 2023-10-16 23:52:03,030 testing 2000/3769, dt: 0.145, eta: 4.3m
+[INFO]: 2023-10-16 23:54:26,051 testing 3000/3769, dt: 0.144, eta: 1.8m
+[INFO]: 2023-10-16 23:56:26,939 test_iter 20000 2d car --> easy: 0.8558, mod: 0.8288, hard: 0.6765
+[INFO]: 2023-10-16 23:56:26,941 test_iter 20000 gr car --> easy: 0.2325, mod: 0.1796, hard: 0.1588
+[INFO]: 2023-10-16 23:56:26,942 test_iter 20000 3d car --> easy: 0.1821, mod: 0.1496, hard: 0.1285
+[INFO]: 2023-10-16 23:56:26,942 test_iter 20000 2d pedestrian --> easy: 0.7271, mod: 0.5875, hard: 0.5035
+[INFO]: 2023-10-16 23:56:26,943 test_iter 20000 gr pedestrian --> easy: 0.1136, mod: 0.1100, hard: 0.1040
+[INFO]: 2023-10-16 23:56:26,943 test_iter 20000 3d pedestrian --> easy: 0.1066, mod: 0.1030, hard: 0.0996
+[INFO]: 2023-10-16 23:56:26,944 test_iter 20000 2d cyclist --> easy: 0.5792, mod: 0.3723, hard: 0.3695
+[INFO]: 2023-10-16 23:56:26,944 test_iter 20000 gr cyclist --> easy: 0.0349, mod: 0.0272, hard: 0.0285
+[INFO]: 2023-10-16 23:56:26,945 test_iter 20000 3d cyclist --> easy: 0.0344, mod: 0.0263, hard: 0.0207
+[INFO]: 2023-10-16 23:59:01,217 iter: 20250, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1008, cls: 0.0390, iou: 0.0970), misc (ry: 0.19, z: 0.36), dt: 0.68, eta: 5.6h
+[INFO]: 2023-10-17 00:01:35,936 iter: 20500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1282, cls: 0.0385, iou: 0.1005), misc (ry: 0.23, z: 0.44), dt: 0.68, eta: 5.5h
+[INFO]: 2023-10-17 00:04:09,241 iter: 20750, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1572, cls: 0.0416, iou: 0.1034), misc (ry: 0.31, z: 0.44), dt: 0.68, eta: 5.5h
+[INFO]: 2023-10-17 00:06:41,798 iter: 21000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1421, cls: 0.0432, iou: 0.1049), misc (ry: 0.28, z: 0.45), dt: 0.67, eta: 5.4h
+[INFO]: 2023-10-17 00:09:16,345 iter: 21250, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1127, cls: 0.0400, iou: 0.1000), misc (ry: 0.21, z: 0.42), dt: 0.67, eta: 5.4h
+[INFO]: 2023-10-17 00:11:49,842 iter: 21500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1095, cls: 0.0382, iou: 0.0964), misc (ry: 0.21, z: 0.44), dt: 0.67, eta: 5.3h
+[INFO]: 2023-10-17 00:14:26,490 iter: 21750, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0932, cls: 0.0391, iou: 0.0964), misc (ry: 0.19, z: 0.38), dt: 0.67, eta: 5.3h
+[INFO]: 2023-10-17 00:16:59,914 iter: 22000, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0873, cls: 0.0379, iou: 0.0924), misc (ry: 0.16, z: 0.36), dt: 0.67, eta: 5.2h
+[INFO]: 2023-10-17 00:19:35,310 iter: 22250, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0934, cls: 0.0387, iou: 0.0951), misc (ry: 0.19, z: 0.34), dt: 0.67, eta: 5.2h
+[INFO]: 2023-10-17 00:22:09,316 iter: 22500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0907, cls: 0.0373, iou: 0.0913), misc (ry: 0.17, z: 0.39), dt: 0.67, eta: 5.1h
+[INFO]: 2023-10-17 00:24:44,234 iter: 22750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0845, cls: 0.0367, iou: 0.0883), misc (ry: 0.18, z: 0.35), dt: 0.67, eta: 5.1h
+[INFO]: 2023-10-17 00:27:16,803 iter: 23000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0808, cls: 0.0353, iou: 0.0900), misc (ry: 0.16, z: 0.36), dt: 0.67, eta: 5.0h
+[INFO]: 2023-10-17 00:29:51,838 iter: 23250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0824, cls: 0.0354, iou: 0.0886), misc (ry: 0.17, z: 0.35), dt: 0.67, eta: 5.0h
+[INFO]: 2023-10-17 00:32:26,625 iter: 23500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0807, cls: 0.0362, iou: 0.0859), misc (ry: 0.17, z: 0.34), dt: 0.67, eta: 4.9h
+[INFO]: 2023-10-17 00:34:59,164 iter: 23750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0773, cls: 0.0365, iou: 0.0890), misc (ry: 0.15, z: 0.36), dt: 0.67, eta: 4.9h
+[INFO]: 2023-10-17 00:37:32,863 iter: 24000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0755, cls: 0.0344, iou: 0.0867), misc (ry: 0.15, z: 0.37), dt: 0.67, eta: 4.8h
+[INFO]: 2023-10-17 00:40:07,821 iter: 24250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0754, cls: 0.0356, iou: 0.0852), misc (ry: 0.15, z: 0.36), dt: 0.67, eta: 4.8h
+[INFO]: 2023-10-17 00:42:41,246 iter: 24500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0761, cls: 0.0362, iou: 0.0864), misc (ry: 0.15, z: 0.32), dt: 0.67, eta: 4.7h
+[INFO]: 2023-10-17 00:45:16,696 iter: 24750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0692, cls: 0.0366, iou: 0.0818), misc (ry: 0.15, z: 0.31), dt: 0.67, eta: 4.7h
+[INFO]: 2023-10-17 00:47:51,809 iter: 25000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0693, cls: 0.0350, iou: 0.0829), misc (ry: 0.15, z: 0.32), dt: 0.67, eta: 4.6h
+[INFO]: 2023-10-17 00:50:26,345 iter: 25250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0792, cls: 0.0339, iou: 0.0831), misc (ry: 0.17, z: 0.33), dt: 0.66, eta: 4.6h
+[INFO]: 2023-10-17 00:53:00,703 iter: 25500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0679, cls: 0.0353, iou: 0.0808), misc (ry: 0.15, z: 0.32), dt: 0.66, eta: 4.5h
+[INFO]: 2023-10-17 00:55:33,313 iter: 25750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0627, cls: 0.0321, iou: 0.0779), misc (ry: 0.13, z: 0.30), dt: 0.66, eta: 4.5h
+[INFO]: 2023-10-17 00:58:09,256 iter: 26000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0782, cls: 0.0349, iou: 0.0856), misc (ry: 0.15, z: 0.35), dt: 0.66, eta: 4.4h
+[INFO]: 2023-10-17 01:00:43,579 iter: 26250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0673, cls: 0.0339, iou: 0.0826), misc (ry: 0.15, z: 0.31), dt: 0.66, eta: 4.4h
+[INFO]: 2023-10-17 01:03:17,819 iter: 26500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0635, cls: 0.0326, iou: 0.0800), misc (ry: 0.14, z: 0.33), dt: 0.66, eta: 4.3h
+[INFO]: 2023-10-17 01:05:51,994 iter: 26750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0599, cls: 0.0321, iou: 0.0784), misc (ry: 0.14, z: 0.30), dt: 0.66, eta: 4.3h
+[INFO]: 2023-10-17 01:08:27,859 iter: 27000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0629, cls: 0.0343, iou: 0.0800), misc (ry: 0.14, z: 0.31), dt: 0.66, eta: 4.2h
+[INFO]: 2023-10-17 01:11:03,321 iter: 27250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0610, cls: 0.0326, iou: 0.0764), misc (ry: 0.13, z: 0.34), dt: 0.66, eta: 4.2h
+[INFO]: 2023-10-17 01:13:35,941 iter: 27500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0623, cls: 0.0329, iou: 0.0781), misc (ry: 0.14, z: 0.28), dt: 0.66, eta: 4.1h
+[INFO]: 2023-10-17 01:16:12,259 iter: 27750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0687, cls: 0.0351, iou: 0.0812), misc (ry: 0.15, z: 0.30), dt: 0.66, eta: 4.1h
+[INFO]: 2023-10-17 01:18:47,910 iter: 28000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0611, cls: 0.0341, iou: 0.0776), misc (ry: 0.14, z: 0.29), dt: 0.66, eta: 4.0h
+[INFO]: 2023-10-17 01:21:21,757 iter: 28250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0600, cls: 0.0316, iou: 0.0780), misc (ry: 0.13, z: 0.31), dt: 0.66, eta: 4.0h
+[INFO]: 2023-10-17 01:23:56,445 iter: 28500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0836, cls: 0.0331, iou: 0.0790), misc (ry: 0.20, z: 0.30), dt: 0.66, eta: 3.9h
+[INFO]: 2023-10-17 01:26:32,603 iter: 28750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0735, cls: 0.0342, iou: 0.0810), misc (ry: 0.18, z: 0.31), dt: 0.66, eta: 3.9h
+[INFO]: 2023-10-17 01:29:09,194 iter: 29000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0616, cls: 0.0318, iou: 0.0751), misc (ry: 0.15, z: 0.32), dt: 0.66, eta: 3.8h
+[INFO]: 2023-10-17 01:31:44,515 iter: 29250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0670, cls: 0.0315, iou: 0.0768), misc (ry: 0.15, z: 0.33), dt: 0.66, eta: 3.8h
+[INFO]: 2023-10-17 01:34:19,613 iter: 29500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0535, cls: 0.0308, iou: 0.0735), misc (ry: 0.12, z: 0.29), dt: 0.66, eta: 3.7h
+[INFO]: 2023-10-17 01:36:52,073 iter: 29750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0604, cls: 0.0312, iou: 0.0752), misc (ry: 0.15, z: 0.28), dt: 0.66, eta: 3.7h
+[INFO]: 2023-10-17 01:39:27,235 iter: 30000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0580, cls: 0.0322, iou: 0.0760), misc (ry: 0.14, z: 0.28), dt: 0.66, eta: 3.7h
+[INFO]: 2023-10-17 01:41:54,219 testing 1000/3769, dt: 0.142, eta: 6.6m
+[INFO]: 2023-10-17 01:44:14,744 testing 2000/3769, dt: 0.141, eta: 4.2m
+[INFO]: 2023-10-17 01:46:37,512 testing 3000/3769, dt: 0.142, eta: 1.8m
+[INFO]: 2023-10-17 01:48:35,728 test_iter 30000 2d car --> easy: 0.8878, mod: 0.8284, hard: 0.6711
+[INFO]: 2023-10-17 01:48:35,729 test_iter 30000 gr car --> easy: 0.2385, mod: 0.2032, hard: 0.1724
+[INFO]: 2023-10-17 01:48:35,730 test_iter 30000 3d car --> easy: 0.1814, mod: 0.1575, hard: 0.1333
+[INFO]: 2023-10-17 01:48:35,731 test_iter 30000 2d pedestrian --> easy: 0.6673, mod: 0.5872, hard: 0.5043
+[INFO]: 2023-10-17 01:48:35,731 test_iter 30000 gr pedestrian --> easy: 0.0675, mod: 0.0668, hard: 0.0620
+[INFO]: 2023-10-17 01:48:35,732 test_iter 30000 3d pedestrian --> easy: 0.0641, mod: 0.0619, hard: 0.0566
+[INFO]: 2023-10-17 01:48:35,733 test_iter 30000 2d cyclist --> easy: 0.6435, mod: 0.4713, hard: 0.4042
+[INFO]: 2023-10-17 01:48:35,733 test_iter 30000 gr cyclist --> easy: 0.0643, mod: 0.0549, hard: 0.0552
+[INFO]: 2023-10-17 01:48:35,734 test_iter 30000 3d cyclist --> easy: 0.0613, mod: 0.0541, hard: 0.0543
+[INFO]: 2023-10-17 01:51:10,380 iter: 30250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0545, cls: 0.0304, iou: 0.0749), misc (ry: 0.13, z: 0.27), dt: 0.68, eta: 3.7h
+[INFO]: 2023-10-17 01:53:43,836 iter: 30500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0558, cls: 0.0311, iou: 0.0743), misc (ry: 0.13, z: 0.31), dt: 0.67, eta: 3.7h
+[INFO]: 2023-10-17 01:56:19,666 iter: 30750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0585, cls: 0.0331, iou: 0.0752), misc (ry: 0.13, z: 0.28), dt: 0.67, eta: 3.6h
+[INFO]: 2023-10-17 01:58:55,043 iter: 31000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0489, cls: 0.0315, iou: 0.0716), misc (ry: 0.12, z: 0.27), dt: 0.67, eta: 3.6h
+[INFO]: 2023-10-17 02:01:29,509 iter: 31250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0477, cls: 0.0308, iou: 0.0695), misc (ry: 0.12, z: 0.27), dt: 0.67, eta: 3.5h
+[INFO]: 2023-10-17 02:04:01,163 iter: 31500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0476, cls: 0.0289, iou: 0.0698), misc (ry: 0.13, z: 0.29), dt: 0.67, eta: 3.5h
+[INFO]: 2023-10-17 02:06:35,864 iter: 31750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0531, cls: 0.0318, iou: 0.0730), misc (ry: 0.13, z: 0.28), dt: 0.67, eta: 3.4h
+[INFO]: 2023-10-17 02:09:09,932 iter: 32000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0554, cls: 0.0318, iou: 0.0742), misc (ry: 0.13, z: 0.28), dt: 0.67, eta: 3.4h
+[INFO]: 2023-10-17 02:11:45,367 iter: 32250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0524, cls: 0.0308, iou: 0.0706), misc (ry: 0.13, z: 0.28), dt: 0.67, eta: 3.3h
+[INFO]: 2023-10-17 02:14:17,808 iter: 32500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0466, cls: 0.0292, iou: 0.0704), misc (ry: 0.12, z: 0.27), dt: 0.67, eta: 3.3h
+[INFO]: 2023-10-17 02:16:51,050 iter: 32750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0522, cls: 0.0302, iou: 0.0704), misc (ry: 0.12, z: 0.28), dt: 0.67, eta: 3.2h
+[INFO]: 2023-10-17 02:19:27,395 iter: 33000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0467, cls: 0.0299, iou: 0.0683), misc (ry: 0.12, z: 0.26), dt: 0.67, eta: 3.2h
+[INFO]: 2023-10-17 02:22:00,776 iter: 33250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0498, cls: 0.0294, iou: 0.0692), misc (ry: 0.12, z: 0.28), dt: 0.67, eta: 3.1h
+[INFO]: 2023-10-17 02:24:35,019 iter: 33500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0505, cls: 0.0313, iou: 0.0725), misc (ry: 0.13, z: 0.28), dt: 0.67, eta: 3.1h
+[INFO]: 2023-10-17 02:27:09,180 iter: 33750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0450, cls: 0.0297, iou: 0.0665), misc (ry: 0.12, z: 0.26), dt: 0.67, eta: 3.0h
+[INFO]: 2023-10-17 02:29:42,497 iter: 34000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0428, cls: 0.0289, iou: 0.0643), misc (ry: 0.11, z: 0.25), dt: 0.67, eta: 3.0h
+[INFO]: 2023-10-17 02:32:16,266 iter: 34250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0475, cls: 0.0318, iou: 0.0677), misc (ry: 0.13, z: 0.25), dt: 0.67, eta: 2.9h
+[INFO]: 2023-10-17 02:34:51,332 iter: 34500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0466, cls: 0.0302, iou: 0.0655), misc (ry: 0.12, z: 0.25), dt: 0.67, eta: 2.9h
+[INFO]: 2023-10-17 02:37:27,669 iter: 34750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0424, cls: 0.0304, iou: 0.0649), misc (ry: 0.12, z: 0.24), dt: 0.67, eta: 2.8h
+[INFO]: 2023-10-17 02:40:02,634 iter: 35000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0439, cls: 0.0288, iou: 0.0659), misc (ry: 0.12, z: 0.26), dt: 0.67, eta: 2.8h
+[INFO]: 2023-10-17 02:42:37,359 iter: 35250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0436, cls: 0.0294, iou: 0.0654), misc (ry: 0.11, z: 0.24), dt: 0.67, eta: 2.7h
+[INFO]: 2023-10-17 02:45:11,718 iter: 35500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0425, cls: 0.0294, iou: 0.0642), misc (ry: 0.11, z: 0.25), dt: 0.67, eta: 2.7h
+[INFO]: 2023-10-17 02:47:43,439 iter: 35750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0398, cls: 0.0290, iou: 0.0607), misc (ry: 0.10, z: 0.24), dt: 0.67, eta: 2.6h
+[INFO]: 2023-10-17 02:50:17,698 iter: 36000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0415, cls: 0.0301, iou: 0.0623), misc (ry: 0.11, z: 0.24), dt: 0.67, eta: 2.6h
+[INFO]: 2023-10-17 02:52:51,889 iter: 36250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0415, cls: 0.0288, iou: 0.0609), misc (ry: 0.11, z: 0.24), dt: 0.67, eta: 2.5h
+[INFO]: 2023-10-17 02:55:27,067 iter: 36500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0398, cls: 0.0289, iou: 0.0643), misc (ry: 0.11, z: 0.24), dt: 0.67, eta: 2.5h
+[INFO]: 2023-10-17 02:58:03,451 iter: 36750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0381, cls: 0.0279, iou: 0.0619), misc (ry: 0.10, z: 0.24), dt: 0.67, eta: 2.4h
+[INFO]: 2023-10-17 03:00:38,037 iter: 37000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0442, cls: 0.0289, iou: 0.0656), misc (ry: 0.11, z: 0.27), dt: 0.66, eta: 2.4h
+[INFO]: 2023-10-17 03:03:13,082 iter: 37250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0395, cls: 0.0289, iou: 0.0619), misc (ry: 0.11, z: 0.24), dt: 0.66, eta: 2.4h
+[INFO]: 2023-10-17 03:05:44,722 iter: 37500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0390, cls: 0.0282, iou: 0.0616), misc (ry: 0.11, z: 0.23), dt: 0.66, eta: 2.3h
+[INFO]: 2023-10-17 03:08:21,022 iter: 37750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0381, cls: 0.0292, iou: 0.0595), misc (ry: 0.11, z: 0.24), dt: 0.66, eta: 2.3h
+[INFO]: 2023-10-17 03:10:54,857 iter: 38000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0380, cls: 0.0283, iou: 0.0595), misc (ry: 0.11, z: 0.23), dt: 0.66, eta: 2.2h
+[INFO]: 2023-10-17 03:13:28,797 iter: 38250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0436, cls: 0.0286, iou: 0.0622), misc (ry: 0.11, z: 0.25), dt: 0.66, eta: 2.2h
+[INFO]: 2023-10-17 03:16:02,658 iter: 38500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0366, cls: 0.0283, iou: 0.0580), misc (ry: 0.11, z: 0.23), dt: 0.66, eta: 2.1h
+[INFO]: 2023-10-17 03:18:37,327 iter: 38750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0364, cls: 0.0281, iou: 0.0590), misc (ry: 0.11, z: 0.23), dt: 0.66, eta: 2.1h
+[INFO]: 2023-10-17 03:21:09,831 iter: 39000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0376, cls: 0.0288, iou: 0.0596), misc (ry: 0.10, z: 0.23), dt: 0.66, eta: 2.0h
+[INFO]: 2023-10-17 03:23:45,334 iter: 39250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0366, cls: 0.0289, iou: 0.0593), misc (ry: 0.10, z: 0.22), dt: 0.66, eta: 2.0h
+[INFO]: 2023-10-17 03:26:19,122 iter: 39500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0370, cls: 0.0279, iou: 0.0570), misc (ry: 0.10, z: 0.23), dt: 0.66, eta: 1.9h
+[INFO]: 2023-10-17 03:28:54,533 iter: 39750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0389, cls: 0.0290, iou: 0.0597), misc (ry: 0.11, z: 0.23), dt: 0.66, eta: 1.9h
+[INFO]: 2023-10-17 03:31:28,183 iter: 40000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0386, cls: 0.0290, iou: 0.0593), misc (ry: 0.10, z: 0.23), dt: 0.66, eta: 1.8h
+[INFO]: 2023-10-17 03:34:00,377 testing 1000/3769, dt: 0.147, eta: 6.8m
+[INFO]: 2023-10-17 03:36:25,980 testing 2000/3769, dt: 0.146, eta: 4.3m
+[INFO]: 2023-10-17 03:38:49,381 testing 3000/3769, dt: 0.145, eta: 1.9m
+[INFO]: 2023-10-17 03:40:47,628 test_iter 40000 2d car --> easy: 0.9221, mod: 0.8461, hard: 0.6828
+[INFO]: 2023-10-17 03:40:47,629 test_iter 40000 gr car --> easy: 0.2674, mod: 0.2137, hard: 0.1795
+[INFO]: 2023-10-17 03:40:47,630 test_iter 40000 3d car --> easy: 0.2030, mod: 0.1694, hard: 0.1377
+[INFO]: 2023-10-17 03:40:47,631 test_iter 40000 2d pedestrian --> easy: 0.6542, mod: 0.5760, hard: 0.4949
+[INFO]: 2023-10-17 03:40:47,631 test_iter 40000 gr pedestrian --> easy: 0.0681, mod: 0.0569, hard: 0.0558
+[INFO]: 2023-10-17 03:40:47,632 test_iter 40000 3d pedestrian --> easy: 0.0535, mod: 0.0536, hard: 0.0458
+[INFO]: 2023-10-17 03:40:47,632 test_iter 40000 2d cyclist --> easy: 0.6463, mod: 0.4130, hard: 0.4038
+[INFO]: 2023-10-17 03:40:47,633 test_iter 40000 gr cyclist --> easy: 0.0594, mod: 0.0560, hard: 0.0561
+[INFO]: 2023-10-17 03:40:47,633 test_iter 40000 3d cyclist --> easy: 0.0576, mod: 0.0550, hard: 0.0552
+[INFO]: 2023-10-17 03:43:20,805 iter: 40250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0326, cls: 0.0260, iou: 0.0548), misc (ry: 0.10, z: 0.22), dt: 0.67, eta: 1.8h
+[INFO]: 2023-10-17 03:45:56,389 iter: 40500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0330, cls: 0.0287, iou: 0.0551), misc (ry: 0.10, z: 0.23), dt: 0.67, eta: 1.8h
+[INFO]: 2023-10-17 03:48:30,067 iter: 40750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0334, cls: 0.0269, iou: 0.0557), misc (ry: 0.10, z: 0.22), dt: 0.67, eta: 1.7h
+[INFO]: 2023-10-17 03:51:05,716 iter: 41000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0318, cls: 0.0276, iou: 0.0548), misc (ry: 0.10, z: 0.22), dt: 0.67, eta: 1.7h
+[INFO]: 2023-10-17 03:53:41,976 iter: 41250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0331, cls: 0.0277, iou: 0.0556), misc (ry: 0.10, z: 0.23), dt: 0.67, eta: 1.6h
+[INFO]: 2023-10-17 03:56:18,333 iter: 41500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0383, cls: 0.0297, iou: 0.0569), misc (ry: 0.10, z: 0.23), dt: 0.67, eta: 1.6h
+[INFO]: 2023-10-17 03:58:54,388 iter: 41750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0314, cls: 0.0278, iou: 0.0530), misc (ry: 0.10, z: 0.21), dt: 0.67, eta: 1.5h
+[INFO]: 2023-10-17 04:01:30,140 iter: 42000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0346, cls: 0.0291, iou: 0.0543), misc (ry: 0.10, z: 0.21), dt: 0.67, eta: 1.5h
+[INFO]: 2023-10-17 04:04:03,958 iter: 42250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0334, cls: 0.0285, iou: 0.0536), misc (ry: 0.10, z: 0.20), dt: 0.67, eta: 1.4h
+[INFO]: 2023-10-17 04:06:37,970 iter: 42500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0310, cls: 0.0266, iou: 0.0518), misc (ry: 0.10, z: 0.21), dt: 0.67, eta: 1.4h
+[INFO]: 2023-10-17 04:09:12,071 iter: 42750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0297, cls: 0.0264, iou: 0.0526), misc (ry: 0.09, z: 0.20), dt: 0.67, eta: 1.4h
+[INFO]: 2023-10-17 04:11:43,349 iter: 43000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0281, cls: 0.0250, iou: 0.0503), misc (ry: 0.09, z: 0.21), dt: 0.67, eta: 1.3h
+[INFO]: 2023-10-17 04:14:18,262 iter: 43250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0317, cls: 0.0274, iou: 0.0525), misc (ry: 0.10, z: 0.20), dt: 0.67, eta: 1.3h
+[INFO]: 2023-10-17 04:16:53,344 iter: 43500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0302, cls: 0.0272, iou: 0.0503), misc (ry: 0.10, z: 0.20), dt: 0.67, eta: 1.2h
+[INFO]: 2023-10-17 04:19:30,151 iter: 43750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0306, cls: 0.0272, iou: 0.0521), misc (ry: 0.09, z: 0.20), dt: 0.67, eta: 1.2h
+[INFO]: 2023-10-17 04:22:01,825 iter: 44000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0314, cls: 0.0270, iou: 0.0512), misc (ry: 0.10, z: 0.20), dt: 0.67, eta: 1.1h
+[INFO]: 2023-10-17 04:24:36,315 iter: 44250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0293, cls: 0.0269, iou: 0.0498), misc (ry: 0.10, z: 0.21), dt: 0.67, eta: 1.1h
+[INFO]: 2023-10-17 04:27:09,004 iter: 44500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0323, cls: 0.0279, iou: 0.0495), misc (ry: 0.10, z: 0.20), dt: 0.67, eta: 1.0h
+[INFO]: 2023-10-17 04:29:44,576 iter: 44750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0312, cls: 0.0274, iou: 0.0496), misc (ry: 0.10, z: 0.20), dt: 0.67, eta: 58.6m
+[INFO]: 2023-10-17 04:32:19,100 iter: 45000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0283, cls: 0.0270, iou: 0.0496), misc (ry: 0.09, z: 0.20), dt: 0.67, eta: 55.8m
+[INFO]: 2023-10-17 04:34:53,872 iter: 45250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0328, cls: 0.0269, iou: 0.0499), misc (ry: 0.10, z: 0.21), dt: 0.67, eta: 52.9m
+[INFO]: 2023-10-17 04:37:27,696 iter: 45500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0287, cls: 0.0265, iou: 0.0488), misc (ry: 0.09, z: 0.21), dt: 0.67, eta: 50.1m
+[INFO]: 2023-10-17 04:40:03,088 iter: 45750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0342, cls: 0.0302, iou: 0.0522), misc (ry: 0.10, z: 0.20), dt: 0.67, eta: 47.3m
+[INFO]: 2023-10-17 04:42:38,351 iter: 46000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0322, cls: 0.0271, iou: 0.0496), misc (ry: 0.10, z: 0.20), dt: 0.67, eta: 44.5m
+[INFO]: 2023-10-17 04:45:14,319 iter: 46250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0318, cls: 0.0280, iou: 0.0495), misc (ry: 0.09, z: 0.20), dt: 0.67, eta: 41.7m
+[INFO]: 2023-10-17 04:47:48,133 iter: 46500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0283, cls: 0.0264, iou: 0.0474), misc (ry: 0.09, z: 0.19), dt: 0.67, eta: 38.9m
+[INFO]: 2023-10-17 04:50:23,151 iter: 46750, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0297, cls: 0.0266, iou: 0.0473), misc (ry: 0.10, z: 0.19), dt: 0.67, eta: 36.1m
+[INFO]: 2023-10-17 04:52:58,233 iter: 47000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0285, cls: 0.0279, iou: 0.0482), misc (ry: 0.09, z: 0.18), dt: 0.67, eta: 33.4m
+[INFO]: 2023-10-17 04:55:33,115 iter: 47250, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0290, cls: 0.0273, iou: 0.0471), misc (ry: 0.09, z: 0.19), dt: 0.67, eta: 30.6m
+[INFO]: 2023-10-17 04:58:08,683 iter: 47500, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0264, cls: 0.0273, iou: 0.0454), misc (ry: 0.09, z: 0.18), dt: 0.67, eta: 27.8m
+[INFO]: 2023-10-17 05:00:44,361 iter: 47750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0263, cls: 0.0261, iou: 0.0473), misc (ry: 0.09, z: 0.19), dt: 0.67, eta: 25.0m
+[INFO]: 2023-10-17 05:03:19,537 iter: 48000, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0260, cls: 0.0250, iou: 0.0452), misc (ry: 0.09, z: 0.19), dt: 0.67, eta: 22.2m
+[INFO]: 2023-10-17 05:05:53,571 iter: 48250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0326, cls: 0.0297, iou: 0.0490), misc (ry: 0.09, z: 0.19), dt: 0.67, eta: 19.4m
+[INFO]: 2023-10-17 05:08:25,194 iter: 48500, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0264, cls: 0.0266, iou: 0.0452), misc (ry: 0.09, z: 0.19), dt: 0.67, eta: 16.6m
+[INFO]: 2023-10-17 05:10:56,194 iter: 48750, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0263, cls: 0.0255, iou: 0.0445), misc (ry: 0.09, z: 0.19), dt: 0.67, eta: 13.9m
+[INFO]: 2023-10-17 05:13:30,300 iter: 49000, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0266, cls: 0.0266, iou: 0.0447), misc (ry: 0.09, z: 0.18), dt: 0.66, eta: 11.1m
+[INFO]: 2023-10-17 05:16:05,614 iter: 49250, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0272, cls: 0.0266, iou: 0.0439), misc (ry: 0.09, z: 0.18), dt: 0.66, eta: 8.3m
+[INFO]: 2023-10-17 05:18:41,268 iter: 49500, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0290, cls: 0.0272, iou: 0.0455), misc (ry: 0.09, z: 0.19), dt: 0.66, eta: 5.5m
+[INFO]: 2023-10-17 05:21:13,233 iter: 49750, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0231, cls: 0.0247, iou: 0.0408), misc (ry: 0.08, z: 0.17), dt: 0.66, eta: 2.8m
+[INFO]: 2023-10-17 05:23:49,791 iter: 50000, acc (bg: 1.00, fg: 0.99, iou: 0.96), loss (bbox_3d: 0.0298, cls: 0.0282, iou: 0.0460), misc (ry: 0.09, z: 0.18), dt: 0.66, eta: 0.7s
+[INFO]: 2023-10-17 05:26:16,955 testing 1000/3769, dt: 0.142, eta: 6.6m
+[INFO]: 2023-10-17 05:28:38,629 testing 2000/3769, dt: 0.142, eta: 4.2m
+[INFO]: 2023-10-17 05:30:58,950 testing 3000/3769, dt: 0.141, eta: 1.8m
+[INFO]: 2023-10-17 05:32:56,578 test_iter 50000 2d car --> easy: 0.9188, mod: 0.8452, hard: 0.6813
+[INFO]: 2023-10-17 05:32:56,579 test_iter 50000 gr car --> easy: 0.2681, mod: 0.2159, hard: 0.1819
+[INFO]: 2023-10-17 05:32:56,580 test_iter 50000 3d car --> easy: 0.2032, mod: 0.1727, hard: 0.1534
+[INFO]: 2023-10-17 05:32:56,581 test_iter 50000 2d pedestrian --> easy: 0.6628, mod: 0.5851, hard: 0.5038
+[INFO]: 2023-10-17 05:32:56,581 test_iter 50000 gr pedestrian --> easy: 0.0675, mod: 0.0575, hard: 0.0568
+[INFO]: 2023-10-17 05:32:56,582 test_iter 50000 3d pedestrian --> easy: 0.0482, mod: 0.0536, hard: 0.0486
+[INFO]: 2023-10-17 05:32:56,582 test_iter 50000 2d cyclist --> easy: 0.6641, mod: 0.4215, hard: 0.4146
+[INFO]: 2023-10-17 05:32:56,583 test_iter 50000 gr cyclist --> easy: 0.1080, mod: 0.1000, hard: 0.1002
+[INFO]: 2023-10-17 05:32:56,584 test_iter 50000 3d cyclist --> easy: 0.1038, mod: 0.0909, hard: 0.0909
