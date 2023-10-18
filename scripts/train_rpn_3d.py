@@ -1,5 +1,5 @@
 # -----------------------------------------
-# python modules
+# python模块
 # -----------------------------------------
 from easydict import EasyDict as edict
 from getopt import getopt
@@ -13,7 +13,7 @@ sys.path.append(os.getcwd())
 np.set_printoptions(suppress=True)
 
 # -----------------------------------------
-# custom modules
+# 自定义模块
 # -----------------------------------------
 from lib.core import *
 from lib.imdb_util import *
@@ -23,26 +23,26 @@ from lib.loss.rpn_3d import *
 def main(argv):
 
     # -----------------------------------------
-    # parse arguments
+    # 传入参数
     # -----------------------------------------
     opts, args = getopt(argv, '', ['config=', 'restore='])
 
-    # defaults
+    # 默认
     conf_name = None
     restore = None
 
-    # read opts
+    # 读取参数
     for opt, arg in opts:
 
         if opt in ('--config'): conf_name = arg
         if opt in ('--restore'): restore = int(arg)
 
-    # required opt
+    # 必须要传入的参数 --config
     if conf_name is None:
         raise ValueError('Please provide a configuration file name, e.g., --config=<config_name>')
 
     # -----------------------------------------
-    # basic setup
+    # 基础设置
     # -----------------------------------------
 
     conf = init_config(conf_name)
@@ -51,13 +51,15 @@ def main(argv):
     init_torch(conf.rng_seed, conf.cuda_seed)
     init_log_file(paths.logs)
 
-    vis = init_visdom(conf_name, conf.visdom_port)
+    # 不用visdom
+    # vis = init_visdom(conf_name, conf.visdom_port)
 
-    # defaults
+    # 默认
     start_iter = 0
     tracker = edict()
     iterator = None
-    has_visdom = vis is not None
+    # has_visdom = vis is not None
+    has_visdom = None
 
     dataset = Dataset(conf, paths.data, paths.output)
 
@@ -66,33 +68,33 @@ def main(argv):
 
 
     # -----------------------------------------
-    # store config
+    # 存储设置
     # -----------------------------------------
 
-    # store configuration
+    # 保存设置
     pickle_write(os.path.join(paths.output, 'conf.pkl'), conf)
 
-    # show configuration
+    # 显示设置
     pretty = pretty_print('conf', conf)
     logging.info(pretty)
 
 
     # -----------------------------------------
-    # network and loss
+    # 网络与损失
     # -----------------------------------------
 
-    # training network
+    # 训练网络
     rpn_net, optimizer = init_training_model(conf, paths.output)
 
-    # setup loss
+    # 设置损失
     criterion_det = RPN_3D_loss(conf)
 
-    # custom pretrained network
+    # 自定义预训练网络
     if 'pretrained' in conf:
 
         load_weights(rpn_net, conf.pretrained)
 
-    # resume training
+    # 继续训练
     if restore:
         start_iter = (restore - 1)
         resume_checkpoint(optimizer, rpn_net, paths.weights, restore)
@@ -107,27 +109,27 @@ def main(argv):
     start_time = time()
 
     # -----------------------------------------
-    # train
+    # 训练
     # -----------------------------------------
 
     for iteration in range(start_iter, conf.max_iter):
 
-        # next iteration
+        # 下一个迭代
         iterator, images, imobjs = next_iteration(dataset.loader, iterator)
 
-        #  learning rate
+        # 学习率
         adjust_lr(conf, optimizer, iteration)
 
-        # forward
+        # 前向传播
         cls, prob, bbox_2d, bbox_3d, feat_size = rpn_net(images)
 
-        # loss
+        # 损失
         det_loss, det_stats = criterion_det(cls, prob, bbox_2d, bbox_3d, imobjs, feat_size)
 
         total_loss = det_loss
         stats = det_stats
 
-        # backprop
+        # 后向传播
         if total_loss > 0:
 
             total_loss.backward()
@@ -149,8 +151,8 @@ def main(argv):
             log_stats(tracker, iteration, start_time, start_iter, conf.max_iter)
 
             # display results
-            if has_visdom:
-                display_stats(vis, tracker, iteration, start_time, start_iter, conf.max_iter, conf_name, pretty)
+            # if has_visdom:
+            #     display_stats(vis, tracker, iteration, start_time, start_iter, conf.max_iter, conf_name, pretty)
 
             # reset tracker
             tracker = edict()
