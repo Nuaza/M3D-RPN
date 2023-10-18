@@ -53,7 +53,7 @@ class RPN(nn.Module):
 
         del self.base.transition3.pool
 
-        # dilate
+	# TODO:这些densenet的网络层，能不能改
         dilate_layer(self.base.denseblock4.denselayer1.conv2, 2)
         dilate_layer(self.base.denseblock4.denselayer2.conv2, 2)
         dilate_layer(self.base.denseblock4.denselayer3.conv2, 2)
