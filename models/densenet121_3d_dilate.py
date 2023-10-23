@@ -5,7 +5,6 @@ import torch
 
 
 def dilate_layer(layer, val):
-
     layer.dilation = val
     layer.padding = val
 
