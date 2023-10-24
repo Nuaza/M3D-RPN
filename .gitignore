@@ -6,5 +6,8 @@ data/kitti_split2/validation
 
 output/kitti_3d_multi_warmup/results
 output/kitti_3d_multi_warmup/weights
+output/kitti_3d_multi_warmup_local/results
+output/kitti_3d_multi_warmup_local/weights
 output/kitti_3d_multi_main/results
 output/kitti_3d_multi_main/weights
+
