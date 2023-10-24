@@ -17,7 +17,7 @@ class RPN(nn.Module):
 
         self.base = base
 
-        del self.base.transition3.pool
+        # del self.base.transition3.pool
 
         # dilate
         dilate_layer(self.base.denseblock4.denselayer1.conv2, 2)

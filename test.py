@@ -7,7 +7,5 @@ logging.basicConfig(level=logging.INFO)
 
 if __name__ == '__main__':
     densenet121 = models.densenet121()
-    test = DenseNet()
-    logging.info(densenet121)
-    # print(densenet121.features)
-    # print(test.features)
+    densenet121_local = DenseNet()
+    logging.info(densenet121_local.features)
