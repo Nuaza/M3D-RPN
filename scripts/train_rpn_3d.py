@@ -85,6 +85,7 @@ def main(argv):
 
     # 训练网络
     rpn_net, optimizer = init_training_model(conf, paths.output)
+    logging.info(rpn_net)
 
     # 设置损失
     criterion_det = RPN_3D_loss(conf)
