@@ -19,9 +19,6 @@ import shutil
 import math
 import copy
 import cv2
-#from scipy.spatial.transform import Rotation as scipy_R
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from PIL import Image
 
 

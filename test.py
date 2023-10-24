@@ -1,6 +1,6 @@
 import logging
 
-from models.backbones.densenet121 import DenseNet
+from backbones.densenet121 import DenseNet
 from torchvision import models
 
 logging.basicConfig(level=logging.INFO)
