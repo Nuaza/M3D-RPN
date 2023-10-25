@@ -5,8 +5,10 @@ import torch
 
 
 def dilate_layer(layer, val):
-    layer.dilation = val
-    layer.padding = val
+    # layer.dilation = val
+    # layer.padding = val
+    layer.dilation = (2, 2)
+    layer.padding = (2, 2)
 
 
 class RPN(nn.Module):
