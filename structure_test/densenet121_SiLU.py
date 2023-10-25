@@ -1,5 +1,6 @@
 import logging
-
+import torch
+import torch.nn as nn
 from torchvision import models
 
 logging.basicConfig(level=logging.INFO)
@@ -10,8 +11,15 @@ def dilate_layer(layer, val):
     layer.padding = val
 
 
+def replace_to_SiLU(layer):
+    layer.relu1 = nn.SiLU(inplace=True)
+    layer.relu2 = nn.SiLU(inplace=True)
+
+
 if __name__ == '__main__':
     densenet121 = models.densenet121().features
+
+    # dilate
     del densenet121.transition3.pool
     dilate_layer(densenet121.denseblock4.denselayer1.conv2, (2, 2))
     dilate_layer(densenet121.denseblock4.denselayer2.conv2, (2, 2))
@@ -29,5 +37,69 @@ if __name__ == '__main__':
     dilate_layer(densenet121.denseblock4.denselayer14.conv2, (2, 2))
     dilate_layer(densenet121.denseblock4.denselayer15.conv2, (2, 2))
     dilate_layer(densenet121.denseblock4.denselayer16.conv2, (2, 2))
-    logging.info(densenet121)
 
+    # SiLU
+    densenet121.relu0 = nn.SiLU(inplace=True)
+    densenet121.transition1.relu = nn.SiLU(inplace=True)
+    densenet121.transition2.relu = nn.SiLU(inplace=True)
+    densenet121.transition3.relu = nn.SiLU(inplace=True)
+    replace_to_SiLU(densenet121.denseblock1.denselayer1)
+    replace_to_SiLU(densenet121.denseblock1.denselayer2)
+    replace_to_SiLU(densenet121.denseblock1.denselayer3)
+    replace_to_SiLU(densenet121.denseblock1.denselayer4)
+    replace_to_SiLU(densenet121.denseblock1.denselayer5)
+    replace_to_SiLU(densenet121.denseblock1.denselayer6)
+    replace_to_SiLU(densenet121.denseblock2.denselayer1)
+    replace_to_SiLU(densenet121.denseblock2.denselayer2)
+    replace_to_SiLU(densenet121.denseblock2.denselayer3)
+    replace_to_SiLU(densenet121.denseblock2.denselayer4)
+    replace_to_SiLU(densenet121.denseblock2.denselayer5)
+    replace_to_SiLU(densenet121.denseblock2.denselayer6)
+    replace_to_SiLU(densenet121.denseblock2.denselayer7)
+    replace_to_SiLU(densenet121.denseblock2.denselayer8)
+    replace_to_SiLU(densenet121.denseblock2.denselayer9)
+    replace_to_SiLU(densenet121.denseblock2.denselayer10)
+    replace_to_SiLU(densenet121.denseblock2.denselayer11)
+    replace_to_SiLU(densenet121.denseblock2.denselayer12)
+    replace_to_SiLU(densenet121.denseblock3.denselayer1)
+    replace_to_SiLU(densenet121.denseblock3.denselayer2)
+    replace_to_SiLU(densenet121.denseblock3.denselayer3)
+    replace_to_SiLU(densenet121.denseblock3.denselayer4)
+    replace_to_SiLU(densenet121.denseblock3.denselayer5)
+    replace_to_SiLU(densenet121.denseblock3.denselayer6)
+    replace_to_SiLU(densenet121.denseblock3.denselayer7)
+    replace_to_SiLU(densenet121.denseblock3.denselayer8)
+    replace_to_SiLU(densenet121.denseblock3.denselayer9)
+    replace_to_SiLU(densenet121.denseblock3.denselayer10)
+    replace_to_SiLU(densenet121.denseblock3.denselayer11)
+    replace_to_SiLU(densenet121.denseblock3.denselayer12)
+    replace_to_SiLU(densenet121.denseblock3.denselayer13)
+    replace_to_SiLU(densenet121.denseblock3.denselayer14)
+    replace_to_SiLU(densenet121.denseblock3.denselayer15)
+    replace_to_SiLU(densenet121.denseblock3.denselayer16)
+    replace_to_SiLU(densenet121.denseblock3.denselayer17)
+    replace_to_SiLU(densenet121.denseblock3.denselayer18)
+    replace_to_SiLU(densenet121.denseblock3.denselayer19)
+    replace_to_SiLU(densenet121.denseblock3.denselayer20)
+    replace_to_SiLU(densenet121.denseblock3.denselayer21)
+    replace_to_SiLU(densenet121.denseblock3.denselayer22)
+    replace_to_SiLU(densenet121.denseblock3.denselayer23)
+    replace_to_SiLU(densenet121.denseblock3.denselayer24)
+    replace_to_SiLU(densenet121.denseblock4.denselayer1)
+    replace_to_SiLU(densenet121.denseblock4.denselayer2)
+    replace_to_SiLU(densenet121.denseblock4.denselayer3)
+    replace_to_SiLU(densenet121.denseblock4.denselayer4)
+    replace_to_SiLU(densenet121.denseblock4.denselayer5)
+    replace_to_SiLU(densenet121.denseblock4.denselayer6)
+    replace_to_SiLU(densenet121.denseblock4.denselayer7)
+    replace_to_SiLU(densenet121.denseblock4.denselayer8)
+    replace_to_SiLU(densenet121.denseblock4.denselayer9)
+    replace_to_SiLU(densenet121.denseblock4.denselayer10)
+    replace_to_SiLU(densenet121.denseblock4.denselayer11)
+    replace_to_SiLU(densenet121.denseblock4.denselayer12)
+    replace_to_SiLU(densenet121.denseblock4.denselayer13)
+    replace_to_SiLU(densenet121.denseblock4.denselayer14)
+    replace_to_SiLU(densenet121.denseblock4.denselayer15)
+    replace_to_SiLU(densenet121.denseblock4.denselayer16)
+
+    logging.info(densenet121)

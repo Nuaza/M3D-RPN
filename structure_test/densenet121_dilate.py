@@ -12,6 +12,8 @@ def dilate_layer(layer, val):
 
 if __name__ == '__main__':
     densenet121 = models.densenet121().features
+
+    #dilate
     del densenet121.transition3.pool
     dilate_layer(densenet121.denseblock4.denselayer1.conv2, (2, 2))
     dilate_layer(densenet121.denseblock4.denselayer2.conv2, (2, 2))
