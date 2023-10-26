@@ -2,6 +2,7 @@ import logging
 import torch
 import torch.nn as nn
 from torchvision import models
+from backbones.densenet121 import DenseNet
 
 logging.basicConfig(level=logging.INFO)
 
@@ -17,7 +18,10 @@ def replace_to_SiLU(layer):
 
 
 if __name__ == '__main__':
-    densenet121 = models.densenet121().features
+    densenet121_model = DenseNet()
+    torchvision_model = models.densenet121(pretrained=True)
+    densenet121_model.load_state_dict(torchvision_model.state_dict())
+    densenet121 = densenet121_model.features
 
     # dilate
     del densenet121.transition3.pool
@@ -102,4 +106,6 @@ if __name__ == '__main__':
     replace_to_SiLU(densenet121.denseblock4.denselayer15)
     replace_to_SiLU(densenet121.denseblock4.denselayer16)
 
-    logging.info(densenet121)
+    logging.info(densenet121_model)
+    for param in densenet121.parameters():
+        print(param)
