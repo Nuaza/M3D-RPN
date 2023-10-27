@@ -14,7 +14,7 @@ class PConv(nn.Module):
 
         self.conv = nn.Conv2d(
             self.dim_conv,
-            self.dim_conv / 2,
+            self.dim_conv,
             kernel_size,
             stride=1,
             padding=(kernel_size - 1) // 2,

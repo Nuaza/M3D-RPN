@@ -13,10 +13,6 @@ def dilate_layer(layer, val):
     layer.padding = val
 
 
-def replace_to_SiLU(layer):
-    layer.relu1 = nn.SiLU(inplace=True)
-    layer.relu2 = nn.SiLU(inplace=True)
-
 if __name__ == '__main__':
 
     # If import the torchvision model to local codes, use this.
@@ -47,9 +43,10 @@ if __name__ == '__main__':
     dilate_layer(densenet121.denseblock4.denselayer15.conv2, (2, 2))
     dilate_layer(densenet121.denseblock4.denselayer16.conv2, (2, 2))
 
-    # Replace transition Conv2d to PConv
-    densenet121.transition1.conv = PConv(256, 1, kernel_size=1)
-    densenet121.transition2.conv = PConv(512, 1, kernel_size=1)
-    densenet121.transition3.conv = PConv(1024, 1, kernel_size=1)
-
+    # Replace
+    densenet121.denseblock1.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+    densenet121.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+    densenet121.denseblock3.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+    densenet121.denseblock4.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+    print(densenet121.denseblock1.denselayer1.conv1)
     logging.info(densenet121_model)
