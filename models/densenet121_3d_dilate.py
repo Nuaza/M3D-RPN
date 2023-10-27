@@ -39,10 +39,11 @@ class RPN(nn.Module):
         dilate_layer(self.base.denseblock4.denselayer15.conv2, (2, 2))
         dilate_layer(self.base.denseblock4.denselayer16.conv2, (2, 2))
 
-        # Replace transition Conv2d to PConv
-        self.base.transition1.conv = PConv(256, 1, kernel_size=1)
-        self.base.transition2.conv = PConv(512, 1, kernel_size=1)
-        self.base.transition3.conv = PConv(1024, 1, kernel_size=1)
+        # Replace PConv
+        self.base.denseblock1.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+        self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+        self.base.denseblock3.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+        self.base.denseblock4.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
         # settings
         self.phase = phase

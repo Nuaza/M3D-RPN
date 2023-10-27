@@ -43,7 +43,7 @@ if __name__ == '__main__':
     dilate_layer(densenet121.denseblock4.denselayer15.conv2, (2, 2))
     dilate_layer(densenet121.denseblock4.denselayer16.conv2, (2, 2))
 
-    # Replace
+    # Replace PConv
     densenet121.denseblock1.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
     densenet121.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
     densenet121.denseblock3.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
