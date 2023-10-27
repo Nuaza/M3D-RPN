@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 from torchvision import models
 from backbones.densenet121 import DenseNet
+from models.PConv import PConv
 
 logging.basicConfig(level=logging.INFO)
 
@@ -16,11 +17,15 @@ def replace_to_SiLU(layer):
     layer.relu1 = nn.SiLU(inplace=True)
     layer.relu2 = nn.SiLU(inplace=True)
 
-
 if __name__ == '__main__':
-    densenet121_model = DenseNet()
-    torchvision_model = models.densenet121(pretrained=True)
-    densenet121_model.load_state_dict(torchvision_model.state_dict())
+
+    # If import the torchvision model to local codes, use this.
+    # densenet121_model = DenseNet()
+    # torchvision_model = models.densenet121(pretrained=True)
+    # densenet121_model.load_state_dict(torchvision_model.state_dict())
+    # densenet121 = densenet121_model.features
+
+    densenet121_model = models.densenet121(weights=True)
     densenet121 = densenet121_model.features
 
     # dilate
@@ -42,6 +47,9 @@ if __name__ == '__main__':
     dilate_layer(densenet121.denseblock4.denselayer15.conv2, (2, 2))
     dilate_layer(densenet121.denseblock4.denselayer16.conv2, (2, 2))
 
+    # Replace transition Conv2d to PConv
+    densenet121.transition1.conv = PConv(256, 1, kernel_size=1)
+    densenet121.transition2.conv = PConv(512, 1, kernel_size=1)
+    densenet121.transition3.conv = PConv(1024, 1, kernel_size=1)
+
     logging.info(densenet121_model)
-    for param in densenet121.parameters():
-        print(param)
