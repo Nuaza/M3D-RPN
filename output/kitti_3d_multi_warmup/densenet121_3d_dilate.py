@@ -1,5 +1,6 @@
 import torch.nn as nn
 from torchvision import models
+from models.PConv import PConv
 from lib.rpn_util import *
 import torch
 
@@ -12,7 +13,6 @@ def dilate_layer(layer, val):
 
 
 class RPN(nn.Module):
-
 
     def __init__(self, phase, base, conf):
         super(RPN, self).__init__()
@@ -38,6 +38,11 @@ class RPN(nn.Module):
         dilate_layer(self.base.denseblock4.denselayer14.conv2, (2, 2))
         dilate_layer(self.base.denseblock4.denselayer15.conv2, (2, 2))
         dilate_layer(self.base.denseblock4.denselayer16.conv2, (2, 2))
+
+        # Replace transition Conv2d to PConv
+        self.base.transition1.conv = PConv(256, 1, kernel_size=1)
+        self.base.transition2.conv = PConv(512, 1, kernel_size=1)
+        self.base.transition3.conv = PConv(1024, 1, kernel_size=1)
 
         # settings
         self.phase = phase
@@ -74,7 +79,6 @@ class RPN(nn.Module):
         self.rois = locate_anchors(conf.anchors, self.feat_size, conf.feat_stride, convert_tensor=True)
         self.rois = self.rois.type(torch.cuda.FloatTensor)
         self.anchors = conf.anchors
-
 
     def forward(self, x):
 
@@ -148,14 +152,15 @@ class RPN(nn.Module):
 
 
 def build(conf, phase='train'):
-
     train = phase.lower() == 'train'
 
     densenet121 = models.densenet121(pretrained=train)
 
     rpn_net = RPN(phase, densenet121.features, conf)
 
-    if train: rpn_net.train()
-    else: rpn_net.eval()
+    if train:
+        rpn_net.train()
+    else:
+        rpn_net.eval()
 
     return rpn_net
