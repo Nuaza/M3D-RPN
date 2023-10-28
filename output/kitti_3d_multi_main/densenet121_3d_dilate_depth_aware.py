@@ -1,51 +1,14 @@
 import torch.nn as nn
 from torchvision import models
 from lib.rpn_util import *
-import torch.nn.functional as F
+from models.PConv import PConv
+from models.LocalConv2d import LocalConv2d
 import torch
 
 
 def dilate_layer(layer, val):
     layer.dilation = val
     layer.padding = val
-
-def replace_to_SiLU(layer):
-    layer.relu1 = nn.SiLU(inplace=True)
-    layer.relu2 = nn.SiLU(inplace=True)
-
-
-class LocalConv2d(nn.Module):
-
-    def __init__(self, num_rows, num_feats_in, num_feats_out, kernel=1, padding=0):
-        super(LocalConv2d, self).__init__()
-
-        self.num_rows = num_rows
-        self.out_channels = num_feats_out
-        self.kernel = kernel
-        self.pad = padding
-
-        self.group_conv = nn.Conv2d(num_feats_in * num_rows, num_feats_out * num_rows, kernel, stride=1, groups=num_rows)
-
-    def forward(self, x):
-
-        b, c, h, w = x.size()
-
-        if self.pad: x = F.pad(x, (self.pad, self.pad, self.pad, self.pad), mode='constant', value=0)
-
-        t = int(h / self.num_rows)
-
-        # unfold by rows
-        x = x.unfold(2, t + self.pad*2, t)
-        x = x.permute([0, 2, 1, 4, 3]).contiguous()
-        x = x.view(b, c * self.num_rows, t + self.pad*2, (w+self.pad*2)).contiguous()
-
-        # group convolution for efficient parallel processing
-        y = self.group_conv(x)
-        y = y.view(b, self.num_rows, self.out_channels, t, w).contiguous()
-        y = y.permute([0, 2, 1, 3, 4]).contiguous()
-        y = y.view(b, self.out_channels, h, w)
-
-        return y
 
 
 class RPN(nn.Module):
@@ -75,69 +38,8 @@ class RPN(nn.Module):
         dilate_layer(self.base.denseblock4.denselayer15.conv2, (2, 2))
         dilate_layer(self.base.denseblock4.denselayer16.conv2, (2, 2))
 
-        # SiLU
-        self.base.relu0 = nn.SiLU(inplace=True)
-        self.base.transition1.relu = nn.SiLU(inplace=True)
-        self.base.transition2.relu = nn.SiLU(inplace=True)
-        self.base.transition3.relu = nn.SiLU(inplace=True)
-        replace_to_SiLU(self.base.denseblock1.denselayer1)
-        replace_to_SiLU(self.base.denseblock1.denselayer2)
-        replace_to_SiLU(self.base.denseblock1.denselayer3)
-        replace_to_SiLU(self.base.denseblock1.denselayer4)
-        replace_to_SiLU(self.base.denseblock1.denselayer5)
-        replace_to_SiLU(self.base.denseblock1.denselayer6)
-        replace_to_SiLU(self.base.denseblock2.denselayer1)
-        replace_to_SiLU(self.base.denseblock2.denselayer2)
-        replace_to_SiLU(self.base.denseblock2.denselayer3)
-        replace_to_SiLU(self.base.denseblock2.denselayer4)
-        replace_to_SiLU(self.base.denseblock2.denselayer5)
-        replace_to_SiLU(self.base.denseblock2.denselayer6)
-        replace_to_SiLU(self.base.denseblock2.denselayer7)
-        replace_to_SiLU(self.base.denseblock2.denselayer8)
-        replace_to_SiLU(self.base.denseblock2.denselayer9)
-        replace_to_SiLU(self.base.denseblock2.denselayer10)
-        replace_to_SiLU(self.base.denseblock2.denselayer11)
-        replace_to_SiLU(self.base.denseblock2.denselayer12)
-        replace_to_SiLU(self.base.denseblock3.denselayer1)
-        replace_to_SiLU(self.base.denseblock3.denselayer2)
-        replace_to_SiLU(self.base.denseblock3.denselayer3)
-        replace_to_SiLU(self.base.denseblock3.denselayer4)
-        replace_to_SiLU(self.base.denseblock3.denselayer5)
-        replace_to_SiLU(self.base.denseblock3.denselayer6)
-        replace_to_SiLU(self.base.denseblock3.denselayer7)
-        replace_to_SiLU(self.base.denseblock3.denselayer8)
-        replace_to_SiLU(self.base.denseblock3.denselayer9)
-        replace_to_SiLU(self.base.denseblock3.denselayer10)
-        replace_to_SiLU(self.base.denseblock3.denselayer11)
-        replace_to_SiLU(self.base.denseblock3.denselayer12)
-        replace_to_SiLU(self.base.denseblock3.denselayer13)
-        replace_to_SiLU(self.base.denseblock3.denselayer14)
-        replace_to_SiLU(self.base.denseblock3.denselayer15)
-        replace_to_SiLU(self.base.denseblock3.denselayer16)
-        replace_to_SiLU(self.base.denseblock3.denselayer17)
-        replace_to_SiLU(self.base.denseblock3.denselayer18)
-        replace_to_SiLU(self.base.denseblock3.denselayer19)
-        replace_to_SiLU(self.base.denseblock3.denselayer20)
-        replace_to_SiLU(self.base.denseblock3.denselayer21)
-        replace_to_SiLU(self.base.denseblock3.denselayer22)
-        replace_to_SiLU(self.base.denseblock3.denselayer23)
-        replace_to_SiLU(self.base.denseblock3.denselayer24)
-        replace_to_SiLU(self.base.denseblock4.denselayer1)
-        replace_to_SiLU(self.base.denseblock4.denselayer2)
-        replace_to_SiLU(self.base.denseblock4.denselayer3)
-        replace_to_SiLU(self.base.denseblock4.denselayer4)
-        replace_to_SiLU(self.base.denseblock4.denselayer5)
-        replace_to_SiLU(self.base.denseblock4.denselayer6)
-        replace_to_SiLU(self.base.denseblock4.denselayer7)
-        replace_to_SiLU(self.base.denseblock4.denselayer8)
-        replace_to_SiLU(self.base.denseblock4.denselayer9)
-        replace_to_SiLU(self.base.denseblock4.denselayer10)
-        replace_to_SiLU(self.base.denseblock4.denselayer11)
-        replace_to_SiLU(self.base.denseblock4.denselayer12)
-        replace_to_SiLU(self.base.denseblock4.denselayer13)
-        replace_to_SiLU(self.base.denseblock4.denselayer14)
-        replace_to_SiLU(self.base.denseblock4.denselayer15)
-        replace_to_SiLU(self.base.denseblock4.denselayer16)
+        # Replace transition Conv2d to PConv
+        self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
         # settings
         self.phase = phase
@@ -174,7 +76,8 @@ class RPN(nn.Module):
         )
 
         # outputs
-        self.cls_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_classes * self.num_anchors, 1, )
+        self.cls_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_classes * self.num_anchors,
+                                   1, )
 
         # bbox 2d
         self.bbox_x_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
@@ -221,7 +124,7 @@ class RPN(nn.Module):
 
         batch_size = x.size(0)
 
-        # resnet
+        # densenet
         x = self.base(x)
 
         prop_feats = self.prop_feats(x)
@@ -357,7 +260,8 @@ def build(conf, phase='train'):
         src_weights = torch.load(conf.pretrained)
         src_keylist = list(src_weights.keys())
 
-        conv_layers = ['cls', 'bbox_x', 'bbox_y', 'bbox_w', 'bbox_h', 'bbox_x3d', 'bbox_y3d', 'bbox_w3d', 'bbox_h3d', 'bbox_l3d', 'bbox_z3d', 'bbox_rY3d']
+        conv_layers = ['cls', 'bbox_x', 'bbox_y', 'bbox_w', 'bbox_h', 'bbox_x3d', 'bbox_y3d', 'bbox_w3d', 'bbox_h3d',
+                       'bbox_l3d', 'bbox_z3d', 'bbox_rY3d']
 
         # prop_feats
         src_weight_key = 'module.{}.0.weight'.format('prop_feats')
@@ -369,21 +273,21 @@ def build(conf, phase='train'):
         src_weights[dst_weight_key] = src_weights[src_weight_key].repeat(conf.bins, 1, 1, 1)
         src_weights[dst_bias_key] = src_weights[src_bias_key].repeat(conf.bins, )
 
-        #del src_weights[src_weight_key]
-        #del src_weights[src_bias_key]
+        # del src_weights[src_weight_key]
+        # del src_weights[src_bias_key]
 
         for layer in conv_layers:
             src_weight_key = 'module.{}.weight'.format(layer)
             src_bias_key = 'module.{}.bias'.format(layer)
 
-            dst_weight_key = 'module.{}.group_conv.weight'.format(layer+'_loc')
-            dst_bias_key = 'module.{}.group_conv.bias'.format(layer+'_loc')
+            dst_weight_key = 'module.{}.group_conv.weight'.format(layer + '_loc')
+            dst_bias_key = 'module.{}.group_conv.bias'.format(layer + '_loc')
 
             src_weights[dst_weight_key] = src_weights[src_weight_key].repeat(conf.bins, 1, 1, 1)
             src_weights[dst_bias_key] = src_weights[src_bias_key].repeat(conf.bins, )
 
-            #del src_weights[src_weight_key]
-            #del src_weights[src_bias_key]
+            # del src_weights[src_weight_key]
+            # del src_weights[src_bias_key]
 
         src_keylist = list(src_weights.keys())
 
