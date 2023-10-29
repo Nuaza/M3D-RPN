@@ -41,7 +41,7 @@ class RPN(nn.Module):
         dilate_layer(self.base.denseblock4.denselayer16.conv2, (2, 2))
 
         # Replace PConv
-        self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+        # self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
         # Replace RefConv
         self.base.denseblock2.denselayer1.conv1 = RefConv(128, 1, stride=1, kernel_size=1, map_k=1)
