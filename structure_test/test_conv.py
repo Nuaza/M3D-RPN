@@ -2,8 +2,10 @@ import logging
 import torch
 import torch.nn as nn
 from torchvision import models
+from torchinfo import summary
 from backbones.densenet121 import DenseNet
 from models.PConv import PConv
+from models.RefConv import RefConv
 
 logging.basicConfig(level=logging.INFO)
 
@@ -44,9 +46,11 @@ if __name__ == '__main__':
     dilate_layer(densenet121.denseblock4.denselayer16.conv2, (2, 2))
 
     # Replace PConv
-    densenet121.denseblock1.denselayer1.conv1 = PConv(64, 1, kernel_size=1)
-    densenet121.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
-    densenet121.denseblock3.denselayer1.conv1 = PConv(256, 1, kernel_size=1)
-    densenet121.denseblock4.denselayer1.conv1 = PConv(512, 1, kernel_size=1)
-    print(densenet121.denseblock1.denselayer1.conv1)
+    # densenet121.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
+
+    # Replace RefConv
+    densenet121.denseblock2.denselayer1.conv1 = RefConv(128, 1, stride=1, kernel_size=1, map_k=1)
+
     logging.info(densenet121_model)
+
+    # summary(densenet121_model)
