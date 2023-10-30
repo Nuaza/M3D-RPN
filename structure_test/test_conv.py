@@ -49,7 +49,10 @@ if __name__ == '__main__':
     # densenet121.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
     # Replace RefConv
+    densenet121.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
     densenet121.denseblock2.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    densenet121.denseblock3.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    densenet121.denseblock4.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
 
     logging.info(densenet121_model)
 
