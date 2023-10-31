@@ -1,0 +1,1043 @@
+[INFO]: 2023-10-30 23:26:41,677 Preloading imdb.
+[INFO]: 2023-10-30 23:26:42,934 weighted respectively as 1.05 and 0.00
+[INFO]: 2023-10-30 23:26:42,934 Found 3534 foreground and 178 empty images
+[INFO]: 2023-10-30 23:26:45,304 Labels not used in training.. ['DontCare', 'Truck', 'Tram', 'Misc', 'Person_sitting']
+[INFO]: 2023-10-30 23:26:45,308 conf: {
+    model:                  densenet121_3d_dilate_depth_aware       
+    solver_type:            sgd                                     
+    lr:                     0.004                                   
+    momentum:               0.9                                     
+    weight_decay:           0.0005                                  
+    max_iter:               50000                                   
+    snapshot_iter:          5000                                    
+    display:                250                                     
+    do_test:                True                                    
+    lr_policy:              poly                                    
+    lr_steps:               None                                    
+    lr_target:              4e-08                                   
+    rng_seed:               2                                       
+    cuda_seed:              2                                       
+    image_means:            [0.485, 0.456, 0.406]                   
+    image_stds:             [0.229, 0.224, 0.225]                   
+    feat_stride:            16                                      
+    has_3d:                 True                                    
+    test_scale:             512                                     
+    crop_size:              [512, 1760]                             
+    mirror_prob:            0.5                                     
+    distort_prob:           -1                                      
+    dataset_test:           kitti_split1                            
+    datasets_train:         [{'anno_fmt': 'kitti_det',
+                             'im_ext': '.png',
+                             'name': 'kitti_split1',
+                             'scale': 1}]
+    use_3d_for_2d:          True                                    
+    percent_anc_h:          [0.0625, 0.75]                          
+    min_gt_h:               32.0                                    
+    max_gt_h:               384.0                                   
+    min_gt_vis:             0.65                                    
+    ilbls:                  ['Van', 'ignore']                       
+    lbls:                   ['Car', 'Pedestrian', 'Cyclist']        
+    batch_size:             2                                       
+    fg_image_ratio:         1.0                                     
+    box_samples:            0.2                                     
+    fg_fraction:            0.2                                     
+    bg_thresh_lo:           0                                       
+    bg_thresh_hi:           0.5                                     
+    fg_thresh:              0.5                                     
+    ign_thresh:             0.5                                     
+    best_thresh:            0.35                                    
+    nms_topN_pre:           3000                                    
+    nms_topN_post:          40                                      
+    nms_thres:              0.4                                     
+    clip_boxes:             False                                   
+    test_protocol:          kitti                                   
+    test_db:                kitti                                   
+    test_min_h:             0                                       
+    min_det_scales:         [0, 0]                                  
+    cluster_anchors:        0                                       
+    even_anchors:           0                                       
+    expand_anchors:         0                                       
+    anchors:                [[-0.5, -8.5, 15.5, 23.5, 51.969, 0.531,
+                             1.713, 1.025, -0.799],
+                            [-8.5, -8.5, 23.5, 23.5, 52.176, 1.618,
+                             1.6, 3.811, -0.453],
+                            [-16.5, -8.5, 31.5, 23.5, 48.334,
+                             1.644, 1.529, 3.966, 0.673],
+                            [-2.528, -12.555, 17.528, 27.555,
+                             44.781, 0.534, 1.771, 0.971, 0.093],
+                            [-12.555, -12.555, 27.555, 27.555,
+                             44.704, 1.599, 1.569, 3.814, -0.187],
+                            [-22.583, -12.555, 37.583, 27.555,
+                             43.492, 1.621, 1.536, 3.91, 0.719],
+                            [-5.069, -17.638, 20.069, 32.638,
+                             34.666, 0.561, 1.752, 0.967, -0.384],
+                            [-17.638, -17.638, 32.638, 32.638,
+                             35.35, 1.567, 1.591, 3.81, -0.511],
+                            [-30.207, -17.638, 45.207, 32.638,
+                             37.128, 1.602, 1.529, 3.904, 0.452],
+                            [-8.255, -24.01, 23.255, 39.01, 28.771,
+                             0.613, 1.76, 0.98, 0.067],
+                            [-24.01, -24.01, 39.01, 39.01, 28.331,
+                             1.543, 1.592, 3.66, -0.811],
+                            [-39.764, -24.01, 54.764, 39.01,
+                             30.541, 1.626, 1.524, 3.908, 0.312],
+                            [-12.248, -31.996, 27.248, 46.996,
+                             23.011, 0.606, 1.758, 0.996, 0.208],
+                            [-31.996, -31.996, 46.996, 46.996,
+                             22.948, 1.51, 1.599, 3.419, -1.076],
+                            [-51.744, -31.996, 66.744, 46.996,
+                             25.0, 1.628, 1.527, 3.917, 0.334],
+                            [-17.253, -42.006, 32.253, 57.006,
+                             18.479, 0.601, 1.747, 1.007, 0.347],
+                            [-42.006, -42.006, 57.006, 57.006,
+                             18.815, 1.487, 1.599, 3.337, -0.862],
+                            [-66.759, -42.006, 81.759, 57.006,
+                             20.576, 1.623, 1.532, 3.942, 0.323],
+                            [-23.527, -54.553, 38.527, 69.553,
+                             15.035, 0.625, 1.744, 0.917, 0.41],
+                            [-54.553, -54.553, 69.553, 69.553,
+                             15.346, 1.29, 1.659, 3.083, -0.275],
+                            [-85.58, -54.553, 100.58, 69.553,
+                             16.326, 1.613, 1.527, 3.934, 0.268],
+                            [-31.39, -70.281, 46.39, 85.281,
+                             12.265, 0.631, 1.747, 0.954, 0.317],
+                            [-70.281, -70.281, 85.281, 85.281,
+                             11.878, 1.044, 1.67, 2.415, -0.211],
+                            [-109.171, -70.281, 124.171, 85.281,
+                             13.58, 1.621, 1.539, 3.961, 0.189],
+                            [-41.247, -89.994, 56.247, 104.994,
+                             9.932, 0.61, 1.771, 0.934, 0.486],
+                            [-89.994, -89.994, 104.994, 104.994,
+                             8.949, 0.811, 1.766, 1.662, 0.08],
+                            [-138.741, -89.994, 153.741, 104.994,
+                             11.043, 1.61, 1.533, 3.899, 0.04],
+                            [-53.602, -114.704, 68.602, 129.704,
+                             8.389, 0.604, 1.793, 0.95, 0.806],
+                            [-114.704, -114.704, 129.704, 129.704,
+                             8.071, 1.01, 1.751, 2.19, -0.076],
+                            [-175.806, -114.704, 190.806, 129.704,
+                             9.184, 1.606, 1.526, 3.869, -0.066],
+                            [-69.089, -145.677, 84.089, 160.677,
+                             6.923, 0.627, 1.791, 0.96, 0.784],
+                            [-145.677, -145.677, 160.677, 160.677,
+                             6.784, 1.384, 1.615, 2.862, -1.035],
+                            [-222.266, -145.677, 237.266, 160.677,
+                             7.863, 1.617, 1.55, 3.948, -0.071],
+                            [-88.5, -184.5, 103.5, 199.5, 5.189,
+                             0.66, 1.755, 0.841, 0.173],
+                            [-184.5, -184.5, 199.5, 199.5, 4.388,
+                             0.743, 1.728, 1.381, 0.642],
+                            [-280.5, -184.5, 295.5, 199.5, 5.583,
+                             1.583, 1.547, 3.862, -0.072]]
+    bbox_means:             [[-0.0, 0.002, 0.064, -0.093, 0.011,
+                             -0.067, 0.192, 0.059, -0.021, 0.069,
+                             -0.004]]
+    bbox_stds:              [[0.14, 0.126, 0.247, 0.239, 0.163,
+                             0.132, 3.621, 0.382, 0.102, 0.503,
+                             1.855]]
+    anchor_scales:          [32.0, 40.11, 50.276, 63.019, 78.991,
+                            99.012, 124.106, 155.561, 194.989,
+                            244.409, 306.354, 384.0]
+    anchor_ratios:          [0.5, 1.0, 1.5]                         
+    hard_negatives:         True                                    
+    focal_loss:             0                                       
+    cls_2d_lambda:          1                                       
+    iou_2d_lambda:          1                                       
+    bbox_2d_lambda:         0                                       
+    bbox_3d_lambda:         1                                       
+    bbox_3d_proj_lambda:    0.0                                     
+    hill_climbing:          True                                    
+    bins:                   32                                      
+    visdom_port:            8100                                    
+    pretrained:             'output/kitti_3d_multi_warmup/weights/model_50000_pkl'
+}
+[INFO]: 2023-10-30 23:26:45,976 DataParallel(
+  (module): RPN(
+    (base): Sequential(
+      (conv0): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+      (norm0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu0): ReLU(inplace=True)
+      (pool0): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (denseblock1): _DenseBlock(
+        (denselayer1): _DenseLayer(
+          (norm1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): RefConv(
+            (convmap): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4096, bias=False)
+          )
+        )
+        (denselayer2): _DenseLayer(
+          (norm1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(96, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer3): _DenseLayer(
+          (norm1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer4): _DenseLayer(
+          (norm1): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(160, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer5): _DenseLayer(
+          (norm1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(192, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer6): _DenseLayer(
+          (norm1): BatchNorm2d(224, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(224, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (transition1): _Transition(
+        (norm): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (pool): AvgPool2d(kernel_size=2, stride=2, padding=0)
+      )
+      (denseblock2): _DenseBlock(
+        (denselayer1): _DenseLayer(
+          (norm1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): PConv(
+            (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          )
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): RefConv(
+            (convmap): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4096, bias=False)
+          )
+        )
+        (denselayer2): _DenseLayer(
+          (norm1): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(160, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer3): _DenseLayer(
+          (norm1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(192, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer4): _DenseLayer(
+          (norm1): BatchNorm2d(224, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(224, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer5): _DenseLayer(
+          (norm1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer6): _DenseLayer(
+          (norm1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(288, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer7): _DenseLayer(
+          (norm1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(320, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer8): _DenseLayer(
+          (norm1): BatchNorm2d(352, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(352, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer9): _DenseLayer(
+          (norm1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(384, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer10): _DenseLayer(
+          (norm1): BatchNorm2d(416, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(416, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer11): _DenseLayer(
+          (norm1): BatchNorm2d(448, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(448, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer12): _DenseLayer(
+          (norm1): BatchNorm2d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(480, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (transition2): _Transition(
+        (norm): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (pool): AvgPool2d(kernel_size=2, stride=2, padding=0)
+      )
+      (denseblock3): _DenseBlock(
+        (denselayer1): _DenseLayer(
+          (norm1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): RefConv(
+            (convmap): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4096, bias=False)
+          )
+        )
+        (denselayer2): _DenseLayer(
+          (norm1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(288, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer3): _DenseLayer(
+          (norm1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(320, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer4): _DenseLayer(
+          (norm1): BatchNorm2d(352, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(352, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer5): _DenseLayer(
+          (norm1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(384, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer6): _DenseLayer(
+          (norm1): BatchNorm2d(416, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(416, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer7): _DenseLayer(
+          (norm1): BatchNorm2d(448, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(448, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer8): _DenseLayer(
+          (norm1): BatchNorm2d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(480, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer9): _DenseLayer(
+          (norm1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer10): _DenseLayer(
+          (norm1): BatchNorm2d(544, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(544, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer11): _DenseLayer(
+          (norm1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(576, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer12): _DenseLayer(
+          (norm1): BatchNorm2d(608, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(608, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer13): _DenseLayer(
+          (norm1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(640, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer14): _DenseLayer(
+          (norm1): BatchNorm2d(672, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(672, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer15): _DenseLayer(
+          (norm1): BatchNorm2d(704, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(704, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer16): _DenseLayer(
+          (norm1): BatchNorm2d(736, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(736, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer17): _DenseLayer(
+          (norm1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(768, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer18): _DenseLayer(
+          (norm1): BatchNorm2d(800, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(800, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer19): _DenseLayer(
+          (norm1): BatchNorm2d(832, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(832, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer20): _DenseLayer(
+          (norm1): BatchNorm2d(864, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(864, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer21): _DenseLayer(
+          (norm1): BatchNorm2d(896, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer22): _DenseLayer(
+          (norm1): BatchNorm2d(928, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(928, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer23): _DenseLayer(
+          (norm1): BatchNorm2d(960, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(960, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+        (denselayer24): _DenseLayer(
+          (norm1): BatchNorm2d(992, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(992, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        )
+      )
+      (transition3): _Transition(
+        (norm): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      )
+      (denseblock4): _DenseBlock(
+        (denselayer1): _DenseLayer(
+          (norm1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): RefConv(
+            (convmap): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=4096, bias=False)
+          )
+        )
+        (denselayer2): _DenseLayer(
+          (norm1): BatchNorm2d(544, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(544, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer3): _DenseLayer(
+          (norm1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(576, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer4): _DenseLayer(
+          (norm1): BatchNorm2d(608, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(608, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer5): _DenseLayer(
+          (norm1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(640, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer6): _DenseLayer(
+          (norm1): BatchNorm2d(672, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(672, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer7): _DenseLayer(
+          (norm1): BatchNorm2d(704, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(704, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer8): _DenseLayer(
+          (norm1): BatchNorm2d(736, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(736, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer9): _DenseLayer(
+          (norm1): BatchNorm2d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(768, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer10): _DenseLayer(
+          (norm1): BatchNorm2d(800, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(800, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer11): _DenseLayer(
+          (norm1): BatchNorm2d(832, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(832, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer12): _DenseLayer(
+          (norm1): BatchNorm2d(864, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(864, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer13): _DenseLayer(
+          (norm1): BatchNorm2d(896, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer14): _DenseLayer(
+          (norm1): BatchNorm2d(928, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(928, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer15): _DenseLayer(
+          (norm1): BatchNorm2d(960, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(960, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+        (denselayer16): _DenseLayer(
+          (norm1): BatchNorm2d(992, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu1): ReLU(inplace=True)
+          (conv1): Conv2d(992, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (norm2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu2): ReLU(inplace=True)
+          (conv2): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+        )
+      )
+      (norm5): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (prop_feats): Sequential(
+      (0): Conv2d(1024, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ReLU(inplace=True)
+    )
+    (cls): Conv2d(512, 144, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_x): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_y): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_w): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_h): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_x3d): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_y3d): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_z3d): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_w3d): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_h3d): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_l3d): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (bbox_rY3d): Conv2d(512, 36, kernel_size=(1, 1), stride=(1, 1))
+    (prop_feats_loc): Sequential(
+      (0): LocalConv2d(
+        (group_conv): Conv2d(32768, 16384, kernel_size=(3, 3), stride=(1, 1), groups=32)
+      )
+      (1): ReLU(inplace=True)
+    )
+    (cls_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 4608, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_x_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_y_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_w_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_h_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_x3d_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_y3d_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_z3d_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_w3d_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_h3d_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_l3d_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (bbox_rY3d_loc): LocalConv2d(
+      (group_conv): Conv2d(16384, 1152, kernel_size=(1, 1), stride=(1, 1), groups=32)
+    )
+    (sigmoid): Sigmoid()
+    (softmax): Softmax(dim=1)
+  )
+)
+[INFO]: 2023-10-30 23:29:20,783 iter: 250, acc (bg: 1.00, fg: 0.93, iou: 0.86), loss (bbox_3d: 0.3409, cls: 0.0925, iou: 0.1574), misc (ry: 0.37, z: 0.72), dt: 0.62, eta: 8.6h
+[INFO]: 2023-10-30 23:31:56,797 iter: 500, acc (bg: 1.00, fg: 0.89, iou: 0.81), loss (bbox_3d: 0.7030, cls: 0.1446, iou: 0.2225), misc (ry: 0.78, z: 1.14), dt: 0.62, eta: 8.6h
+[INFO]: 2023-10-30 23:34:30,578 iter: 750, acc (bg: 1.00, fg: 0.90, iou: 0.82), loss (bbox_3d: 0.6400, cls: 0.1279, iou: 0.2076), misc (ry: 0.70, z: 1.03), dt: 0.62, eta: 8.5h
+[INFO]: 2023-10-30 23:37:02,785 iter: 1000, acc (bg: 1.00, fg: 0.89, iou: 0.82), loss (bbox_3d: 0.6888, cls: 0.1441, iou: 0.2119), misc (ry: 0.70, z: 1.03), dt: 0.62, eta: 8.4h
+[INFO]: 2023-10-30 23:39:36,455 iter: 1250, acc (bg: 1.00, fg: 0.92, iou: 0.82), loss (bbox_3d: 0.6320, cls: 0.1150, iou: 0.2018), misc (ry: 0.74, z: 1.02), dt: 0.62, eta: 8.4h
+[INFO]: 2023-10-30 23:42:11,076 iter: 1500, acc (bg: 1.00, fg: 0.94, iou: 0.85), loss (bbox_3d: 0.4511, cls: 0.0932, iou: 0.1731), misc (ry: 0.51, z: 0.83), dt: 0.62, eta: 8.3h
+[INFO]: 2023-10-30 23:44:48,067 iter: 1750, acc (bg: 1.00, fg: 0.92, iou: 0.83), loss (bbox_3d: 0.4704, cls: 0.1023, iou: 0.1902), misc (ry: 0.52, z: 0.84), dt: 0.62, eta: 8.3h
+[INFO]: 2023-10-30 23:47:20,535 iter: 2000, acc (bg: 1.00, fg: 0.94, iou: 0.84), loss (bbox_3d: 0.4532, cls: 0.0900, iou: 0.1773), misc (ry: 0.56, z: 0.81), dt: 0.62, eta: 8.2h
+[INFO]: 2023-10-30 23:49:53,295 iter: 2250, acc (bg: 1.00, fg: 0.94, iou: 0.85), loss (bbox_3d: 0.4205, cls: 0.0895, iou: 0.1696), misc (ry: 0.46, z: 0.89), dt: 0.62, eta: 8.2h
+[INFO]: 2023-10-30 23:52:25,671 iter: 2500, acc (bg: 1.00, fg: 0.95, iou: 0.85), loss (bbox_3d: 0.3789, cls: 0.0768, iou: 0.1666), misc (ry: 0.40, z: 0.82), dt: 0.62, eta: 8.1h
+[INFO]: 2023-10-30 23:55:00,458 iter: 2750, acc (bg: 1.00, fg: 0.94, iou: 0.86), loss (bbox_3d: 0.3825, cls: 0.0816, iou: 0.1621), misc (ry: 0.43, z: 0.72), dt: 0.62, eta: 8.1h
+[INFO]: 2023-10-30 23:57:36,118 iter: 3000, acc (bg: 1.00, fg: 0.94, iou: 0.85), loss (bbox_3d: 0.3672, cls: 0.0847, iou: 0.1633), misc (ry: 0.43, z: 0.71), dt: 0.62, eta: 8.1h
+[INFO]: 2023-10-31 00:00:10,350 iter: 3250, acc (bg: 1.00, fg: 0.95, iou: 0.86), loss (bbox_3d: 0.3623, cls: 0.0765, iou: 0.1602), misc (ry: 0.42, z: 0.73), dt: 0.62, eta: 8.0h
+[INFO]: 2023-10-31 00:02:43,579 iter: 3500, acc (bg: 1.00, fg: 0.95, iou: 0.86), loss (bbox_3d: 0.3441, cls: 0.0739, iou: 0.1541), misc (ry: 0.46, z: 0.68), dt: 0.62, eta: 8.0h
+[INFO]: 2023-10-31 00:05:19,682 iter: 3750, acc (bg: 1.00, fg: 0.96, iou: 0.87), loss (bbox_3d: 0.3356, cls: 0.0640, iou: 0.1479), misc (ry: 0.43, z: 0.68), dt: 0.62, eta: 7.9h
+[INFO]: 2023-10-31 00:07:53,261 iter: 4000, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2786, cls: 0.0641, iou: 0.1463), misc (ry: 0.34, z: 0.64), dt: 0.62, eta: 7.9h
+[INFO]: 2023-10-31 00:10:30,992 iter: 4250, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2437, cls: 0.0637, iou: 0.1390), misc (ry: 0.29, z: 0.63), dt: 0.62, eta: 7.9h
+[INFO]: 2023-10-31 00:13:05,818 iter: 4500, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2582, cls: 0.0616, iou: 0.1420), misc (ry: 0.35, z: 0.61), dt: 0.62, eta: 7.8h
+[INFO]: 2023-10-31 00:15:40,756 iter: 4750, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2592, cls: 0.0618, iou: 0.1405), misc (ry: 0.36, z: 0.61), dt: 0.62, eta: 7.8h
+[INFO]: 2023-10-31 00:18:15,624 iter: 5000, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2414, cls: 0.0609, iou: 0.1366), misc (ry: 0.31, z: 0.58), dt: 0.62, eta: 7.7h
+[INFO]: 2023-10-31 00:20:48,000 testing 1000/3769, dt: 0.148, eta: 6.8m
+[INFO]: 2023-10-31 00:23:13,998 testing 2000/3769, dt: 0.147, eta: 4.3m
+[INFO]: 2023-10-31 00:25:41,348 testing 3000/3769, dt: 0.147, eta: 1.9m
+[INFO]: 2023-10-31 00:27:46,408 test_iter 5000 2d car --> easy: 0.8520, mod: 0.7864, hard: 0.6444
+[INFO]: 2023-10-31 00:27:46,409 test_iter 5000 gr car --> easy: 0.1312, mod: 0.1173, hard: 0.0993
+[INFO]: 2023-10-31 00:27:46,410 test_iter 5000 3d car --> easy: 0.0931, mod: 0.0776, hard: 0.0632
+[INFO]: 2023-10-31 00:27:46,411 test_iter 5000 2d pedestrian --> easy: 0.6128, mod: 0.4881, hard: 0.4684
+[INFO]: 2023-10-31 00:27:46,411 test_iter 5000 gr pedestrian --> easy: 0.0567, mod: 0.0550, hard: 0.0551
+[INFO]: 2023-10-31 00:27:46,412 test_iter 5000 3d pedestrian --> easy: 0.0522, mod: 0.0533, hard: 0.0455
+[INFO]: 2023-10-31 00:27:46,412 test_iter 5000 2d cyclist --> easy: 0.4525, mod: 0.2991, hard: 0.2917
+[INFO]: 2023-10-31 00:27:46,413 test_iter 5000 gr cyclist --> easy: 0.0187, mod: 0.0111, hard: 0.0115
+[INFO]: 2023-10-31 00:27:46,413 test_iter 5000 3d cyclist --> easy: 0.0165, mod: 0.0107, hard: 0.0091
+[INFO]: 2023-10-31 00:30:22,655 iter: 5250, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2427, cls: 0.0560, iou: 0.1364), misc (ry: 0.37, z: 0.61), dt: 0.73, eta: 9.0h
+[INFO]: 2023-10-31 00:32:56,534 iter: 5500, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2250, cls: 0.0614, iou: 0.1363), misc (ry: 0.32, z: 0.55), dt: 0.72, eta: 8.9h
+[INFO]: 2023-10-31 00:35:30,604 iter: 5750, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2434, cls: 0.0622, iou: 0.1377), misc (ry: 0.33, z: 0.57), dt: 0.72, eta: 8.8h
+[INFO]: 2023-10-31 00:38:04,090 iter: 6000, acc (bg: 1.00, fg: 0.96, iou: 0.87), loss (bbox_3d: 0.2509, cls: 0.0638, iou: 0.1402), misc (ry: 0.35, z: 0.60), dt: 0.71, eta: 8.7h
+[INFO]: 2023-10-31 00:40:39,420 iter: 6250, acc (bg: 1.00, fg: 0.96, iou: 0.86), loss (bbox_3d: 0.2812, cls: 0.0660, iou: 0.1502), misc (ry: 0.39, z: 0.65), dt: 0.71, eta: 8.6h
+[INFO]: 2023-10-31 00:43:12,971 iter: 6500, acc (bg: 1.00, fg: 0.95, iou: 0.86), loss (bbox_3d: 0.2863, cls: 0.0772, iou: 0.1505), misc (ry: 0.40, z: 0.61), dt: 0.71, eta: 8.5h
+[INFO]: 2023-10-31 00:45:50,073 iter: 6750, acc (bg: 1.00, fg: 0.96, iou: 0.87), loss (bbox_3d: 0.2384, cls: 0.0626, iou: 0.1411), misc (ry: 0.30, z: 0.60), dt: 0.70, eta: 8.4h
+[INFO]: 2023-10-31 00:48:24,540 iter: 7000, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2052, cls: 0.0552, iou: 0.1313), misc (ry: 0.31, z: 0.52), dt: 0.70, eta: 8.4h
+[INFO]: 2023-10-31 00:51:00,992 iter: 7250, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2196, cls: 0.0589, iou: 0.1340), misc (ry: 0.30, z: 0.54), dt: 0.70, eta: 8.3h
+[INFO]: 2023-10-31 00:53:35,896 iter: 7500, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2138, cls: 0.0541, iou: 0.1335), misc (ry: 0.32, z: 0.52), dt: 0.69, eta: 8.2h
+[INFO]: 2023-10-31 00:56:09,706 iter: 7750, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2364, cls: 0.0590, iou: 0.1348), misc (ry: 0.38, z: 0.53), dt: 0.69, eta: 8.1h
+[INFO]: 2023-10-31 00:58:45,096 iter: 8000, acc (bg: 1.00, fg: 0.96, iou: 0.87), loss (bbox_3d: 0.2979, cls: 0.0683, iou: 0.1462), misc (ry: 0.41, z: 0.58), dt: 0.69, eta: 8.0h
+[INFO]: 2023-10-31 01:01:18,432 iter: 8250, acc (bg: 1.00, fg: 0.97, iou: 0.87), loss (bbox_3d: 0.2611, cls: 0.0586, iou: 0.1387), misc (ry: 0.41, z: 0.58), dt: 0.69, eta: 8.0h
+[INFO]: 2023-10-31 01:03:53,975 iter: 8500, acc (bg: 1.00, fg: 0.97, iou: 0.88), loss (bbox_3d: 0.2316, cls: 0.0553, iou: 0.1329), misc (ry: 0.34, z: 0.63), dt: 0.69, eta: 7.9h
+[INFO]: 2023-10-31 01:06:29,248 iter: 8750, acc (bg: 1.00, fg: 0.97, iou: 0.89), loss (bbox_3d: 0.1977, cls: 0.0551, iou: 0.1254), misc (ry: 0.26, z: 0.53), dt: 0.68, eta: 7.8h
+[INFO]: 2023-10-31 01:09:04,010 iter: 9000, acc (bg: 1.00, fg: 0.98, iou: 0.88), loss (bbox_3d: 0.1926, cls: 0.0516, iou: 0.1274), misc (ry: 0.26, z: 0.56), dt: 0.68, eta: 7.8h
+[INFO]: 2023-10-31 01:11:38,967 iter: 9250, acc (bg: 1.00, fg: 0.98, iou: 0.88), loss (bbox_3d: 0.1933, cls: 0.0499, iou: 0.1263), misc (ry: 0.28, z: 0.52), dt: 0.68, eta: 7.7h
+[INFO]: 2023-10-31 01:14:13,526 iter: 9500, acc (bg: 1.00, fg: 0.97, iou: 0.89), loss (bbox_3d: 0.1948, cls: 0.0552, iou: 0.1256), misc (ry: 0.30, z: 0.50), dt: 0.68, eta: 7.6h
+[INFO]: 2023-10-31 01:16:49,072 iter: 9750, acc (bg: 1.00, fg: 0.97, iou: 0.89), loss (bbox_3d: 0.1869, cls: 0.0522, iou: 0.1197), misc (ry: 0.28, z: 0.46), dt: 0.68, eta: 7.6h
+[INFO]: 2023-10-31 01:19:24,504 iter: 10000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1566, cls: 0.0504, iou: 0.1148), misc (ry: 0.23, z: 0.46), dt: 0.68, eta: 7.5h
+[INFO]: 2023-10-31 01:21:56,053 testing 1000/3769, dt: 0.147, eta: 6.8m
+[INFO]: 2023-10-31 01:24:23,250 testing 2000/3769, dt: 0.147, eta: 4.3m
+[INFO]: 2023-10-31 01:26:50,088 testing 3000/3769, dt: 0.147, eta: 1.9m
+[INFO]: 2023-10-31 01:28:52,653 test_iter 10000 2d car --> easy: 0.8987, mod: 0.8147, hard: 0.6683
+[INFO]: 2023-10-31 01:28:52,654 test_iter 10000 gr car --> easy: 0.1617, mod: 0.1310, hard: 0.1118
+[INFO]: 2023-10-31 01:28:52,655 test_iter 10000 3d car --> easy: 0.1176, mod: 0.0950, hard: 0.0775
+[INFO]: 2023-10-31 01:28:52,655 test_iter 10000 2d pedestrian --> easy: 0.6519, mod: 0.5696, hard: 0.4895
+[INFO]: 2023-10-31 01:28:52,656 test_iter 10000 gr pedestrian --> easy: 0.0631, mod: 0.0542, hard: 0.0544
+[INFO]: 2023-10-31 01:28:52,656 test_iter 10000 3d pedestrian --> easy: 0.0513, mod: 0.0525, hard: 0.0455
+[INFO]: 2023-10-31 01:28:52,657 test_iter 10000 2d cyclist --> easy: 0.5400, mod: 0.3779, hard: 0.3206
+[INFO]: 2023-10-31 01:28:52,658 test_iter 10000 gr cyclist --> easy: 0.0286, mod: 0.0227, hard: 0.0227
+[INFO]: 2023-10-31 01:28:52,658 test_iter 10000 3d cyclist --> easy: 0.0277, mod: 0.0227, hard: 0.0227
+[INFO]: 2023-10-31 01:31:28,544 iter: 10250, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1913, cls: 0.0495, iou: 0.1236), misc (ry: 0.29, z: 0.54), dt: 0.73, eta: 8.1h
+[INFO]: 2023-10-31 01:34:03,179 iter: 10500, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1692, cls: 0.0475, iou: 0.1177), misc (ry: 0.27, z: 0.47), dt: 0.73, eta: 8.0h
+[INFO]: 2023-10-31 01:36:36,288 iter: 10750, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1664, cls: 0.0454, iou: 0.1172), misc (ry: 0.27, z: 0.51), dt: 0.72, eta: 7.9h
+[INFO]: 2023-10-31 01:39:12,088 iter: 11000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1663, cls: 0.0478, iou: 0.1180), misc (ry: 0.26, z: 0.49), dt: 0.72, eta: 7.8h
+[INFO]: 2023-10-31 01:41:46,246 iter: 11250, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1591, cls: 0.0499, iou: 0.1188), misc (ry: 0.26, z: 0.45), dt: 0.72, eta: 7.8h
+[INFO]: 2023-10-31 01:44:20,185 iter: 11500, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1594, cls: 0.0480, iou: 0.1176), misc (ry: 0.25, z: 0.49), dt: 0.72, eta: 7.7h
+[INFO]: 2023-10-31 01:46:55,002 iter: 11750, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1529, cls: 0.0474, iou: 0.1127), misc (ry: 0.23, z: 0.47), dt: 0.72, eta: 7.6h
+[INFO]: 2023-10-31 01:49:28,227 iter: 12000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1579, cls: 0.0474, iou: 0.1190), misc (ry: 0.24, z: 0.52), dt: 0.71, eta: 7.5h
+[INFO]: 2023-10-31 01:52:02,969 iter: 12250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1446, cls: 0.0445, iou: 0.1107), misc (ry: 0.22, z: 0.47), dt: 0.71, eta: 7.5h
+[INFO]: 2023-10-31 01:54:34,556 iter: 12500, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1545, cls: 0.0489, iou: 0.1168), misc (ry: 0.24, z: 0.51), dt: 0.71, eta: 7.4h
+[INFO]: 2023-10-31 01:57:08,765 iter: 12750, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1480, cls: 0.0481, iou: 0.1161), misc (ry: 0.25, z: 0.45), dt: 0.71, eta: 7.3h
+[INFO]: 2023-10-31 01:59:42,803 iter: 13000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1481, cls: 0.0454, iou: 0.1110), misc (ry: 0.25, z: 0.48), dt: 0.71, eta: 7.3h
+[INFO]: 2023-10-31 02:02:16,664 iter: 13250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1541, cls: 0.0459, iou: 0.1135), misc (ry: 0.24, z: 0.49), dt: 0.70, eta: 7.2h
+[INFO]: 2023-10-31 02:04:52,746 iter: 13500, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1469, cls: 0.0493, iou: 0.1191), misc (ry: 0.23, z: 0.47), dt: 0.70, eta: 7.1h
+[INFO]: 2023-10-31 02:07:26,985 iter: 13750, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1396, cls: 0.0466, iou: 0.1152), misc (ry: 0.21, z: 0.43), dt: 0.70, eta: 7.1h
+[INFO]: 2023-10-31 02:10:01,657 iter: 14000, acc (bg: 1.00, fg: 0.98, iou: 0.89), loss (bbox_3d: 0.1610, cls: 0.0472, iou: 0.1169), misc (ry: 0.28, z: 0.49), dt: 0.70, eta: 7.0h
+[INFO]: 2023-10-31 02:12:35,792 iter: 14250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1394, cls: 0.0428, iou: 0.1091), misc (ry: 0.21, z: 0.46), dt: 0.70, eta: 6.9h
+[INFO]: 2023-10-31 02:15:09,799 iter: 14500, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1284, cls: 0.0436, iou: 0.1084), misc (ry: 0.20, z: 0.47), dt: 0.70, eta: 6.9h
+[INFO]: 2023-10-31 02:17:42,571 iter: 14750, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1385, cls: 0.0439, iou: 0.1091), misc (ry: 0.22, z: 0.47), dt: 0.70, eta: 6.8h
+[INFO]: 2023-10-31 02:20:16,564 iter: 15000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1274, cls: 0.0451, iou: 0.1072), misc (ry: 0.22, z: 0.42), dt: 0.69, eta: 6.7h
+[INFO]: 2023-10-31 02:22:49,828 testing 1000/3769, dt: 0.149, eta: 6.9m
+[INFO]: 2023-10-31 02:25:14,506 testing 2000/3769, dt: 0.147, eta: 4.3m
+[INFO]: 2023-10-31 02:27:40,781 testing 3000/3769, dt: 0.147, eta: 1.9m
+[INFO]: 2023-10-31 02:29:43,413 test_iter 15000 2d car --> easy: 0.8199, mod: 0.8106, hard: 0.6611
+[INFO]: 2023-10-31 02:29:43,414 test_iter 15000 gr car --> easy: 0.1609, mod: 0.1280, hard: 0.1079
+[INFO]: 2023-10-31 02:29:43,415 test_iter 15000 3d car --> easy: 0.1160, mod: 0.0896, hard: 0.0707
+[INFO]: 2023-10-31 02:29:43,415 test_iter 15000 2d pedestrian --> easy: 0.6536, mod: 0.5769, hard: 0.4963
+[INFO]: 2023-10-31 02:29:43,416 test_iter 15000 gr pedestrian --> easy: 0.0496, mod: 0.0477, hard: 0.0418
+[INFO]: 2023-10-31 02:29:43,416 test_iter 15000 3d pedestrian --> easy: 0.0416, mod: 0.0362, hard: 0.0355
+[INFO]: 2023-10-31 02:29:43,417 test_iter 15000 2d cyclist --> easy: 0.4978, mod: 0.3314, hard: 0.3304
+[INFO]: 2023-10-31 02:29:43,418 test_iter 15000 gr cyclist --> easy: 0.0424, mod: 0.0303, hard: 0.0303
+[INFO]: 2023-10-31 02:29:43,418 test_iter 15000 3d cyclist --> easy: 0.0393, mod: 0.0303, hard: 0.0303
+[INFO]: 2023-10-31 02:32:16,515 iter: 15250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1178, cls: 0.0427, iou: 0.1036), misc (ry: 0.21, z: 0.41), dt: 0.73, eta: 7.0h
+[INFO]: 2023-10-31 02:34:51,279 iter: 15500, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1238, cls: 0.0439, iou: 0.1048), misc (ry: 0.20, z: 0.45), dt: 0.73, eta: 7.0h
+[INFO]: 2023-10-31 02:37:27,174 iter: 15750, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1118, cls: 0.0419, iou: 0.1015), misc (ry: 0.19, z: 0.41), dt: 0.73, eta: 6.9h
+[INFO]: 2023-10-31 02:40:03,742 iter: 16000, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1244, cls: 0.0438, iou: 0.1069), misc (ry: 0.20, z: 0.41), dt: 0.72, eta: 6.8h
+[INFO]: 2023-10-31 02:42:39,670 iter: 16250, acc (bg: 1.00, fg: 0.99, iou: 0.90), loss (bbox_3d: 0.1145, cls: 0.0403, iou: 0.1032), misc (ry: 0.19, z: 0.44), dt: 0.72, eta: 6.8h
+[INFO]: 2023-10-31 02:45:14,743 iter: 16500, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1148, cls: 0.0420, iou: 0.1014), misc (ry: 0.20, z: 0.41), dt: 0.72, eta: 6.7h
+[INFO]: 2023-10-31 02:47:49,808 iter: 16750, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1133, cls: 0.0416, iou: 0.1010), misc (ry: 0.18, z: 0.42), dt: 0.72, eta: 6.7h
+[INFO]: 2023-10-31 02:50:24,044 iter: 17000, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1133, cls: 0.0413, iou: 0.0997), misc (ry: 0.17, z: 0.43), dt: 0.72, eta: 6.6h
+[INFO]: 2023-10-31 02:52:56,902 iter: 17250, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1016, cls: 0.0376, iou: 0.0968), misc (ry: 0.18, z: 0.40), dt: 0.72, eta: 6.5h
+[INFO]: 2023-10-31 02:55:32,547 iter: 17500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1100, cls: 0.0385, iou: 0.1013), misc (ry: 0.19, z: 0.41), dt: 0.72, eta: 6.5h
+[INFO]: 2023-10-31 02:58:08,257 iter: 17750, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1049, cls: 0.0388, iou: 0.0995), misc (ry: 0.19, z: 0.42), dt: 0.71, eta: 6.4h
+[INFO]: 2023-10-31 03:00:43,998 iter: 18000, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0953, cls: 0.0381, iou: 0.0945), misc (ry: 0.16, z: 0.37), dt: 0.71, eta: 6.3h
+[INFO]: 2023-10-31 03:03:15,474 iter: 18250, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1115, cls: 0.0410, iou: 0.1005), misc (ry: 0.19, z: 0.40), dt: 0.71, eta: 6.3h
+[INFO]: 2023-10-31 03:05:49,813 iter: 18500, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1094, cls: 0.0409, iou: 0.0976), misc (ry: 0.21, z: 0.40), dt: 0.71, eta: 6.2h
+[INFO]: 2023-10-31 03:08:23,241 iter: 18750, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1025, cls: 0.0404, iou: 0.1002), misc (ry: 0.20, z: 0.37), dt: 0.71, eta: 6.2h
+[INFO]: 2023-10-31 03:10:57,545 iter: 19000, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1398, cls: 0.0400, iou: 0.1005), misc (ry: 0.27, z: 0.38), dt: 0.71, eta: 6.1h
+[INFO]: 2023-10-31 03:13:32,937 iter: 19250, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1290, cls: 0.0418, iou: 0.1058), misc (ry: 0.24, z: 0.41), dt: 0.71, eta: 6.0h
+[INFO]: 2023-10-31 03:16:08,958 iter: 19500, acc (bg: 1.00, fg: 0.98, iou: 0.90), loss (bbox_3d: 0.1313, cls: 0.0449, iou: 0.1037), misc (ry: 0.24, z: 0.42), dt: 0.71, eta: 6.0h
+[INFO]: 2023-10-31 03:18:43,551 iter: 19750, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1026, cls: 0.0415, iou: 0.0992), misc (ry: 0.19, z: 0.39), dt: 0.70, eta: 5.9h
+[INFO]: 2023-10-31 03:21:19,752 iter: 20000, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.1027, cls: 0.0387, iou: 0.0954), misc (ry: 0.18, z: 0.38), dt: 0.70, eta: 5.9h
+[INFO]: 2023-10-31 03:23:48,743 testing 1000/3769, dt: 0.144, eta: 6.7m
+[INFO]: 2023-10-31 03:26:13,153 testing 2000/3769, dt: 0.144, eta: 4.3m
+[INFO]: 2023-10-31 03:28:39,880 testing 3000/3769, dt: 0.145, eta: 1.9m
+[INFO]: 2023-10-31 03:30:41,430 test_iter 20000 2d car --> easy: 0.8877, mod: 0.8160, hard: 0.6643
+[INFO]: 2023-10-31 03:30:41,431 test_iter 20000 gr car --> easy: 0.2335, mod: 0.1779, hard: 0.1549
+[INFO]: 2023-10-31 03:30:41,432 test_iter 20000 3d car --> easy: 0.1389, mod: 0.1437, hard: 0.1264
+[INFO]: 2023-10-31 03:30:41,432 test_iter 20000 2d pedestrian --> easy: 0.6561, mod: 0.5780, hard: 0.4977
+[INFO]: 2023-10-31 03:30:41,433 test_iter 20000 gr pedestrian --> easy: 0.1300, mod: 0.1163, hard: 0.1123
+[INFO]: 2023-10-31 03:30:41,434 test_iter 20000 3d pedestrian --> easy: 0.1147, mod: 0.1117, hard: 0.1025
+[INFO]: 2023-10-31 03:30:41,434 test_iter 20000 2d cyclist --> easy: 0.5422, mod: 0.3896, hard: 0.3248
+[INFO]: 2023-10-31 03:30:41,435 test_iter 20000 gr cyclist --> easy: 0.0289, mod: 0.0909, hard: 0.0909
+[INFO]: 2023-10-31 03:30:41,435 test_iter 20000 3d cyclist --> easy: 0.0283, mod: 0.0909, hard: 0.0909
+[INFO]: 2023-10-31 03:33:16,952 iter: 20250, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0925, cls: 0.0376, iou: 0.0944), misc (ry: 0.18, z: 0.36), dt: 0.73, eta: 6.0h
+[INFO]: 2023-10-31 03:35:50,358 iter: 20500, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1071, cls: 0.0396, iou: 0.0977), misc (ry: 0.20, z: 0.40), dt: 0.73, eta: 6.0h
+[INFO]: 2023-10-31 03:38:25,333 iter: 20750, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1121, cls: 0.0420, iou: 0.1011), misc (ry: 0.20, z: 0.40), dt: 0.73, eta: 5.9h
+[INFO]: 2023-10-31 03:40:58,301 iter: 21000, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1123, cls: 0.0391, iou: 0.0975), misc (ry: 0.19, z: 0.44), dt: 0.73, eta: 5.9h
+[INFO]: 2023-10-31 03:43:32,963 iter: 21250, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1043, cls: 0.0403, iou: 0.0959), misc (ry: 0.19, z: 0.39), dt: 0.73, eta: 5.8h
+[INFO]: 2023-10-31 03:46:09,197 iter: 21500, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1016, cls: 0.0406, iou: 0.0986), misc (ry: 0.18, z: 0.37), dt: 0.72, eta: 5.7h
+[INFO]: 2023-10-31 03:48:43,984 iter: 21750, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0932, cls: 0.0377, iou: 0.0919), misc (ry: 0.18, z: 0.39), dt: 0.72, eta: 5.7h
+[INFO]: 2023-10-31 03:51:18,371 iter: 22000, acc (bg: 1.00, fg: 0.98, iou: 0.91), loss (bbox_3d: 0.1031, cls: 0.0392, iou: 0.0978), misc (ry: 0.20, z: 0.40), dt: 0.72, eta: 5.6h
+[INFO]: 2023-10-31 03:53:51,805 iter: 22250, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0945, cls: 0.0365, iou: 0.0927), misc (ry: 0.18, z: 0.41), dt: 0.72, eta: 5.6h
+[INFO]: 2023-10-31 03:56:28,955 iter: 22500, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0886, cls: 0.0365, iou: 0.0916), misc (ry: 0.17, z: 0.37), dt: 0.72, eta: 5.5h
+[INFO]: 2023-10-31 03:59:01,548 iter: 22750, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0917, cls: 0.0378, iou: 0.0937), misc (ry: 0.17, z: 0.38), dt: 0.72, eta: 5.4h
+[INFO]: 2023-10-31 04:01:35,603 iter: 23000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0800, cls: 0.0377, iou: 0.0874), misc (ry: 0.17, z: 0.34), dt: 0.72, eta: 5.4h
+[INFO]: 2023-10-31 04:04:09,095 iter: 23250, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0869, cls: 0.0385, iou: 0.0918), misc (ry: 0.16, z: 0.37), dt: 0.72, eta: 5.3h
+[INFO]: 2023-10-31 04:06:44,440 iter: 23500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0772, cls: 0.0363, iou: 0.0853), misc (ry: 0.15, z: 0.34), dt: 0.71, eta: 5.3h
+[INFO]: 2023-10-31 04:09:18,428 iter: 23750, acc (bg: 1.00, fg: 0.99, iou: 0.91), loss (bbox_3d: 0.0870, cls: 0.0355, iou: 0.0922), misc (ry: 0.16, z: 0.38), dt: 0.71, eta: 5.2h
+[INFO]: 2023-10-31 04:11:52,021 iter: 24000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0863, cls: 0.0375, iou: 0.0911), misc (ry: 0.16, z: 0.37), dt: 0.71, eta: 5.1h
+[INFO]: 2023-10-31 04:14:26,564 iter: 24250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0870, cls: 0.0379, iou: 0.0900), misc (ry: 0.16, z: 0.37), dt: 0.71, eta: 5.1h
+[INFO]: 2023-10-31 04:16:59,670 iter: 24500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0786, cls: 0.0356, iou: 0.0869), misc (ry: 0.16, z: 0.32), dt: 0.71, eta: 5.0h
+[INFO]: 2023-10-31 04:19:33,634 iter: 24750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0720, cls: 0.0340, iou: 0.0849), misc (ry: 0.16, z: 0.33), dt: 0.71, eta: 5.0h
+[INFO]: 2023-10-31 04:22:07,638 iter: 25000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0799, cls: 0.0370, iou: 0.0875), misc (ry: 0.15, z: 0.37), dt: 0.71, eta: 4.9h
+[INFO]: 2023-10-31 04:24:36,957 testing 1000/3769, dt: 0.145, eta: 6.7m
+[INFO]: 2023-10-31 04:27:00,014 testing 2000/3769, dt: 0.144, eta: 4.2m
+[INFO]: 2023-10-31 04:29:26,796 testing 3000/3769, dt: 0.145, eta: 1.9m
+[INFO]: 2023-10-31 04:31:27,241 test_iter 25000 2d car --> easy: 0.8576, mod: 0.7976, hard: 0.6513
+[INFO]: 2023-10-31 04:31:27,243 test_iter 25000 gr car --> easy: 0.2123, mod: 0.1713, hard: 0.1399
+[INFO]: 2023-10-31 04:31:27,243 test_iter 25000 3d car --> easy: 0.1349, mod: 0.1138, hard: 0.0877
+[INFO]: 2023-10-31 04:31:27,244 test_iter 25000 2d pedestrian --> easy: 0.6538, mod: 0.5773, hard: 0.4957
+[INFO]: 2023-10-31 04:31:27,245 test_iter 25000 gr pedestrian --> easy: 0.0588, mod: 0.0539, hard: 0.0483
+[INFO]: 2023-10-31 04:31:27,245 test_iter 25000 3d pedestrian --> easy: 0.0464, mod: 0.0422, hard: 0.0412
+[INFO]: 2023-10-31 04:31:27,246 test_iter 25000 2d cyclist --> easy: 0.5604, mod: 0.3993, hard: 0.3969
+[INFO]: 2023-10-31 04:31:27,246 test_iter 25000 gr cyclist --> easy: 0.0281, mod: 0.0270, hard: 0.0173
+[INFO]: 2023-10-31 04:31:27,247 test_iter 25000 3d cyclist --> easy: 0.0278, mod: 0.0163, hard: 0.0170
+[INFO]: 2023-10-31 04:34:02,800 iter: 25250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0771, cls: 0.0364, iou: 0.0882), misc (ry: 0.14, z: 0.37), dt: 0.73, eta: 5.0h
+[INFO]: 2023-10-31 04:36:39,142 iter: 25500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0730, cls: 0.0362, iou: 0.0847), misc (ry: 0.15, z: 0.35), dt: 0.73, eta: 5.0h
+[INFO]: 2023-10-31 04:39:13,400 iter: 25750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0759, cls: 0.0361, iou: 0.0870), misc (ry: 0.15, z: 0.35), dt: 0.73, eta: 4.9h
+[INFO]: 2023-10-31 04:41:46,893 iter: 26000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0722, cls: 0.0354, iou: 0.0846), misc (ry: 0.15, z: 0.32), dt: 0.73, eta: 4.8h
+[INFO]: 2023-10-31 04:44:20,684 iter: 26250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0808, cls: 0.0358, iou: 0.0862), misc (ry: 0.15, z: 0.35), dt: 0.73, eta: 4.8h
+[INFO]: 2023-10-31 04:46:53,836 iter: 26500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0753, cls: 0.0381, iou: 0.0875), misc (ry: 0.15, z: 0.32), dt: 0.72, eta: 4.7h
+[INFO]: 2023-10-31 04:49:28,863 iter: 26750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0776, cls: 0.0375, iou: 0.0865), misc (ry: 0.14, z: 0.34), dt: 0.72, eta: 4.7h
+[INFO]: 2023-10-31 04:52:04,196 iter: 27000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0809, cls: 0.0385, iou: 0.0875), misc (ry: 0.16, z: 0.33), dt: 0.72, eta: 4.6h
+[INFO]: 2023-10-31 04:54:39,225 iter: 27250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0727, cls: 0.0363, iou: 0.0858), misc (ry: 0.14, z: 0.35), dt: 0.72, eta: 4.6h
+[INFO]: 2023-10-31 04:57:16,473 iter: 27500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0703, cls: 0.0344, iou: 0.0843), misc (ry: 0.15, z: 0.34), dt: 0.72, eta: 4.5h
+[INFO]: 2023-10-31 04:59:51,942 iter: 27750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0762, cls: 0.0341, iou: 0.0835), misc (ry: 0.16, z: 0.34), dt: 0.72, eta: 4.5h
+[INFO]: 2023-10-31 05:02:26,842 iter: 28000, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0669, cls: 0.0349, iou: 0.0821), misc (ry: 0.14, z: 0.33), dt: 0.72, eta: 4.4h
+[INFO]: 2023-10-31 05:05:00,255 iter: 28250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0661, cls: 0.0346, iou: 0.0834), misc (ry: 0.14, z: 0.32), dt: 0.72, eta: 4.3h
+[INFO]: 2023-10-31 05:07:34,416 iter: 28500, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0677, cls: 0.0332, iou: 0.0800), misc (ry: 0.14, z: 0.33), dt: 0.72, eta: 4.3h
+[INFO]: 2023-10-31 05:10:11,243 iter: 28750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0741, cls: 0.0365, iou: 0.0851), misc (ry: 0.15, z: 0.34), dt: 0.72, eta: 4.2h
+[INFO]: 2023-10-31 05:12:44,796 iter: 29000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0693, cls: 0.0339, iou: 0.0788), misc (ry: 0.14, z: 0.32), dt: 0.72, eta: 4.2h
+[INFO]: 2023-10-31 05:15:20,756 iter: 29250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0628, cls: 0.0339, iou: 0.0792), misc (ry: 0.13, z: 0.31), dt: 0.72, eta: 4.1h
+[INFO]: 2023-10-31 05:17:57,461 iter: 29500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0622, cls: 0.0334, iou: 0.0786), misc (ry: 0.13, z: 0.32), dt: 0.71, eta: 4.1h
+[INFO]: 2023-10-31 05:20:34,521 iter: 29750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0629, cls: 0.0340, iou: 0.0791), misc (ry: 0.13, z: 0.30), dt: 0.71, eta: 4.0h
+[INFO]: 2023-10-31 05:23:11,125 iter: 30000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0629, cls: 0.0340, iou: 0.0790), misc (ry: 0.13, z: 0.32), dt: 0.71, eta: 4.0h
+[INFO]: 2023-10-31 05:25:40,444 testing 1000/3769, dt: 0.145, eta: 6.7m
+[INFO]: 2023-10-31 05:28:04,875 testing 2000/3769, dt: 0.145, eta: 4.3m
+[INFO]: 2023-10-31 05:30:28,870 testing 3000/3769, dt: 0.144, eta: 1.8m
+[INFO]: 2023-10-31 05:32:29,410 test_iter 30000 2d car --> easy: 0.8813, mod: 0.8130, hard: 0.6632
+[INFO]: 2023-10-31 05:32:29,411 test_iter 30000 gr car --> easy: 0.2378, mod: 0.1690, hard: 0.1473
+[INFO]: 2023-10-31 05:32:29,412 test_iter 30000 3d car --> easy: 0.1613, mod: 0.1270, hard: 0.1037
+[INFO]: 2023-10-31 05:32:29,413 test_iter 30000 2d pedestrian --> easy: 0.6416, mod: 0.5024, hard: 0.4900
+[INFO]: 2023-10-31 05:32:29,413 test_iter 30000 gr pedestrian --> easy: 0.0525, mod: 0.0540, hard: 0.0467
+[INFO]: 2023-10-31 05:32:29,414 test_iter 30000 3d pedestrian --> easy: 0.0496, mod: 0.0455, hard: 0.0407
+[INFO]: 2023-10-31 05:32:29,414 test_iter 30000 2d cyclist --> easy: 0.6234, mod: 0.3931, hard: 0.3889
+[INFO]: 2023-10-31 05:32:29,415 test_iter 30000 gr cyclist --> easy: 0.1083, mod: 0.1021, hard: 0.1021
+[INFO]: 2023-10-31 05:32:29,416 test_iter 30000 3d cyclist --> easy: 0.1055, mod: 0.1008, hard: 0.0909
+[INFO]: 2023-10-31 05:35:03,147 iter: 30250, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0685, cls: 0.0360, iou: 0.0808), misc (ry: 0.14, z: 0.33), dt: 0.73, eta: 4.0h
+[INFO]: 2023-10-31 05:37:37,280 iter: 30500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0573, cls: 0.0328, iou: 0.0752), misc (ry: 0.14, z: 0.29), dt: 0.73, eta: 4.0h
+[INFO]: 2023-10-31 05:40:11,601 iter: 30750, acc (bg: 1.00, fg: 0.99, iou: 0.92), loss (bbox_3d: 0.0648, cls: 0.0378, iou: 0.0809), misc (ry: 0.14, z: 0.30), dt: 0.73, eta: 3.9h
+[INFO]: 2023-10-31 05:42:46,235 iter: 31000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0648, cls: 0.0332, iou: 0.0787), misc (ry: 0.15, z: 0.33), dt: 0.73, eta: 3.8h
+[INFO]: 2023-10-31 05:45:21,881 iter: 31250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0587, cls: 0.0323, iou: 0.0762), misc (ry: 0.13, z: 0.30), dt: 0.73, eta: 3.8h
+[INFO]: 2023-10-31 05:47:55,502 iter: 31500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0568, cls: 0.0326, iou: 0.0753), misc (ry: 0.13, z: 0.30), dt: 0.73, eta: 3.7h
+[INFO]: 2023-10-31 05:50:26,665 iter: 31750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0596, cls: 0.0314, iou: 0.0735), misc (ry: 0.14, z: 0.29), dt: 0.73, eta: 3.7h
+[INFO]: 2023-10-31 05:53:00,777 iter: 32000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0611, cls: 0.0328, iou: 0.0778), misc (ry: 0.14, z: 0.30), dt: 0.72, eta: 3.6h
+[INFO]: 2023-10-31 05:55:37,058 iter: 32250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0547, cls: 0.0325, iou: 0.0736), misc (ry: 0.12, z: 0.28), dt: 0.72, eta: 3.6h
+[INFO]: 2023-10-31 05:58:11,324 iter: 32500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0605, cls: 0.0334, iou: 0.0767), misc (ry: 0.14, z: 0.29), dt: 0.72, eta: 3.5h
+[INFO]: 2023-10-31 06:00:47,151 iter: 32750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0523, cls: 0.0333, iou: 0.0713), misc (ry: 0.13, z: 0.27), dt: 0.72, eta: 3.5h
+[INFO]: 2023-10-31 06:03:20,932 iter: 33000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0492, cls: 0.0314, iou: 0.0701), misc (ry: 0.12, z: 0.27), dt: 0.72, eta: 3.4h
+[INFO]: 2023-10-31 06:05:55,181 iter: 33250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0545, cls: 0.0349, iou: 0.0756), misc (ry: 0.13, z: 0.28), dt: 0.72, eta: 3.4h
+[INFO]: 2023-10-31 06:08:28,652 iter: 33500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0487, cls: 0.0305, iou: 0.0686), misc (ry: 0.12, z: 0.28), dt: 0.72, eta: 3.3h
+[INFO]: 2023-10-31 06:11:06,145 iter: 33750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0505, cls: 0.0315, iou: 0.0721), misc (ry: 0.12, z: 0.28), dt: 0.72, eta: 3.2h
+[INFO]: 2023-10-31 06:13:44,907 iter: 34000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0520, cls: 0.0312, iou: 0.0719), misc (ry: 0.13, z: 0.30), dt: 0.72, eta: 3.2h
+[INFO]: 2023-10-31 06:16:21,996 iter: 34250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0493, cls: 0.0326, iou: 0.0702), misc (ry: 0.12, z: 0.27), dt: 0.72, eta: 3.1h
+[INFO]: 2023-10-31 06:18:58,275 iter: 34500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0528, cls: 0.0324, iou: 0.0725), misc (ry: 0.12, z: 0.28), dt: 0.72, eta: 3.1h
+[INFO]: 2023-10-31 06:21:35,167 iter: 34750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0549, cls: 0.0333, iou: 0.0734), misc (ry: 0.13, z: 0.27), dt: 0.72, eta: 3.0h
+[INFO]: 2023-10-31 06:24:10,614 iter: 35000, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0522, cls: 0.0333, iou: 0.0714), misc (ry: 0.13, z: 0.29), dt: 0.72, eta: 3.0h
+[INFO]: 2023-10-31 06:26:40,954 testing 1000/3769, dt: 0.146, eta: 6.7m
+[INFO]: 2023-10-31 06:29:05,815 testing 2000/3769, dt: 0.145, eta: 4.3m
+[INFO]: 2023-10-31 06:31:32,070 testing 3000/3769, dt: 0.146, eta: 1.9m
+[INFO]: 2023-10-31 06:33:32,588 test_iter 35000 2d car --> easy: 0.8920, mod: 0.8228, hard: 0.6719
+[INFO]: 2023-10-31 06:33:32,589 test_iter 35000 gr car --> easy: 0.2202, mod: 0.2075, hard: 0.1740
+[INFO]: 2023-10-31 06:33:32,590 test_iter 35000 3d car --> easy: 0.1531, mod: 0.1619, hard: 0.1348
+[INFO]: 2023-10-31 06:33:32,590 test_iter 35000 2d pedestrian --> easy: 0.6495, mod: 0.5735, hard: 0.4940
+[INFO]: 2023-10-31 06:33:32,591 test_iter 35000 gr pedestrian --> easy: 0.0844, mod: 0.0692, hard: 0.0664
+[INFO]: 2023-10-31 06:33:32,592 test_iter 35000 3d pedestrian --> easy: 0.0666, mod: 0.0645, hard: 0.0576
+[INFO]: 2023-10-31 06:33:32,592 test_iter 35000 2d cyclist --> easy: 0.5730, mod: 0.4046, hard: 0.4040
+[INFO]: 2023-10-31 06:33:32,593 test_iter 35000 gr cyclist --> easy: 0.0340, mod: 0.0182, hard: 0.0182
+[INFO]: 2023-10-31 06:33:32,593 test_iter 35000 3d cyclist --> easy: 0.0314, mod: 0.0182, hard: 0.0182
+[INFO]: 2023-10-31 06:36:05,454 iter: 35250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0473, cls: 0.0312, iou: 0.0688), misc (ry: 0.11, z: 0.27), dt: 0.73, eta: 3.0h
+[INFO]: 2023-10-31 06:38:41,445 iter: 35500, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0477, cls: 0.0336, iou: 0.0690), misc (ry: 0.12, z: 0.26), dt: 0.73, eta: 2.9h
+[INFO]: 2023-10-31 06:41:15,741 iter: 35750, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0488, cls: 0.0335, iou: 0.0711), misc (ry: 0.12, z: 0.26), dt: 0.73, eta: 2.9h
+[INFO]: 2023-10-31 06:43:50,048 iter: 36000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0474, cls: 0.0305, iou: 0.0675), misc (ry: 0.11, z: 0.27), dt: 0.73, eta: 2.8h
+[INFO]: 2023-10-31 06:46:24,905 iter: 36250, acc (bg: 1.00, fg: 0.99, iou: 0.93), loss (bbox_3d: 0.0522, cls: 0.0325, iou: 0.0703), misc (ry: 0.13, z: 0.29), dt: 0.73, eta: 2.8h
+[INFO]: 2023-10-31 06:48:58,666 iter: 36500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0476, cls: 0.0314, iou: 0.0681), misc (ry: 0.12, z: 0.27), dt: 0.73, eta: 2.7h
+[INFO]: 2023-10-31 06:51:29,848 iter: 36750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0442, cls: 0.0310, iou: 0.0649), misc (ry: 0.11, z: 0.25), dt: 0.73, eta: 2.7h
+[INFO]: 2023-10-31 06:54:05,786 iter: 37000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0423, cls: 0.0301, iou: 0.0660), misc (ry: 0.11, z: 0.26), dt: 0.73, eta: 2.6h
+[INFO]: 2023-10-31 06:56:40,466 iter: 37250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0402, cls: 0.0292, iou: 0.0631), misc (ry: 0.11, z: 0.24), dt: 0.72, eta: 2.6h
+[INFO]: 2023-10-31 06:59:14,506 iter: 37500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0463, cls: 0.0323, iou: 0.0662), misc (ry: 0.12, z: 0.25), dt: 0.72, eta: 2.5h
+[INFO]: 2023-10-31 07:01:50,328 iter: 37750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0463, cls: 0.0314, iou: 0.0653), misc (ry: 0.12, z: 0.25), dt: 0.72, eta: 2.5h
+[INFO]: 2023-10-31 07:04:24,491 iter: 38000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0439, cls: 0.0320, iou: 0.0654), misc (ry: 0.11, z: 0.24), dt: 0.72, eta: 2.4h
+[INFO]: 2023-10-31 07:06:58,398 iter: 38250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0410, cls: 0.0296, iou: 0.0626), misc (ry: 0.11, z: 0.25), dt: 0.72, eta: 2.4h
+[INFO]: 2023-10-31 07:09:34,829 iter: 38500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0416, cls: 0.0304, iou: 0.0633), misc (ry: 0.11, z: 0.25), dt: 0.72, eta: 2.3h
+[INFO]: 2023-10-31 07:12:10,200 iter: 38750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0429, cls: 0.0307, iou: 0.0624), misc (ry: 0.12, z: 0.25), dt: 0.72, eta: 2.3h
+[INFO]: 2023-10-31 07:14:45,712 iter: 39000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0438, cls: 0.0314, iou: 0.0645), misc (ry: 0.12, z: 0.24), dt: 0.72, eta: 2.2h
+[INFO]: 2023-10-31 07:17:22,293 iter: 39250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0431, cls: 0.0292, iou: 0.0635), misc (ry: 0.11, z: 0.25), dt: 0.72, eta: 2.1h
+[INFO]: 2023-10-31 07:19:57,476 iter: 39500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0425, cls: 0.0305, iou: 0.0626), misc (ry: 0.11, z: 0.24), dt: 0.72, eta: 2.1h
+[INFO]: 2023-10-31 07:22:31,680 iter: 39750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0419, cls: 0.0301, iou: 0.0617), misc (ry: 0.11, z: 0.25), dt: 0.72, eta: 2.0h
+[INFO]: 2023-10-31 07:25:07,761 iter: 40000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0401, cls: 0.0307, iou: 0.0616), misc (ry: 0.10, z: 0.23), dt: 0.72, eta: 2.0h
+[INFO]: 2023-10-31 07:27:38,209 testing 1000/3769, dt: 0.146, eta: 6.7m
+[INFO]: 2023-10-31 07:30:03,763 testing 2000/3769, dt: 0.146, eta: 4.3m
+[INFO]: 2023-10-31 07:32:27,671 testing 3000/3769, dt: 0.145, eta: 1.9m
+[INFO]: 2023-10-31 07:34:27,666 test_iter 40000 2d car --> easy: 0.8866, mod: 0.8194, hard: 0.6675
+[INFO]: 2023-10-31 07:34:27,667 test_iter 40000 gr car --> easy: 0.2520, mod: 0.2117, hard: 0.1771
+[INFO]: 2023-10-31 07:34:27,668 test_iter 40000 3d car --> easy: 0.1584, mod: 0.1625, hard: 0.1341
+[INFO]: 2023-10-31 07:34:27,668 test_iter 40000 2d pedestrian --> easy: 0.6323, mod: 0.5618, hard: 0.4837
+[INFO]: 2023-10-31 07:34:27,669 test_iter 40000 gr pedestrian --> easy: 0.0864, mod: 0.1188, hard: 0.1137
+[INFO]: 2023-10-31 07:34:27,669 test_iter 40000 3d pedestrian --> easy: 0.0525, mod: 0.1125, hard: 0.1065
+[INFO]: 2023-10-31 07:34:27,670 test_iter 40000 2d cyclist --> easy: 0.5624, mod: 0.3963, hard: 0.3311
+[INFO]: 2023-10-31 07:34:27,671 test_iter 40000 gr cyclist --> easy: 0.0196, mod: 0.0182, hard: 0.0182
+[INFO]: 2023-10-31 07:34:27,671 test_iter 40000 3d cyclist --> easy: 0.0169, mod: 0.0182, hard: 0.0182
+[INFO]: 2023-10-31 07:37:03,494 iter: 40250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0413, cls: 0.0294, iou: 0.0607), misc (ry: 0.11, z: 0.24), dt: 0.73, eta: 2.0h
+[INFO]: 2023-10-31 07:39:37,170 iter: 40500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0438, cls: 0.0313, iou: 0.0632), misc (ry: 0.11, z: 0.24), dt: 0.73, eta: 1.9h
+[INFO]: 2023-10-31 07:42:12,613 iter: 40750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0427, cls: 0.0316, iou: 0.0629), misc (ry: 0.11, z: 0.24), dt: 0.73, eta: 1.9h
+[INFO]: 2023-10-31 07:44:47,487 iter: 41000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0394, cls: 0.0299, iou: 0.0598), misc (ry: 0.11, z: 0.24), dt: 0.73, eta: 1.8h
+[INFO]: 2023-10-31 07:47:22,768 iter: 41250, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0379, cls: 0.0301, iou: 0.0587), misc (ry: 0.11, z: 0.22), dt: 0.73, eta: 1.8h
+[INFO]: 2023-10-31 07:49:57,368 iter: 41500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0399, cls: 0.0293, iou: 0.0600), misc (ry: 0.11, z: 0.24), dt: 0.73, eta: 1.7h
+[INFO]: 2023-10-31 07:52:32,115 iter: 41750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0391, cls: 0.0297, iou: 0.0597), misc (ry: 0.11, z: 0.24), dt: 0.73, eta: 1.7h
+[INFO]: 2023-10-31 07:55:07,999 iter: 42000, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0390, cls: 0.0299, iou: 0.0603), misc (ry: 0.11, z: 0.23), dt: 0.73, eta: 1.6h
+[INFO]: 2023-10-31 07:57:42,059 iter: 42250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0357, cls: 0.0306, iou: 0.0565), misc (ry: 0.10, z: 0.21), dt: 0.73, eta: 1.6h
+[INFO]: 2023-10-31 08:00:15,126 iter: 42500, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0423, cls: 0.0300, iou: 0.0598), misc (ry: 0.11, z: 0.25), dt: 0.72, eta: 1.5h
+[INFO]: 2023-10-31 08:02:50,519 iter: 42750, acc (bg: 1.00, fg: 0.99, iou: 0.94), loss (bbox_3d: 0.0435, cls: 0.0311, iou: 0.0612), misc (ry: 0.11, z: 0.24), dt: 0.72, eta: 1.5h
+[INFO]: 2023-10-31 08:05:24,312 iter: 43000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0327, cls: 0.0275, iou: 0.0547), misc (ry: 0.10, z: 0.23), dt: 0.72, eta: 1.4h
+[INFO]: 2023-10-31 08:07:58,180 iter: 43250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0366, cls: 0.0295, iou: 0.0567), misc (ry: 0.10, z: 0.22), dt: 0.72, eta: 1.4h
+[INFO]: 2023-10-31 08:10:33,009 iter: 43500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0396, cls: 0.0309, iou: 0.0573), misc (ry: 0.11, z: 0.23), dt: 0.72, eta: 1.3h
+[INFO]: 2023-10-31 08:13:07,162 iter: 43750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0324, cls: 0.0280, iou: 0.0534), misc (ry: 0.10, z: 0.21), dt: 0.72, eta: 1.3h
+[INFO]: 2023-10-31 08:15:41,939 iter: 44000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0376, cls: 0.0296, iou: 0.0569), misc (ry: 0.11, z: 0.22), dt: 0.72, eta: 1.2h
+[INFO]: 2023-10-31 08:18:15,467 iter: 44250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0397, cls: 0.0290, iou: 0.0577), misc (ry: 0.10, z: 0.23), dt: 0.72, eta: 1.2h
+[INFO]: 2023-10-31 08:20:51,399 iter: 44500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0351, cls: 0.0296, iou: 0.0552), misc (ry: 0.10, z: 0.21), dt: 0.72, eta: 1.1h
+[INFO]: 2023-10-31 08:23:28,808 iter: 44750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0339, cls: 0.0280, iou: 0.0524), misc (ry: 0.10, z: 0.23), dt: 0.72, eta: 1.0h
+[INFO]: 2023-10-31 08:26:03,550 iter: 45000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0315, cls: 0.0281, iou: 0.0507), misc (ry: 0.10, z: 0.20), dt: 0.72, eta: 59.9m
+[INFO]: 2023-10-31 08:28:30,494 testing 1000/3769, dt: 0.142, eta: 6.6m
+[INFO]: 2023-10-31 08:30:52,388 testing 2000/3769, dt: 0.142, eta: 4.2m
+[INFO]: 2023-10-31 08:33:14,398 testing 3000/3769, dt: 0.142, eta: 1.8m
+[INFO]: 2023-10-31 08:35:12,195 test_iter 45000 2d car --> easy: 0.8860, mod: 0.8231, hard: 0.6680
+[INFO]: 2023-10-31 08:35:12,196 test_iter 45000 gr car --> easy: 0.2620, mod: 0.2085, hard: 0.1748
+[INFO]: 2023-10-31 08:35:12,196 test_iter 45000 3d car --> easy: 0.1532, mod: 0.1274, hard: 0.0987
+[INFO]: 2023-10-31 08:35:12,197 test_iter 45000 2d pedestrian --> easy: 0.6437, mod: 0.5715, hard: 0.4920
+[INFO]: 2023-10-31 08:35:12,198 test_iter 45000 gr pedestrian --> easy: 0.0580, mod: 0.0623, hard: 0.0570
+[INFO]: 2023-10-31 08:35:12,198 test_iter 45000 3d pedestrian --> easy: 0.0506, mod: 0.0527, hard: 0.0437
+[INFO]: 2023-10-31 08:35:12,199 test_iter 45000 2d cyclist --> easy: 0.5916, mod: 0.4120, hard: 0.3398
+[INFO]: 2023-10-31 08:35:12,199 test_iter 45000 gr cyclist --> easy: 0.0264, mod: 0.0241, hard: 0.0248
+[INFO]: 2023-10-31 08:35:12,200 test_iter 45000 3d cyclist --> easy: 0.0230, mod: 0.0130, hard: 0.0130
+[INFO]: 2023-10-31 08:37:45,905 iter: 45250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0347, cls: 0.0278, iou: 0.0532), misc (ry: 0.10, z: 0.22), dt: 0.73, eta: 57.9m
+[INFO]: 2023-10-31 08:40:19,786 iter: 45500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0356, cls: 0.0295, iou: 0.0541), misc (ry: 0.10, z: 0.21), dt: 0.73, eta: 54.8m
+[INFO]: 2023-10-31 08:42:54,953 iter: 45750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0383, cls: 0.0283, iou: 0.0532), misc (ry: 0.10, z: 0.23), dt: 0.73, eta: 51.7m
+[INFO]: 2023-10-31 08:45:28,602 iter: 46000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0313, cls: 0.0281, iou: 0.0513), misc (ry: 0.10, z: 0.22), dt: 0.73, eta: 48.6m
+[INFO]: 2023-10-31 08:48:01,264 iter: 46250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0331, cls: 0.0279, iou: 0.0514), misc (ry: 0.10, z: 0.21), dt: 0.73, eta: 45.5m
+[INFO]: 2023-10-31 08:50:34,057 iter: 46500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0362, cls: 0.0305, iou: 0.0540), misc (ry: 0.10, z: 0.22), dt: 0.73, eta: 42.4m
+[INFO]: 2023-10-31 08:53:08,079 iter: 46750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0320, cls: 0.0277, iou: 0.0503), misc (ry: 0.10, z: 0.20), dt: 0.73, eta: 39.4m
+[INFO]: 2023-10-31 08:55:41,802 iter: 47000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0352, cls: 0.0301, iou: 0.0527), misc (ry: 0.10, z: 0.21), dt: 0.73, eta: 36.3m
+[INFO]: 2023-10-31 08:58:16,436 iter: 47250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0341, cls: 0.0298, iou: 0.0516), misc (ry: 0.10, z: 0.20), dt: 0.73, eta: 33.3m
+[INFO]: 2023-10-31 09:00:49,598 iter: 47500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0302, cls: 0.0285, iou: 0.0498), misc (ry: 0.09, z: 0.20), dt: 0.73, eta: 30.2m
+[INFO]: 2023-10-31 09:03:23,361 iter: 47750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0302, cls: 0.0292, iou: 0.0496), misc (ry: 0.09, z: 0.20), dt: 0.72, eta: 27.2m
+[INFO]: 2023-10-31 09:05:57,638 iter: 48000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0313, cls: 0.0284, iou: 0.0495), misc (ry: 0.10, z: 0.21), dt: 0.72, eta: 24.1m
+[INFO]: 2023-10-31 09:08:31,921 iter: 48250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0284, cls: 0.0277, iou: 0.0474), misc (ry: 0.09, z: 0.20), dt: 0.72, eta: 21.1m
+[INFO]: 2023-10-31 09:11:07,304 iter: 48500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0341, cls: 0.0280, iou: 0.0503), misc (ry: 0.10, z: 0.21), dt: 0.72, eta: 18.1m
+[INFO]: 2023-10-31 09:13:42,365 iter: 48750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0330, cls: 0.0279, iou: 0.0495), misc (ry: 0.10, z: 0.21), dt: 0.72, eta: 15.1m
+[INFO]: 2023-10-31 09:16:17,373 iter: 49000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0289, cls: 0.0272, iou: 0.0479), misc (ry: 0.09, z: 0.20), dt: 0.72, eta: 12.0m
+[INFO]: 2023-10-31 09:18:50,723 iter: 49250, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0313, cls: 0.0288, iou: 0.0489), misc (ry: 0.10, z: 0.20), dt: 0.72, eta: 9.0m
+[INFO]: 2023-10-31 09:21:24,064 iter: 49500, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0290, cls: 0.0282, iou: 0.0475), misc (ry: 0.09, z: 0.19), dt: 0.72, eta: 6.0m
+[INFO]: 2023-10-31 09:23:58,257 iter: 49750, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0313, cls: 0.0290, iou: 0.0498), misc (ry: 0.09, z: 0.20), dt: 0.72, eta: 3.0m
+[INFO]: 2023-10-31 09:26:34,056 iter: 50000, acc (bg: 1.00, fg: 0.99, iou: 0.95), loss (bbox_3d: 0.0342, cls: 0.0302, iou: 0.0500), misc (ry: 0.10, z: 0.20), dt: 0.72, eta: 0.7s
+[INFO]: 2023-10-31 09:29:01,910 testing 1000/3769, dt: 0.143, eta: 6.6m
+[INFO]: 2023-10-31 09:31:24,866 testing 2000/3769, dt: 0.143, eta: 4.2m
+[INFO]: 2023-10-31 09:33:48,736 testing 3000/3769, dt: 0.143, eta: 1.8m
+[INFO]: 2023-10-31 09:35:48,973 test_iter 50000 2d car --> easy: 0.8898, mod: 0.8246, hard: 0.6702
+[INFO]: 2023-10-31 09:35:48,974 test_iter 50000 gr car --> easy: 0.2687, mod: 0.2116, hard: 0.1764
+[INFO]: 2023-10-31 09:35:48,975 test_iter 50000 3d car --> easy: 0.1624, mod: 0.1358, hard: 0.1032
+[INFO]: 2023-10-31 09:35:48,976 test_iter 50000 2d pedestrian --> easy: 0.6409, mod: 0.5690, hard: 0.4895
+[INFO]: 2023-10-31 09:35:48,976 test_iter 50000 gr pedestrian --> easy: 0.0751, mod: 0.0669, hard: 0.0604
+[INFO]: 2023-10-31 09:35:48,977 test_iter 50000 3d pedestrian --> easy: 0.0565, mod: 0.0541, hard: 0.0460
+[INFO]: 2023-10-31 09:35:48,978 test_iter 50000 2d cyclist --> easy: 0.6505, mod: 0.4079, hard: 0.4047
+[INFO]: 2023-10-31 09:35:48,978 test_iter 50000 gr cyclist --> easy: 0.0268, mod: 0.0247, hard: 0.0252
+[INFO]: 2023-10-31 09:35:48,979 test_iter 50000 3d cyclist --> easy: 0.0227, mod: 0.0130, hard: 0.0130
