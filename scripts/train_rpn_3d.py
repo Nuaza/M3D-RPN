@@ -118,7 +118,7 @@ def main(argv):
         # 下一个迭代
         iterator, images, imobjs = next_iteration(dataset.loader, iterator)
 
-        # 学习率
+        # 动态学习率
         adjust_lr(conf, optimizer, iteration)
 
         # 前向传播

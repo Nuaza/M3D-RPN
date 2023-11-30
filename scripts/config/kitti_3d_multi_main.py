@@ -48,8 +48,8 @@ def Config():
     conf.distort_prob = -1
     
     # datasets
-    conf.dataset_test = 'kitti_split1'
-    conf.datasets_train = [{'name': 'kitti_split1', 'anno_fmt': 'kitti_det', 'im_ext': '.png', 'scale': 1}]
+    conf.dataset_test = 'kitti'
+    conf.datasets_train = [{'name': 'kitti', 'anno_fmt': 'kitti_det', 'im_ext': '.png', 'scale': 1}]
     conf.use_3d_for_2d = True
     
     # percent expected height ranges based on test_scale
@@ -128,7 +128,7 @@ def Config():
     # visdom
     conf.visdom_port = 8100
     
-    # conf.pretrained = 'output/kitti_3d_multi_warmup/weights/model_50000_pkl'
+    conf.pretrained = 'output/kitti_3d_multi_warmup/weights/model_50000_pkl'
 
     return conf
 
