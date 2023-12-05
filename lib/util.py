@@ -406,10 +406,10 @@ def draw_text(im, text, pos, scale=0.4, color=(0, 0, 0), font=cv2.FONT_HERSHEY_S
     cv2.putText(im, text, tuple(pos), font, scale, color, lineType)
 
 
-# Calculates rotation matrix to euler angles
+# Calculates 转向矩阵 to 欧拉角
 # The result is the same as MATLAB except the order
 # of the euler angles ( x and z are swapped ).
-# adopted from https://www.learnopencv.com/rotation-matrix-to-euler-angles/
+# 参考 https://www.learnopencv.com/rotation-matrix-to-euler-angles/
 def mat2euler(R):
 
     sy = math.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])
