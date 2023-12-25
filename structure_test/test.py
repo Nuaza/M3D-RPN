@@ -1,9 +1,9 @@
 import logging
+import torch_npu
 
 from torchvision import models
 
-logging.basicConfig(level=logging.INFO)
-
+CALCULATE_DEVICE = "npu:0"
 
 def dilate_layer(layer, val):
     layer.dilation = val
@@ -11,6 +11,8 @@ def dilate_layer(layer, val):
 
 
 if __name__ == '__main__':
-    densenet121 = models.densenet121().features
-    logging.info(densenet121)
+    torch_npu.npu.set_device(CALCULATE_DEVICE)
+    densenet121 = models.densenet121()
+    densenet121 = densenet121.to(CALCULATE_DEVICE)
+    print(next(densenet121.parameters()).device)
 
