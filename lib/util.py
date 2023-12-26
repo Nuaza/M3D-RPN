@@ -1,7 +1,7 @@
 """
-This file is meant to contain generic utility functions
-which can be easily re-used in any project, and are not
-specific to any project or framework (except python!).
+该文件旨在包含通用的工具函数
+可以在任何项目中轻松复用
+并不是特定于任何项目或框架（python除外！）
 """
 
 import os
@@ -141,10 +141,9 @@ def denorm_image(im, image_means, image_stds):
 
 def compute_eta(start_time, idx, total):
     """
-    Computes the estimated time as a formatted string as well
-    as the change in delta time dt.
+    以格式化字符串的形式计算估计时间以及时间增量的变化dt
 
-    Example:
+    例如:
         from time import time
 
         start_time = time()
@@ -240,7 +239,7 @@ def pickle_write(file_path, obj):
 
 def pickle_read(file_path):
     """
-    De-serialize an object from a provided file_path
+    根据提供的文件路径反序列化对象
     """
 
     with open(file_path, 'rb') as file:

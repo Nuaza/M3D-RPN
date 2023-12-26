@@ -1,14 +1,14 @@
 """
-This file is meant to contain all functions of the detective framework
-which are "specific" to the framework but generic among experiments.
+这个文件用于包含检测框架的所有功能
+这些功能对于框架而言是“特定的”，但在实验中是通用的
 
-For example, all the experiments need to initialize configs, training models,
-log stats, display stats, and etc. However, these functions are generally fixed
-to this framework and cannot be easily transferred in other projects.
+例如，所有的实验都需要初始化配置、训练模型、
+日志统计、现实统计等。然而这些功能通常固定在框架中，
+不能轻易移植到其它项目中
 """
 
 # -----------------------------------------
-# python modules
+# python模块
 # -----------------------------------------
 from easydict import EasyDict as edict
 from shapely.geometry import Polygon
@@ -24,21 +24,19 @@ import os
 import cv2
 import math
 
-# stop python from writing so much bytecode
+# 禁用pyc缓存
 sys.dont_write_bytecode = True
 
 # -----------------------------------------
-# custom modules
+# 自定义模块
 # -----------------------------------------
 from lib.util import *
 
 
 def init_config(conf_name):
     """
-    Loads configuration file, by checking for the conf_name.py configuration file as
-    ./config/<conf_name>.py which must have function "Config".
-
-    This function must return a configuration dictionary with any necessary variables for the experiment.
+    加载配置文件，文件内必须包含Config()函数
+    这个函数会返回一个字典，里面包含实验所需的必要配置变量
     """
 
     conf = importlib.import_module('config.' + conf_name).Config()
@@ -48,27 +46,28 @@ def init_config(conf_name):
 
 def init_training_model(conf, cache_folder):
     """
-    This function is meant to load the training model and optimizer, which expects
-    ./model/<conf.model>.py to be the pytorch model file.
+    加载训练模型和优化器
+    ./model/<conf.model>.py 为pytorch模型文件
 
-    The function copies the model file into the cache BEFORE loading, for easy reproducibility.
+    该函数在加载之前会先将模型文件复制到缓存中，以便复现
     """
 
     src_path = os.path.join('.', 'models', conf.model + '.py')
     dst_path = os.path.join(cache_folder, conf.model + '.py')
 
-    # (re-) copy the pytorch model file
+    # （重新）复制pytorch模型文件
     if os.path.exists(dst_path): os.remove(dst_path)
     shutil.copyfile(src_path, dst_path)
 
-    # load and build
+    # 装载并构建模型
     network = absolute_import(dst_path)
     network = network.build(conf, 'train')
 
-    # multi-gpu
+    # 多gpu
     network = torch.nn.DataParallel(network)
 
-    # load SGD
+    # TODO: 新的优化器的具体实现可以写在这儿
+    # 加载SGD优化器
     if conf.solver_type.lower() == 'sgd':
 
         lr = conf.lr
@@ -77,7 +76,7 @@ def init_training_model(conf, cache_folder):
 
         optimizer = torch.optim.SGD(network.parameters(), lr=lr, momentum=mo, weight_decay=wd)
 
-    # load adam
+    # 加载adam优化器
     elif conf.solver_type.lower() == 'adam':
 
         lr = conf.lr
@@ -85,7 +84,7 @@ def init_training_model(conf, cache_folder):
 
         optimizer = torch.optim.Adam(network.parameters(), lr=lr, weight_decay=wd)
 
-    # load adamax
+    # 加载adamax优化器
     elif conf.solver_type.lower() == 'adamax':
 
         lr = conf.lr
@@ -401,38 +400,37 @@ def load_weights(model, path, remove_module=False):
 
 def log_stats(tracker, iteration, start_time, start_iter, max_iter, skip=1):
     """
-    This function writes the given stats to the log / prints to the screen.
-    Also, computes the estimated time arrival (eta) for completion and (dt) delta time per iteration.
+    该函数将给定的统计信息写入日志/打印到屏幕上
+    此外，计算剩余时间(eta)和每次迭代的时间增量(dt)
 
     Args:
-        tracker (array): dictionary array tracker objects. See below.
-        iteration (int): the current iteration
-        start_time (float): starting time of whole experiment
-        start_iter (int): starting iteration of whole experiment
+        tracker (array): 一种字典类型的数组，表示tracker的对象，详见下
+        iteration (int): 目前的迭代轮数
+        start_time (float): 整个实验的开始时间
+        start_iter (int): 整个实验的起始迭代序数
         max_iter (int): maximum iteration to go to
 
-    A tracker object is a dictionary with the following:
-        "name": the name of the statistic being tracked, e.g., 'fg_acc', 'abs_z'
-        "group": an arbitrary group key, e.g., 'loss', 'acc', 'misc'
-        "format": the python string format to use (see official str format function in python), e.g., '{:.2f}' for
-                  a float with 2 decimal places.
+    tracker对象是具有这些参数的字典数据结构:
+        "name": 被追踪的统计参数名，例如 'fg_acc', 'abs_z'
+        "group": 任意一组键值，例如 'loss', 'acc', 'misc'
+        "format": 使用的python字符串类型，例如 '{:.2f}' 表示一个保留到小数点后2位的浮点数
     """
 
     display_str = 'iter: {}'.format((int((iteration + 1)/skip)))
 
-    # compute eta
+    # 计算剩余时间
     time_str, dt = compute_eta(start_time, iteration - start_iter, max_iter - start_iter)
 
-    # cycle through all tracks
+    # 遍历所有的tracker
     last_group = ''
     for key in sorted(tracker.keys()):
 
         if type(tracker[key]) == list:
 
-            # compute mean
+            # 计算平均值
             meanval = np.mean(tracker[key])
 
-            # get properties
+            # 获取具体属性
             format = tracker[key + '_obj'].format
             group = tracker[key + '_obj'].group
             name = tracker[key + '_obj'].name
@@ -513,9 +511,9 @@ def display_stats(vis, tracker, iteration, start_time, start_iter, max_iter, con
 
 def compute_stats(tracker, stats):
     """
-    Copies any arbitary statistics which appear in 'stats' into 'tracker'.
-    Also, for each new object to track we will secretly store the objects information
-    into 'tracker' with the key as (group + name + '_obj'). This way we can retrieve these properties later.
+    将'stats'中的统计数据复制到'tracker'中
+    此外，对于每个要追踪的新对象，我们将秘密地将对象信息存储到'tracker'中，键值为(group + name + '_obj')
+    我们可以在之后检索这些属性
 
     Args:
         tracker (array): dictionary array tracker objects. See below.
@@ -582,9 +580,8 @@ def next_iteration(loader, iterator):
 
 def init_training_paths(conf_name, use_tmp_folder=None):
     """
-    Simple function to store and create the relevant paths for the project,
-    based on the base = current_working_dir (cwd). For this reason, we expect
-    that the experiments are run from the root folder.
+    基于 base = current_working_dir (cwd) 存储和创建项目相关路径的简单函数
+    因此，我们希望从根文件夹运行实验
 
     data    =  ./data
     output  =  ./output/<conf_name>
@@ -596,7 +593,7 @@ def init_training_paths(conf_name, use_tmp_folder=None):
         conf_name (str): configuration experiment name (used for storage into ./output/<conf_name>)
     """
 
-    # make paths
+    # 创建路径
     paths = edict()
     paths.base = os.getcwd()
     paths.data = os.path.join(paths.base, 'data')
@@ -607,7 +604,7 @@ def init_training_paths(conf_name, use_tmp_folder=None):
     if use_tmp_folder: paths.results = os.path.join(paths.base, '.tmp_results', conf_name, 'results')
     else: paths.results = os.path.join(paths.output, 'results')
 
-    # make directories
+    # 创建目录
     mkdir_if_missing(paths.output)
     mkdir_if_missing(paths.logs)
     mkdir_if_missing(paths.weights)
@@ -618,23 +615,23 @@ def init_training_paths(conf_name, use_tmp_folder=None):
 
 def init_torch(rng_seed, cuda_seed):
     """
-    Initializes the seeds for ALL potential randomness, including torch, numpy, and random packages.
+    初始化所有潜在随机性的种子，包括pytorch、numpy和random
 
     Args:
-        rng_seed (int): the shared random seed to use for numpy and random
-        cuda_seed (int): the random seed to use for pytorch's torch.cuda.manual_seed_all function
+        rng_seed (int): numpy 和 random 共享的随机种子
+        cuda_seed (int): pytorch 的 torch.cuda.manual_seed_all 函数专用随机种子
     """
 
-    # default tensor
+    # 默认Tensor类型
     torch.set_default_tensor_type('torch.cuda.FloatTensor')
 
-    # seed everything
+    # 随机种子
     torch.manual_seed(rng_seed)
     np.random.seed(rng_seed)
     random.seed(rng_seed)
     torch.cuda.manual_seed_all(cuda_seed)
 
-    # make the code deterministic
+    # 使代码具有确定性
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 

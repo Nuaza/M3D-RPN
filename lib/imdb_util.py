@@ -1,13 +1,12 @@
 """
-This file contains all image database (imdb) functionality,
-such as loading and reading information from a dataset.
+这个文件包含所有图像数据集(imdb)的函数
+比如从数据集中加载和读取信息
 
-Generally, this file is meant to read in a dataset from disk into a
-simple custom format for the detetive framework.
+该文件旨在将数据集从磁盘读入侦探框架的简单自定义格式
 """
 
 # -----------------------------------------
-# modules
+# 模块
 # -----------------------------------------
 import torch
 import torch.utils.data as data
@@ -19,7 +18,7 @@ from copy import deepcopy
 sys.dont_write_bytecode = True
 
 # -----------------------------------------
-# custom
+# 自定义
 # -----------------------------------------
 from lib.rpn_util import *
 from lib.util import *
@@ -28,54 +27,60 @@ from lib.core import *
 
 class Dataset(torch.utils.data.Dataset):
     """
-    A single Dataset class is used for the whole project,
-    which implements the __init__ and __get__ functions from PyTorch.
+    一个用于整个项目的简单的数据集类
+    其从PyTorch继承了__init__方法和__get__方法
     """
 
     def __init__(self, conf, root, cache_folder=None):
         """
-        This function reads in all datasets to be used in training and stores ANY relevant
-        information which may be needed during training as a list of edict()
-        (referred to commonly as 'imobj').
+        这个函数读取训练中所使用的数据集
+        并将训练过程中可能需要的任何相关信息存储为edict()的列表(通常表示为'imobj ')
 
-        The function also optionally stores the image database (imdb) file into a cache.
+        这个函数也可以选择将图像数据集(imdb)文件存进缓存
         """
 
         imdb = []
 
+        # conf文件里加入video_det可以用于检测视频文件
         self.video_det = False if not ('video_det' in conf) else conf.video_det
+        # TODO: video_count是用来干啥的？
         self.video_count = 1 if not ('video_count' in conf) else conf.video_count
         self.use_3d_for_2d = ('use_3d_for_2d' in conf) and conf.use_3d_for_2d
 
-        # use cache?
+        logging.info('==开始处理数据集==')
+        # 使用缓存?
         if (cache_folder is not None) and os.path.exists(os.path.join(cache_folder, 'imdb.pkl')):
-            logging.info('Preloading imdb.')
+            logging.info('找到图像数据集(imdb)缓存.')
             imdb = pickle_read(os.path.join(cache_folder, 'imdb.pkl'))
 
         else:
 
-            # cycle through each dataset
+            # 循环遍历每个数据集
             for dbind, db in enumerate(conf.datasets_train):
 
-                logging.info('Loading imdb {}'.format(db['name']))
+                logging.info('载入图像数据集(imdb) {}'.format(db['name']))
 
-                # single imdb
+                # 单个图像数据集
                 imdb_single_db = []
 
-                # kitti formatting
+                # TODO: 如果有其它格式的数据集可以加在这儿
+                # kitti格式
                 if db['anno_fmt'].lower() == 'kitti_det':
-
+                    # 训练文件夹
                     train_folder = os.path.join(root, db['name'], 'training')
-
+                    # 标签文件夹
                     ann_folder = os.path.join(train_folder, 'label_2', '')
+                    # 相机标定数据文件夹
                     cal_folder = os.path.join(train_folder, 'calib', '')
+                    # 图片文件夹
                     im_folder = os.path.join(train_folder, 'image_2', '')
 
-                    # get sorted filepaths
+                    # 获得排序后的文件路径
                     annlist = sorted(glob(ann_folder + '*.txt'))
 
                     imdb_start = time()
 
+                    # 放射空间(affine space)的大小，如果在conf文件中设定了affine_size则启用仿射
                     self.affine_size = None if not ('affine_size' in conf) else conf.affine_size
 
                     for annind, annpath in enumerate(annlist):
@@ -90,12 +95,13 @@ class Dataset(torch.utils.data.Dataset):
                         impath_pre2 = os.path.join(train_folder, 'prev_2', id + '_02' + db['im_ext'])
                         impath_pre3 = os.path.join(train_folder, 'prev_2', id + '_03' + db['im_ext'])
 
-                        # read gts
+                        # 读取真值
                         p2 = read_kitti_cal(calpath)
                         p2_inv = np.linalg.inv(p2)
 
                         gts = read_kitti_label(annpath, p2, self.use_3d_for_2d)
 
+                        # 如果没有启用仿射空间则执行(为啥要写not xxx is None这种双重否定的判断？)
                         if not self.affine_size is None:
 
                             # filter relevant classes
@@ -105,7 +111,7 @@ class Dataset(torch.utils.data.Dataset):
 
                                 KITTI_H = 1.65
 
-                                # compute ray traces for default projection
+                                # 为默认投影计算射线轨迹
                                 for gtind in range(len(gts_plane)):
                                     gt = gts_plane[gtind]
 
@@ -133,19 +139,19 @@ class Dataset(torch.utils.data.Dataset):
 
                         obj = edict()
 
-                        # did not compute transformer
+                        # 不计算仿射空间
                         if (self.affine_size is None) or len(gts_plane) < 1:
                             obj.affine_gt = None
                         else:
                             obj.affine_gt = affine_gt
 
-                        # store gts
+                        # 存储真值
                         obj.id = id
                         obj.gts = gts
                         obj.p2 = p2
                         obj.p2_inv = p2_inv
 
-                        # im properties
+                        # 图片参数
                         im = Image.open(impath)
                         obj.path = impath
                         obj.path_pre = impath_pre
@@ -153,41 +159,41 @@ class Dataset(torch.utils.data.Dataset):
                         obj.path_pre3 = impath_pre3
                         obj.imW, obj.imH = im.size
 
-                        # database properties
+                        # 数据集参数
                         obj.dbname = db.name
                         obj.scale = db.scale
                         obj.dbind = dbind
 
-                        # store
+                        # 存储
                         imdb_single_db.append(obj)
 
                         if (annind % 1000) == 0 and annind > 0:
                             time_str, dt = compute_eta(imdb_start, annind, len(annlist))
-                            logging.info('{}/{}, dt: {:0.4f}, eta: {}'.format(annind, len(annlist), dt, time_str))
+                            logging.info('已加载{}/共计{}, 时间增量dt: {:0.4f}, 剩余时间: {}'.format(annind, len(annlist), dt, time_str))
 
 
-                # concatenate single imdb into full imdb
+                # 图片数据集的整合
                 imdb += imdb_single_db
 
             imdb = np.array(imdb)
 
-            # cache off the imdb?
+            # 缓存imdb?
             if cache_folder is not None:
                 pickle_write(os.path.join(cache_folder, 'imdb.pkl'), imdb)
 
-        # store more information
+        # 存储更多信息
         self.datasets_train = conf.datasets_train
         self.len = len(imdb)
         self.imdb = imdb
 
-        # setup data augmentation transforms
+        # 设置数据增强转换
         self.transform = Augmentation(conf)
 
-        # setup sampler and data loader for this dataset
+        # 设置这个数据集的sampler和DataLoader
         self.sampler = torch.utils.data.sampler.WeightedRandomSampler(balance_samples(conf, imdb), self.len)
         self.loader = torch.utils.data.DataLoader(self, conf.batch_size, sampler=self.sampler, collate_fn=self.collate)
 
-        # check classes
+        # 检查没有使用的标签类别
         cls_not_used = []
         for imobj in imdb:
 
@@ -197,26 +203,27 @@ class Dataset(torch.utils.data.Dataset):
                     cls_not_used.append(cls)
 
         if len(cls_not_used) > 0:
-            logging.info('Labels not used in training.. {}'.format(cls_not_used))
-
+            logging.info('训练过程未使用的标签.. {}'.format(cls_not_used))
+        logging.info('==数据集处理完毕==')
 
     def __getitem__(self, index):
         """
-        Grabs the item at the given index. Specifically,
-          - read the image from disk
-          - read the imobj from RAM
-          - applies data augmentation to (im, imobj)
-          - converts image to RGB and [B C W H]
+        从给定索引获取具体内容。具体而言:
+          - 从硬盘读取图片
+          - 从内存读取imobj
+          - 将数据增强应用到(图片, imobj)
+          - 将图片格式从RGB转换成[B C W H]
         """
 
+        # 没有检测视频，仅检测图片
         if not self.video_det:
 
-            # read image
+            # 读取图片
             im = cv2.imread(self.imdb[index].path)
 
         else:
 
-            # read images
+            # 读取图片
             im = cv2.imread(self.imdb[index].path)
 
             video_count = 1 if self.video_count is None else self.video_count
@@ -229,6 +236,7 @@ class Dataset(torch.utils.data.Dataset):
 
                 im = np.concatenate((im, im_pre), axis=2)
 
+            # 啊?
             if video_count >= 3:
 
                 im_pre2 = cv2.imread(self.imdb[index].path_pre2)
@@ -241,6 +249,7 @@ class Dataset(torch.utils.data.Dataset):
 
                 im = np.concatenate((im, im_pre2), axis=2)
 
+            # 啊??
             if video_count >= 4:
 
                 im_pre3 = cv2.imread(self.imdb[index].path_pre3)
@@ -254,7 +263,7 @@ class Dataset(torch.utils.data.Dataset):
                 im = np.concatenate((im, im_pre3), axis=2)
 
 
-        # transform / data augmentation
+        # 转换/数据增强
         im, imobj = self.transform(im, deepcopy(self.imdb[index]))
 
         for i in range(int(im.shape[2]/3)):
@@ -277,7 +286,7 @@ class Dataset(torch.utils.data.Dataset):
 
         # go through each batch
         for sample in batch:
-            
+
             # append images and object dictionaries
             imgs.append(sample[0])
             imobjs.append(sample[1])
@@ -584,12 +593,12 @@ def balance_samples(conf, imdb):
             sample_weights[valid_inds] = fg_weight
             sample_weights[empty_inds] = bg_weight
 
-            logging.info('weighted respectively as {:.2f} and {:.2f}'.format(fg_weight, bg_weight))
+            logging.info('前景加权为: {:.2f} 背景加权为: {:.2f}'.format(fg_weight, bg_weight))
 
-        logging.info('Found {} foreground and {} empty images'.format(np.sum(sample_weights > 0), np.sum(sample_weights <= 0)))
+        logging.info('找到 {} 前景和 {} 空图像'.format(np.sum(sample_weights > 0), np.sum(sample_weights <= 0)))
 
     # force sampling weights to sum to 1
     sample_weights /= np.sum(sample_weights)
 
     return sample_weights
-    
+

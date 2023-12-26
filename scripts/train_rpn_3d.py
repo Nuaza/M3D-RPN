@@ -7,7 +7,7 @@ import numpy as np
 import sys
 import os
 
-# stop python from writing so much bytecode
+# 禁用pyc缓存
 sys.dont_write_bytecode = True
 sys.path.append(os.getcwd())
 np.set_printoptions(suppress=True)
@@ -39,31 +39,36 @@ def main(argv):
 
     # 必须要传入的参数 --config
     if conf_name is None:
-        raise ValueError('Please provide a configuration file name, e.g., --config=<config_name>')
+        raise ValueError('请提供参数文件名，例如： --config=<参数名>')
 
     # -----------------------------------------
     # 基础设置
     # -----------------------------------------
 
+    # 获取到配置文件的Config()函数，其返回一个包含训练所需的各项配置变量的字典
     conf = init_config(conf_name)
+    # 初始化训练的路径
     paths = init_training_paths(conf_name)
 
+    # 初始化torch，传随机种子
     init_torch(conf.rng_seed, conf.cuda_seed)
     init_log_file(paths.logs)
 
     # 不用visdom
     # vis = init_visdom(conf_name, conf.visdom_port)
 
-    # 默认
     start_iter = 0
+    # 追踪目标统计信息的tracker
     tracker = edict()
     iterator = None
     # has_visdom = vis is not None
     has_visdom = None
 
+    # 加载数据集
     dataset = Dataset(conf, paths.data, paths.output)
-
+    # 生成锚
     generate_anchors(conf, dataset.imdb, paths.output)
+    # 计算边界框(bbox)的回归参数(均值和标准差)
     compute_bbox_stats(conf, dataset.imdb, paths.output)
 
 
@@ -73,18 +78,20 @@ def main(argv):
 
     # 保存设置
     pickle_write(os.path.join(paths.output, 'conf.pkl'), conf)
+    logging.info('设置已保存')
 
     # 显示设置
-    pretty = pretty_print('conf', conf)
+    pretty = pretty_print('训练配置一览', conf)
     logging.info(pretty)
-
 
     # -----------------------------------------
     # 网络与损失
     # -----------------------------------------
 
-    # 训练网络
+    # 加载网络模型和优化器
     rpn_net, optimizer = init_training_model(conf, paths.output)
+
+    # 打印网络结构
     logging.info(rpn_net)
 
     # 设置损失
@@ -115,16 +122,16 @@ def main(argv):
 
     for iteration in range(start_iter, conf.max_iter):
 
-        # 下一个迭代
+        # 迭代
         iterator, images, imobjs = next_iteration(dataset.loader, iterator)
 
-        # 动态学习率
+        # 动态调整学习率
         adjust_lr(conf, optimizer, iteration)
 
         # 前向传播
         cls, prob, bbox_2d, bbox_3d, feat_size = rpn_net(images)
 
-        # 损失
+        # 计算损失
         det_loss, det_stats = criterion_det(cls, prob, bbox_2d, bbox_3d, imobjs, feat_size)
 
         total_loss = det_loss
@@ -135,51 +142,51 @@ def main(argv):
 
             total_loss.backward()
 
-            # batch skip, simulates larger batches by skipping gradient step
+            # 通过跳过梯度步骤来模拟更大的批次
             if (not 'batch_skip' in conf) or ((iteration + 1) % conf.batch_skip) == 0:
                 optimizer.step()
                 optimizer.zero_grad()
 
-        # keep track of stats
+        # 使用tracker追踪目标信息
         compute_stats(tracker, stats)
 
         # -----------------------------------------
-        # display
+        # 显示
         # -----------------------------------------
         if (iteration + 1) % conf.display == 0 and iteration > start_iter:
 
-            # log results
+            # 将结果记录到日志中
             log_stats(tracker, iteration, start_time, start_iter, conf.max_iter)
 
-            # display results
+            # 展示结果
             # if has_visdom:
             #     display_stats(vis, tracker, iteration, start_time, start_iter, conf.max_iter, conf_name, pretty)
 
-            # reset tracker
+            # 重设tracker
             tracker = edict()
 
         # -----------------------------------------
-        # test network
+        # 测试网络
         # -----------------------------------------
         if (iteration + 1) % conf.snapshot_iter == 0 and iteration > start_iter:
 
-            # store checkpoint
+            # 存储检查点
             save_checkpoint(optimizer, rpn_net, paths.weights, (iteration + 1))
 
             if conf.do_test:
 
-                # eval mode
+                # 验证模式
                 rpn_net.eval()
 
-                # necessary paths
+                # 必要的路径
                 results_path = os.path.join(paths.results, 'results_{}'.format((iteration + 1)))
 
                 # -----------------------------------------
-                # test kitti
+                # 测试kitti
                 # -----------------------------------------
                 if conf.test_protocol.lower() == 'kitti':
 
-                    # delete and re-make
+                    # 删除原结果并重做
                     results_path = os.path.join(results_path, 'data')
                     mkdir_if_missing(results_path, delete_if_exist=True)
 
@@ -188,12 +195,12 @@ def main(argv):
                 else:
                     logging.warning('Testing protocol {} not understood.'.format(conf.test_protocol))
 
-                # train mode
+                # 回到训练模式
                 rpn_net.train()
 
                 freeze_layers(rpn_net, freeze_blacklist, freeze_whitelist)
 
 
-# run from command line
+# 从命令行运行
 if __name__ == "__main__":
     main(sys.argv[1:])

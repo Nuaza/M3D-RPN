@@ -1,6 +1,5 @@
 """
-This file is meant to contain functions which are
-specific to region proposal networks.
+此文件旨在包含特定于区域提案网络(RPN)的功能
 """
 
 import matplotlib.pyplot as plt
@@ -21,23 +20,22 @@ from copy import deepcopy
 
 def generate_anchors(conf, imdb, cache_folder):
     """
-    Generates the anchors according to the configuration and
-    (optionally) based on the imdb properties.
+    根据配置和(可选的)基于imdb属性生成锚
     """
-
-    # use cache?
+    logging.info('==开始生成anchors==')
+    # 用缓存不?
     if (cache_folder is not None) and os.path.exists(os.path.join(cache_folder, 'anchors.pkl')):
 
         anchors = pickle_read(os.path.join(cache_folder, 'anchors.pkl'))
 
-    # generate anchors
+    # 生成锚
     else:
 
         anchors = np.zeros([len(conf.anchor_scales)*len(conf.anchor_ratios), 4], dtype=np.float32)
 
         aind = 0
 
-        # compute simple anchors based on scale/ratios
+        # 基于scale/ratio计算简单锚
         for scale in conf.anchor_scales:
 
             for ratio in conf.anchor_ratios:
@@ -49,33 +47,33 @@ def generate_anchors(conf, imdb, cache_folder):
                 aind += 1
 
 
-        # optionally cluster anchors
+        # 可选的锚群
         if conf.cluster_anchors:
             anchors = cluster_anchors(conf.feat_stride, anchors, conf.test_scale, imdb, conf.lbls,
                                       conf.ilbls, conf.anchor_ratios, conf.min_gt_vis, conf.min_gt_h,
                                       conf.max_gt_h, conf.even_anchors, conf.expand_anchors)
 
 
-        # has 3d? then need to compute stats for each new dimension
-        # presuming that anchors are initialized in "2d"
+        # 有3d?那就需要为每个新维度计算统计信息
+        # 假设锚在“2d”中初始化
         elif conf.has_3d:
 
-            # compute the default stats for each anchor
+            # 计算每个锚点的默认统计信息
             normalized_gts = []
 
-            # check all images
+            # 检查所有图像
             for imind, imobj in enumerate(imdb):
 
-                # has ground truths?
+                # 有真值?
                 if len(imobj.gts) > 0:
 
                     scale = imobj.scale * conf.test_scale / imobj.imH
 
-                    # determine ignores
+                    # 决定哪些需要忽略掉
                     igns, rmvs = determine_ignores(imobj.gts, conf.lbls, conf.ilbls, conf.min_gt_vis,
                                                    conf.min_gt_h, np.inf, scale)
 
-                    # accumulate boxes
+                    # 累积锚框
                     gts_all = bbXYWH2Coords(np.array([gt.bbox_full * scale for gt in imobj.gts]))
                     gts_val = gts_all[(rmvs == False) & (igns == False), :]
 
@@ -84,7 +82,7 @@ def generate_anchors(conf, imdb, cache_folder):
 
                     if gts_val.shape[0] > 0:
 
-                        # center all 2D ground truths
+                        # 将所有2D真值框居中
                         for gtind in range(0, gts_val.shape[0]):
                             w = gts_val[gtind, 2] - gts_val[gtind, 0] + 1
                             h = gts_val[gtind, 3] - gts_val[gtind, 1] + 1
@@ -94,25 +92,25 @@ def generate_anchors(conf, imdb, cache_folder):
                     if gts_val.shape[0] > 0:
                         normalized_gts += np.concatenate((gts_val, gts_3d), axis=1).tolist()
 
-            # convert to np
+            # 转换成numpy矩阵
             normalized_gts = np.array(normalized_gts)
 
-            # expand dimensions
+            # 升维
             anchors = np.concatenate((anchors, np.zeros([anchors.shape[0], 5])), axis=1)
 
-            # bbox_3d order --> [cx3d, cy3d, cz3d, w3d, h3d, l3d, rotY]
+            # 边界框3d(bbox_3d)顺序 --> [cx3d, cy3d, cz3d, w3d, h3d, l3d, rotY]
             anchors_z3d = [[] for x in range(anchors.shape[0])]
             anchors_w3d = [[] for x in range(anchors.shape[0])]
             anchors_h3d = [[] for x in range(anchors.shape[0])]
             anchors_l3d = [[] for x in range(anchors.shape[0])]
             anchors_rotY = [[] for x in range(anchors.shape[0])]
 
-            # find best matches for each ground truth
+            # 为每个真值找到最佳匹配
             ols = iou(anchors[:, 0:4], normalized_gts[:, 0:4])
             gt_target_ols = np.amax(ols, axis=0)
             gt_target_anchor = np.argmax(ols, axis=0)
 
-            # assign each box to an anchor
+            # 将每个框分配给一个锚点
             for gtind, gt in enumerate(normalized_gts):
 
                 anum = gt_target_anchor[gtind]
@@ -124,14 +122,14 @@ def generate_anchors(conf, imdb, cache_folder):
                     anchors_l3d[anum].append(gt[9])
                     anchors_rotY[anum].append(gt[10])
 
-            # compute global means
+            # 计算全局均值
             anchors_z3d_gl = np.empty(0)
             anchors_w3d_gl = np.empty(0)
             anchors_h3d_gl = np.empty(0)
             anchors_l3d_gl = np.empty(0)
             anchors_rotY_gl = np.empty(0)
 
-            # update anchors
+            # 更新锚点
             for aind in range(0, anchors.shape[0]):
 
                 if len(np.array(anchors_z3d[aind])) > 0:
@@ -151,12 +149,13 @@ def generate_anchors(conf, imdb, cache_folder):
                         anchors[aind, 8] = np.mean(np.array(anchors_rotY[aind]))
 
                 else:
-                    raise ValueError('Non-used anchor #{} found'.format(aind))
+                    raise ValueError('找到未使用的锚 #{}'.format(aind))
 
         if (cache_folder is not None):
             pickle_write(os.path.join(cache_folder, 'anchors.pkl'), anchors)
 
     conf.anchors = anchors
+    logging.info('==anchors生成完毕==')
 
 
 def anchor_center(w, h, stride):
@@ -610,18 +609,17 @@ def clsName2Ind(lbls, cls):
 
 def compute_bbox_stats(conf, imdb, cache_folder=''):
     """
-    Computes the mean and standard deviation for each regression
-    parameter (usually pertaining to [dx, dy, sw, sh] but sometimes
-    for 3d parameters too).
+    计算每个回归参数的均值(mean)和标准差(stds)
+    (通常用于[dx, dy, sw, sh]，有时也用于3d参数)
 
-    Once these stats are known we normalize the regression targets
-    to have 0 mean and 1 variance, to hypothetically ease training.
+    一旦这些统计信息已知，我们将回归目标归一化，使其均值为0，方差为1，以假设简化训练
     """
-
+    logging.info('==开始计算bbox参数==')
     if (cache_folder is not None) and os.path.exists(os.path.join(cache_folder, 'bbox_means.pkl')) \
             and os.path.exists(os.path.join(cache_folder, 'bbox_stds.pkl')):
-
+        logging.info('找到bbox的回归均值缓存')
         means = pickle_read(os.path.join(cache_folder, 'bbox_means.pkl'))
+        logging.info('找到bbox的回归标准差缓存')
         stds = pickle_read(os.path.join(cache_folder, 'bbox_stds.pkl'))
 
     else:
@@ -635,8 +633,8 @@ def compute_bbox_stats(conf, imdb, cache_folder=''):
 
         class_counts = np.zeros([1], dtype=np.float128) + 1e-10
 
-        # compute the mean first
-        logging.info('Computing bbox regression mean..')
+        # 先计算均值
+        logging.info('计算bbox的回归均值..')
 
         for imind, imobj in enumerate(imdb):
 
@@ -696,7 +694,7 @@ def compute_bbox_stats(conf, imdb, cache_folder=''):
 
         means = sums/class_counts
 
-        logging.info('Computing bbox regression stds..')
+        logging.info('计算bbox的回归标准差..')
 
         for imobj in imdb:
 
@@ -758,7 +756,7 @@ def compute_bbox_stats(conf, imdb, cache_folder=''):
         means = means.astype(float)
         stds = stds.astype(float)
 
-        logging.info('used {:d} boxes with avg std {:.4f}'.format(int(class_counts[0]), np.mean(stds)))
+        logging.info('使用 {:d} 个边界框,平均标准差为 {:.4f}'.format(int(class_counts[0]), np.mean(stds)))
 
         if (cache_folder is not None):
             pickle_write(os.path.join(cache_folder, 'bbox_means.pkl'), means)
@@ -766,6 +764,7 @@ def compute_bbox_stats(conf, imdb, cache_folder=''):
 
     conf.bbox_means = means
     conf.bbox_stds = stds
+    logging.info('==bbox参数计算完毕==')
 
 
 def flatten_tensor(input):

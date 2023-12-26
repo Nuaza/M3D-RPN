@@ -1,13 +1,12 @@
 """
-This file contains all PyTroch data augmentation functions.
+这个文件包含所有的PyTorch数据增强方法
 
-Every transform should have a __call__ function which takes in (self, image, imobj)
-where imobj is an arbitary dict containing relevant information to the image.
+每个变换都应有一个__call__函数，形参为 (self, image, imobj)
+其中imobj是包含图像相关信息的任意字典
 
-In many cases the imobj can be None, which enables the same augmentations to be used
-during testing as they are in training.
+在许多情况下imobj可以为None，其表示允许在测试过程中使用与训练过程相同的增强方法
 
-Optionally, most transforms should have an __init__ function as well, if needed.
+如果需要，大多数转换也应该有一个__init__函数
 """
 
 import numpy as np
@@ -330,9 +329,8 @@ class PhotometricDistort(object):
 
 class Augmentation(object):
     """
-    Data Augmentation class which packages the typical pre-processing
-    and all data augmentation transformations (mirror and photometric distort)
-    into a single transform.
+    数据增强类
+    它将典型的预处理和所有数据增强转换(镜像和光度失真)打包成一个单一的转换
     """
     def __init__(self, conf):
 
