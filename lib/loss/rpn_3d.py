@@ -1,11 +1,11 @@
 import torch.nn as nn
 import sys
 
-# stop python from writing so much bytecode
+# 禁用pyc缓存
 sys.dont_write_bytecode = True
 
 # -----------------------------------------
-# custom modules
+# 自定义模块
 # -----------------------------------------
 from lib.rpn_util import *
 
