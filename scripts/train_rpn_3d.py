@@ -4,7 +4,6 @@
 from easydict import EasyDict as edict
 from getopt import getopt
 import numpy as np
-import time
 import sys
 import os
 
@@ -16,6 +15,7 @@ np.set_printoptions(suppress=True)
 # -----------------------------------------
 # 自定义模块
 # -----------------------------------------
+from time import sleep
 from tqdm import tqdm
 from lib.core import *
 from lib.imdb_util import *
@@ -80,8 +80,8 @@ def main(argv):
 
     # 保存设置
     pickle_write(os.path.join(paths.output, 'conf.pkl'), conf)
-    for item in tqdm([i for i in range(0, 5)], desc="正在保存设置"):
-        time.sleep(1)
+    for item in tqdm([i for i in range(0, 100)], desc="正在保存设置"):
+        sleep(0.05)
     logging.info('保存设置')
 
     # 显示设置
@@ -96,6 +96,8 @@ def main(argv):
     rpn_net, optimizer = init_training_model(conf, paths.output)
 
     # 打印网络结构
+    for item in tqdm([i for i in range(0, 100)], desc="正在加载神经网络"):
+        sleep(0.05)
     logging.info(rpn_net)
 
     # 设置损失

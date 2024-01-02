@@ -1,7 +1,7 @@
 from tqdm import tqdm
-import time
+from time import sleep
 
 if __name__ == '__main__':
-    for item in tqdm([i for i in range(0, 5)], desc="正在保存设置"):
-        time.sleep(1)
+    for item in tqdm([i for i in range(0, 100)], desc="正在保存设置"):
+        sleep(0.05)
 
