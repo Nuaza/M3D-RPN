@@ -189,6 +189,10 @@ def main(argv):
             # 重设tracker
             tracker = edict()
 
+            # 重设进度条
+            training_bar.close()
+            training_bar = tqdm(total=conf.display)
+
         # -----------------------------------------
         # 测试网络
         # -----------------------------------------

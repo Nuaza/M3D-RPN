@@ -43,7 +43,6 @@ class Dataset(torch.utils.data.Dataset):
 
         # conf文件里加入video_det可以用于检测视频文件
         self.video_det = False if not ('video_det' in conf) else conf.video_det
-        # TODO: video_count是用来干啥的？
         self.video_count = 1 if not ('video_count' in conf) else conf.video_count
         self.use_3d_for_2d = ('use_3d_for_2d' in conf) and conf.use_3d_for_2d
 
@@ -83,7 +82,7 @@ class Dataset(torch.utils.data.Dataset):
                     # 放射空间(affine space)的大小，如果在conf文件中设定了affine_size则启用仿射
                     self.affine_size = None if not ('affine_size' in conf) else conf.affine_size
 
-                    for annind, annpath in tqdm(enumerate(annlist), total=len(annlist)):
+                    for annind, annpath in tqdm(enumerate(annlist), total=len(annlist), unit=" images"):
 
                         # get file parts
                         base = os.path.basename(annpath)
