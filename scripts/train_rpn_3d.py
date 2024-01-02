@@ -4,6 +4,7 @@
 from easydict import EasyDict as edict
 from getopt import getopt
 import numpy as np
+import time
 import sys
 import os
 
@@ -15,6 +16,7 @@ np.set_printoptions(suppress=True)
 # -----------------------------------------
 # 自定义模块
 # -----------------------------------------
+from tqdm import tqdm
 from lib.core import *
 from lib.imdb_util import *
 from lib.loss.rpn_3d import *
@@ -78,7 +80,9 @@ def main(argv):
 
     # 保存设置
     pickle_write(os.path.join(paths.output, 'conf.pkl'), conf)
-    logging.info('设置已保存')
+    for item in tqdm([i for i in range(0, 5)], desc="正在保存设置"):
+        time.sleep(1)
+    logging.info('保存设置')
 
     # 显示设置
     pretty = pretty_print('训练配置一览', conf)

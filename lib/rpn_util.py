@@ -15,6 +15,7 @@ from lib.augmentations import *
 from lib.nms.gpu_nms import gpu_nms
 import torch.nn.functional as F
 
+from tqdm import tqdm
 from copy import deepcopy
 
 
@@ -617,9 +618,9 @@ def compute_bbox_stats(conf, imdb, cache_folder=''):
     logging.info('==开始计算bbox参数==')
     if (cache_folder is not None) and os.path.exists(os.path.join(cache_folder, 'bbox_means.pkl')) \
             and os.path.exists(os.path.join(cache_folder, 'bbox_stds.pkl')):
-        logging.info('找到bbox的回归均值缓存')
+        logging.info('命中bbox的回归均值缓存')
         means = pickle_read(os.path.join(cache_folder, 'bbox_means.pkl'))
-        logging.info('找到bbox的回归标准差缓存')
+        logging.info('命中bbox的回归标准差缓存')
         stds = pickle_read(os.path.join(cache_folder, 'bbox_stds.pkl'))
 
     else:

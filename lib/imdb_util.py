@@ -50,7 +50,7 @@ class Dataset(torch.utils.data.Dataset):
         logging.info('==开始处理数据集==')
         # 使用缓存?
         if (cache_folder is not None) and os.path.exists(os.path.join(cache_folder, 'imdb.pkl')):
-            logging.info('找到图像数据集(imdb)缓存.')
+            logging.info('命中图像数据集(imdb)缓存.')
             imdb = pickle_read(os.path.join(cache_folder, 'imdb.pkl'))
 
         else:
@@ -58,7 +58,7 @@ class Dataset(torch.utils.data.Dataset):
             # 循环遍历每个数据集
             for dbind, db in enumerate(conf.datasets_train):
 
-                logging.info('载入图像数据集(imdb) {}'.format(db['name']))
+                logging.info('载入图像数据集(imdb): {}'.format(db['name']))
 
                 # 单个图像数据集
                 imdb_single_db = []
