@@ -10,6 +10,7 @@ sys.dont_write_bytecode = True
 from lib.rpn_util import *
 
 
+# 损失函数
 class RPN_3D_loss(nn.Module):
 
     def __init__(self, conf):
@@ -47,7 +48,6 @@ class RPN_3D_loss(nn.Module):
         self.min_gt_vis = conf.min_gt_vis
         self.min_gt_h = conf.min_gt_h
         self.max_gt_h = conf.max_gt_h
-
 
     def forward(self, cls, prob, bbox_2d, bbox_3d, imobjs, feat_size):
 
@@ -172,9 +172,9 @@ class RPN_3D_loss(nn.Module):
 
                 # bbox regression
                 transforms, ols, raw_gt = compute_targets(gts_val, gts_ign, box_lbls, rois.numpy(), self.fg_thresh,
-                                                  self.ign_thresh, self.bg_thresh_lo, self.bg_thresh_hi,
-                                                  self.best_thresh, anchors=self.anchors,  gts_3d=gts_3d,
-                                                  tracker=rois[:, 4].numpy())
+                                                          self.ign_thresh, self.bg_thresh_lo, self.bg_thresh_hi,
+                                                          self.best_thresh, anchors=self.anchors, gts_3d=gts_3d,
+                                                          tracker=rois[:, 4].numpy())
 
                 # normalize 2d
                 transforms[:, 0:4] -= self.bbox_means[:, 0:4]
@@ -224,8 +224,8 @@ class RPN_3D_loss(nn.Module):
                     bg_num = len(bg_inds)
 
                 else:
-                    fg_num = min(round(rois.shape[0]*self.box_samples * self.fg_fraction), len(fg_inds))
-                    bg_num = min(round(rois.shape[0]*self.box_samples - fg_num), len(bg_inds))
+                    fg_num = min(round(rois.shape[0] * self.box_samples * self.fg_fraction), len(fg_inds))
+                    bg_num = min(round(rois.shape[0] * self.box_samples - fg_num), len(bg_inds))
 
                 if self.hard_negatives:
 
@@ -260,7 +260,7 @@ class RPN_3D_loss(nn.Module):
                 if fg_num > 0:
 
                     # compile deltas pred
-                    deltas_2d = torch.cat((bbox_x[bind, :, np.newaxis ], bbox_y[bind, :, np.newaxis],
+                    deltas_2d = torch.cat((bbox_x[bind, :, np.newaxis], bbox_y[bind, :, np.newaxis],
                                            bbox_w[bind, :, np.newaxis], bbox_h[bind, :, np.newaxis]), dim=1)
 
                     # compile deltas targets
@@ -300,7 +300,9 @@ class RPN_3D_loss(nn.Module):
                     bbox_x3d_dn_fg /= imobj['scale_factor']
                     bbox_y3d_dn_fg /= imobj['scale_factor']
 
-                    coords_2d = torch.cat((bbox_x3d_dn_fg[np.newaxis,:] * bbox_z3d_dn_fg[np.newaxis,:], bbox_y3d_dn_fg[np.newaxis,:] * bbox_z3d_dn_fg[np.newaxis,:], bbox_z3d_dn_fg[np.newaxis,:]), dim=0)
+                    coords_2d = torch.cat((bbox_x3d_dn_fg[np.newaxis, :] * bbox_z3d_dn_fg[np.newaxis, :],
+                                           bbox_y3d_dn_fg[np.newaxis, :] * bbox_z3d_dn_fg[np.newaxis, :],
+                                           bbox_z3d_dn_fg[np.newaxis, :]), dim=0)
                     coords_2d = torch.cat((coords_2d, torch.ones([1, coords_2d.shape[1]])), dim=0)
 
                     coords_3d = torch.mm(p2_inv, coords_2d)
@@ -314,7 +316,8 @@ class RPN_3D_loss(nn.Module):
                     bbox_z3d_dn_tar = torch.tensor(bbox_z3d_dn_tar, requires_grad=False).type(torch.cuda.FloatTensor)
                     bbox_z3d_dn_tar = src_anchors[:, 4] + bbox_z3d_dn_tar
 
-                    bbox_ry3d_dn_tar = bbox_ry3d_tar[bind, fg_inds] * self.bbox_stds[:, 10][0] + self.bbox_means[:, 10][0]
+                    bbox_ry3d_dn_tar = bbox_ry3d_tar[bind, fg_inds] * self.bbox_stds[:, 10][0] + self.bbox_means[:, 10][
+                        0]
                     bbox_ry3d_dn_tar = torch.tensor(bbox_ry3d_dn_tar, requires_grad=False).type(torch.cuda.FloatTensor)
                     bbox_ry3d_dn_tar = src_anchors[:, 8] + bbox_ry3d_dn_tar
 
@@ -325,8 +328,10 @@ class RPN_3D_loss(nn.Module):
 
                 bg_inds = np.arange(0, rois.shape[0])
 
-                if self.box_samples == np.inf: bg_num = len(bg_inds)
-                else: bg_num = min(round(self.box_samples * (1 - self.fg_fraction)), len(bg_inds))
+                if self.box_samples == np.inf:
+                    bg_num = len(bg_inds)
+                else:
+                    bg_num = min(round(self.box_samples * (1 - self.fg_fraction)), len(bg_inds))
 
                 if self.hard_negatives:
 
@@ -341,10 +346,8 @@ class RPN_3D_loss(nn.Module):
                     if bg_num > 0 and bg_num != bg_inds.shape[0]:
                         bg_inds = np.random.choice(bg_inds, bg_num, replace=False)
 
-
                 labels[bind, :] = 0
                 labels_weight[bind, bg_inds] = BG_ENC
-
 
             # grab label predictions (for weighing purposes)
             active = labels[bind, :] != IGN_FLAG
@@ -394,7 +397,7 @@ class RPN_3D_loss(nn.Module):
 
             if fg_num > 0:
 
-                fg_weight = (self.fg_fraction /(1 - self.fg_fraction)) * (bg_num / fg_num)
+                fg_weight = (self.fg_fraction / (1 - self.fg_fraction)) * (bg_num / fg_num)
                 labels_weight[fg_inds_unravel] = fg_weight
                 labels_weight[bg_inds_unravel] = 1.0
 
@@ -424,7 +427,6 @@ class RPN_3D_loss(nn.Module):
                 weights_sum += np.sum(fg_weights)
                 labels_weight[fg_inds_unravel] *= fg_weights
 
-
         # ----------------------------------------
         # classification loss
         # ----------------------------------------
@@ -442,7 +444,6 @@ class RPN_3D_loss(nn.Module):
             active = labels_weight > 0
 
             if np.any(active.cpu().numpy()):
-
                 loss_cls = F.cross_entropy(cls[active, :], labels[active], reduction='none', ignore_index=IGN_FLAG)
                 loss_cls = (loss_cls * labels_weight[active])
 
@@ -468,7 +469,6 @@ class RPN_3D_loss(nn.Module):
             active = bbox_weights > 0
 
             if self.bbox_2d_lambda:
-
                 # bbox loss 2d
                 bbox_x_tar = torch.tensor(bbox_x_tar, requires_grad=False).type(torch.FloatTensor).cuda().view(-1)
                 bbox_y_tar = torch.tensor(bbox_y_tar, requires_grad=False).type(torch.FloatTensor).cuda().view(-1)
@@ -496,9 +496,7 @@ class RPN_3D_loss(nn.Module):
                 loss += bbox_2d_loss
                 stats.append({'name': 'bbox_2d', 'val': bbox_2d_loss, 'format': '{:0.4f}', 'group': 'loss'})
 
-
             if self.bbox_3d_lambda:
-
                 # bbox loss 3d
                 bbox_x3d_tar = torch.tensor(bbox_x3d_tar, requires_grad=False).type(torch.FloatTensor).cuda().view(-1)
                 bbox_y3d_tar = torch.tensor(bbox_y3d_tar, requires_grad=False).type(torch.FloatTensor).cuda().view(-1)
@@ -541,19 +539,24 @@ class RPN_3D_loss(nn.Module):
                 stats.append({'name': 'bbox_3d', 'val': bbox_3d_loss, 'format': '{:0.4f}', 'group': 'loss'})
 
             if self.bbox_3d_proj_lambda:
-
                 # bbox loss 3d
-                bbox_x3d_proj_tar = torch.tensor(bbox_x3d_proj_tar, requires_grad=False).type(torch.FloatTensor).cuda().view(-1)
-                bbox_y3d_proj_tar = torch.tensor(bbox_y3d_proj_tar, requires_grad=False).type(torch.FloatTensor).cuda().view(-1)
-                bbox_z3d_proj_tar = torch.tensor(bbox_z3d_proj_tar, requires_grad=False).type(torch.FloatTensor).cuda().view(-1)
+                bbox_x3d_proj_tar = torch.tensor(bbox_x3d_proj_tar, requires_grad=False).type(
+                    torch.FloatTensor).cuda().view(-1)
+                bbox_y3d_proj_tar = torch.tensor(bbox_y3d_proj_tar, requires_grad=False).type(
+                    torch.FloatTensor).cuda().view(-1)
+                bbox_z3d_proj_tar = torch.tensor(bbox_z3d_proj_tar, requires_grad=False).type(
+                    torch.FloatTensor).cuda().view(-1)
 
                 bbox_x3d_proj = bbox_x3d_proj[:, :].view(-1)
                 bbox_y3d_proj = bbox_y3d_proj[:, :].view(-1)
                 bbox_z3d_proj = bbox_z3d_proj[:, :].view(-1)
 
-                loss_bbox_x3d_proj = F.smooth_l1_loss(bbox_x3d_proj[active], bbox_x3d_proj_tar[active], reduction='none')
-                loss_bbox_y3d_proj = F.smooth_l1_loss(bbox_y3d_proj[active], bbox_y3d_proj_tar[active], reduction='none')
-                loss_bbox_z3d_proj = F.smooth_l1_loss(bbox_z3d_proj[active], bbox_z3d_proj_tar[active], reduction='none')
+                loss_bbox_x3d_proj = F.smooth_l1_loss(bbox_x3d_proj[active], bbox_x3d_proj_tar[active],
+                                                      reduction='none')
+                loss_bbox_y3d_proj = F.smooth_l1_loss(bbox_y3d_proj[active], bbox_y3d_proj_tar[active],
+                                                      reduction='none')
+                loss_bbox_z3d_proj = F.smooth_l1_loss(bbox_z3d_proj[active], bbox_z3d_proj_tar[active],
+                                                      reduction='none')
 
                 loss_bbox_x3d_proj = (loss_bbox_x3d_proj * bbox_weights[active]).mean()
                 loss_bbox_y3d_proj = (loss_bbox_y3d_proj * bbox_weights[active]).mean()
@@ -585,6 +588,5 @@ class RPN_3D_loss(nn.Module):
                 loss += iou_2d_loss
 
                 stats.append({'name': 'iou', 'val': iou_2d_loss, 'format': '{:0.4f}', 'group': 'loss'})
-
 
         return loss, stats
