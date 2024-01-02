@@ -50,7 +50,7 @@ class Dataset(torch.utils.data.Dataset):
         logging.info('==开始处理数据集==')
         # 使用缓存?
         if (cache_folder is not None) and os.path.exists(os.path.join(cache_folder, 'imdb.pkl')):
-            logging.info('命中图像数据集(imdb)缓存.')
+            logging.info('命中imdb缓存.')
             imdb = pickle_read(os.path.join(cache_folder, 'imdb.pkl'))
 
         else:
@@ -58,7 +58,7 @@ class Dataset(torch.utils.data.Dataset):
             # 循环遍历每个数据集
             for dbind, db in enumerate(conf.datasets_train):
 
-                logging.info('载入图像数据集(imdb): {}'.format(db['name']))
+                logging.info('载入imdb: {}'.format(db['name']))
 
                 # 单个图像数据集
                 imdb_single_db = []
@@ -83,7 +83,7 @@ class Dataset(torch.utils.data.Dataset):
                     # 放射空间(affine space)的大小，如果在conf文件中设定了affine_size则启用仿射
                     self.affine_size = None if not ('affine_size' in conf) else conf.affine_size
 
-                    for annind, annpath in enumerate(annlist):
+                    for annind, annpath in tqdm(enumerate(annlist), total=len(annlist)):
 
                         # get file parts
                         base = os.path.basename(annpath)
@@ -167,9 +167,9 @@ class Dataset(torch.utils.data.Dataset):
                         # 存储
                         imdb_single_db.append(obj)
 
-                        if (annind % 1000) == 0 and annind > 0:
-                            time_str, dt = compute_eta(imdb_start, annind, len(annlist))
-                            logging.info('已加载{}/共计{}, 时间增量dt: {:0.4f}, 剩余时间: {}'.format(annind, len(annlist), dt, time_str))
+                        # if (annind % 1000) == 0 and annind > 0:
+                        #     time_str, dt = compute_eta(imdb_start, annind, len(annlist))
+                        #     logging.info('已加载{}/共计{}, 时间增量dt: {:0.4f}, 剩余时间: {}'.format(annind, len(annlist), dt, time_str))
 
 
                 # 图片数据集的整合
