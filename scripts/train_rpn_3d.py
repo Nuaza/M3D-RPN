@@ -179,6 +179,8 @@ def main(argv):
         # -----------------------------------------
         if (iteration + 1) % conf.display == 0 and iteration > start_iter:
 
+            training_bar.close()
+
             # 将结果记录到日志中
             log_stats(tracker, iteration, start_time, start_iter, conf.max_iter)
 
@@ -190,7 +192,6 @@ def main(argv):
             tracker = edict()
 
             # 重设进度条
-            training_bar.close()
             training_bar = tqdm(total=conf.display)
 
         # -----------------------------------------
