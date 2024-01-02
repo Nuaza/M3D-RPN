@@ -90,7 +90,7 @@ def main(argv):
     pickle_write(os.path.join(paths.output, 'conf.pkl'), conf)
     load_bar("正在保存设置")
     logging.info('设置保存完成')
-    sleep(5)
+    sleep(3)
 
     # 显示设置
     logging.info('训练配置一览')
@@ -108,7 +108,7 @@ def main(argv):
     # 打印网络结构
     load_bar("正在装载神经网络")
     logging.info('装载完成')
-    sleep(5)
+    sleep(3)
 
     # 显示网络结构
     logging.info('神经网络结构一览')
@@ -188,9 +188,6 @@ def main(argv):
 
             # 重设tracker
             tracker = edict()
-
-            # 重设进度条
-            training_bar = tqdm(total=conf.display)
 
         # -----------------------------------------
         # 测试网络
