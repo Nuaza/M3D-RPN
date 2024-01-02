@@ -86,8 +86,9 @@ def main(argv):
     sleep(5)
 
     # 显示设置
-    pretty = pretty_print('训练配置一览', conf)
-    sleep(3)
+    logging.info('训练配置一览')
+    sleep(2)
+    pretty = pretty_print('训练配置', conf)
     logging.info(pretty)
 
     # -----------------------------------------
@@ -100,12 +101,12 @@ def main(argv):
     # 打印网络结构
     for item in tqdm([i for i in range(0, 100)], desc="正在加载神经网络"):
         sleep(0.05)
-    logging.info('网络载入完成')
+    logging.info('加载完成')
     sleep(5)
 
     # 显示网络结构
-    pretty = pretty_print('神经网络结构一览', conf)
-    sleep(3)
+    logging.info('神经网络结构一览')
+    sleep(2)
     logging.info(rpn_net)
 
     # 设置损失
