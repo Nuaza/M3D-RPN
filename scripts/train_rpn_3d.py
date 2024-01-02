@@ -142,6 +142,7 @@ def main(argv):
     # -----------------------------------------
     logging.info('开始训练')
 
+    training_bar = tqdm(total=conf.display)
     for iteration in range(start_iter, conf.max_iter):
 
         # 迭代
@@ -172,6 +173,7 @@ def main(argv):
         # 使用tracker追踪目标信息
         compute_stats(tracker, stats)
 
+        training_bar.update(1)
         # -----------------------------------------
         # 显示
         # -----------------------------------------
@@ -186,6 +188,9 @@ def main(argv):
 
             # 重设tracker
             tracker = edict()
+
+            # 重设进度条
+            training_bar = tqdm(total=conf.display)
 
         # -----------------------------------------
         # 测试网络

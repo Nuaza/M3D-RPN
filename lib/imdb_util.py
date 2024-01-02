@@ -167,10 +167,6 @@ class Dataset(torch.utils.data.Dataset):
                         # 存储
                         imdb_single_db.append(obj)
 
-                        # if (annind % 1000) == 0 and annind > 0:
-                        #     time_str, dt = compute_eta(imdb_start, annind, len(annlist))
-                        #     logging.info('已加载{}/共计{}, 时间增量dt: {:0.4f}, 剩余时间: {}'.format(annind, len(annlist), dt, time_str))
-
 
                 # 图片数据集的整合
                 imdb += imdb_single_db
