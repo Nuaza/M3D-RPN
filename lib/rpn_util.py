@@ -637,7 +637,7 @@ def compute_bbox_stats(conf, imdb, cache_folder=''):
         # 先计算均值
         logging.info('计算bbox的回归均值..')
 
-        for imind, imobj in tqdm(enumerate(imdb), total=len(imdb), unit="objects"):
+        for imind, imobj in tqdm(enumerate(imdb), total=len(imdb), unit=" objects"):
 
             if len(imobj.gts) > 0:
 
@@ -697,7 +697,7 @@ def compute_bbox_stats(conf, imdb, cache_folder=''):
 
         logging.info('计算bbox的回归标准差..')
 
-        for imobj in tqdm(imdb, total=len(imdb), unit="objects"):
+        for imobj in tqdm(imdb, total=len(imdb), unit=" objects"):
 
             if len(imobj.gts) > 0:
 
@@ -1332,7 +1332,7 @@ def test_kitti_3d(dataset_test, net, rpn_conf, results_path, test_path, use_log=
     # init
     test_start = time()
 
-    for imind, impath in tqdm(enumerate(imlist), desc="Validating"):
+    for imind, impath in tqdm(enumerate(imlist), total=len(imlist), desc="Testing"):
 
         im = cv2.imread(impath)
 
@@ -1399,15 +1399,6 @@ def test_kitti_3d(dataset_test, net, rpn_conf, results_path, test_path, use_log=
                            
         file.write(text_to_write)
         file.close()
-
-        # display stats
-        if (imind + 1) % 1000 == 0:
-            time_str, dt = compute_eta(test_start, imind + 1, len(imlist))
-
-            print_str = 'testing {}/{}, dt: {:0.3f}, eta: {}'.format(imind + 1, len(imlist), dt, time_str)
-
-            if use_log: logging.info(print_str)
-            else: print(print_str)
 
 
     # evaluate
