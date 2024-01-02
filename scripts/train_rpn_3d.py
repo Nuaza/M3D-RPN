@@ -22,6 +22,12 @@ from lib.imdb_util import *
 from lib.loss.rpn_3d import *
 
 
+# tqdm做的伪进度条，显示的内容不会被写入log中
+def load_bar(desc, max=100, sleep_time=0.05):
+    for item in tqdm([i for i in range(0, max)], desc=desc):
+        sleep(sleep_time)
+
+
 def main(argv):
 
     # -----------------------------------------
@@ -68,11 +74,13 @@ def main(argv):
 
     # 加载数据集
     dataset = Dataset(conf, paths.data, paths.output)
+    sleep(3)
     # 生成锚
     generate_anchors(conf, dataset.imdb, paths.output)
+    sleep(3)
     # 计算边界框(bbox)的回归参数(均值和标准差)
     compute_bbox_stats(conf, dataset.imdb, paths.output)
-
+    sleep(3)
 
     # -----------------------------------------
     # 存储设置
@@ -80,8 +88,7 @@ def main(argv):
 
     # 保存设置
     pickle_write(os.path.join(paths.output, 'conf.pkl'), conf)
-    for item in tqdm([i for i in range(0, 100)], desc="正在保存设置"):
-        sleep(0.05)
+    load_bar("正在保存设置")
     logging.info('设置保存完成')
     sleep(5)
 
@@ -99,9 +106,8 @@ def main(argv):
     rpn_net, optimizer = init_training_model(conf, paths.output)
 
     # 打印网络结构
-    for item in tqdm([i for i in range(0, 100)], desc="正在加载神经网络"):
-        sleep(0.05)
-    logging.info('加载完成')
+    load_bar("正在装载神经网络")
+    logging.info('装载完成')
     sleep(5)
 
     # 显示网络结构
@@ -134,6 +140,7 @@ def main(argv):
     # -----------------------------------------
     # 训练
     # -----------------------------------------
+    logging.info('开始训练')
 
     for iteration in range(start_iter, conf.max_iter):
 

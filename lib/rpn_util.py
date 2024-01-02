@@ -637,7 +637,7 @@ def compute_bbox_stats(conf, imdb, cache_folder=''):
         # 先计算均值
         logging.info('计算bbox的回归均值..')
 
-        for imind, imobj in enumerate(imdb):
+        for imind, imobj in tqdm(enumerate(imdb)):
 
             if len(imobj.gts) > 0:
 
