@@ -82,10 +82,12 @@ def main(argv):
     pickle_write(os.path.join(paths.output, 'conf.pkl'), conf)
     for item in tqdm([i for i in range(0, 100)], desc="正在保存设置"):
         sleep(0.05)
-    logging.info('保存设置')
+    logging.info('设置保存完成')
+    sleep(5)
 
     # 显示设置
     pretty = pretty_print('训练配置一览', conf)
+    sleep(3)
     logging.info(pretty)
 
     # -----------------------------------------
@@ -98,6 +100,12 @@ def main(argv):
     # 打印网络结构
     for item in tqdm([i for i in range(0, 100)], desc="正在加载神经网络"):
         sleep(0.05)
+    logging.info('网络载入完成')
+    sleep(5)
+
+    # 显示网络结构
+    pretty = pretty_print('神经网络结构一览', conf)
+    sleep(3)
     logging.info(rpn_net)
 
     # 设置损失
