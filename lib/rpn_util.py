@@ -1332,7 +1332,7 @@ def test_kitti_3d(dataset_test, net, rpn_conf, results_path, test_path, use_log=
     # init
     test_start = time()
 
-    for imind, impath in enumerate(imlist):
+    for imind, impath in tqdm(enumerate(imlist), desc="Validating"):
 
         im = cv2.imread(impath)
 

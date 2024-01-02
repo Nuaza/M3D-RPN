@@ -590,7 +590,7 @@ def balance_samples(conf, imdb):
 
             logging.info('前景加权为: {:.2f} 背景加权为: {:.2f}'.format(fg_weight, bg_weight))
 
-        logging.info('找到 {} 前景和 {} 空图像'.format(np.sum(sample_weights > 0), np.sum(sample_weights <= 0)))
+        logging.info('找到 {} 张前景图和 {} 张空图'.format(np.sum(sample_weights > 0), np.sum(sample_weights <= 0)))
 
     # force sampling weights to sum to 1
     sample_weights /= np.sum(sample_weights)
