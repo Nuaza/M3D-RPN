@@ -7,6 +7,10 @@ def test(name):
 
 
 if __name__ == '__main__':
-    for item in tqdm([i for i in range(0, 1000)], desc="Testing"):
-        sleep(1)
+    max_iter = 50000
+    display = 250
+    j = 1
+    for item in tqdm([i for i in range(0, 100)], desc="Testing " + str(j) + "/" + str(int(max_iter/display))):
+        j += 1
+        sleep(0.01)
 

@@ -143,7 +143,9 @@ def main(argv):
     # 训练
     # -----------------------------------------
 
-    training_bar = tqdm(total=conf.display, desc="Training")
+    iter = 1
+    training_bar = tqdm(total=conf.display, desc="Training " + str(iter) + "/" + str(int(conf.max_iter/conf.display)))
+
     for iteration in range(start_iter, conf.max_iter):
 
         # 迭代
@@ -193,7 +195,8 @@ def main(argv):
             tracker = edict()
 
             # 重设进度条
-            training_bar = tqdm(total=conf.display, desc="Training")
+            iter += 1
+            training_bar = tqdm(total=conf.display, desc="Training " + str(iter) + "/" + str(int(conf.max_iter/conf.display)))
 
         # -----------------------------------------
         # 测试网络
