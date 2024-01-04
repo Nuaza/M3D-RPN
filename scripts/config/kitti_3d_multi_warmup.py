@@ -16,7 +16,7 @@ def Config():
     conf.lr = 0.004
     conf.momentum = 0.9
     conf.weight_decay = 0.0005
-    conf.max_iter = 500
+    conf.max_iter = 50000
     conf.snapshot_iter = 10000
     conf.display = 250
     conf.do_test = True
