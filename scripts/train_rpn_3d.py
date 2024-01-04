@@ -55,9 +55,6 @@ def main(argv):
     # 基础设置
     # -----------------------------------------
 
-    train_title = input("输入本次训练任务的信息，打印在日志上以供查阅:")
-    logging.info(train_title)
-
     # 获取到配置文件的Config()函数，其返回一个包含训练所需的各项配置变量的字典
     conf = init_config(conf_name)
     # 初始化训练的路径
