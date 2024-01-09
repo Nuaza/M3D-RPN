@@ -11,3 +11,7 @@ output/kitti_3d_multi_warmup_local/weights
 output/kitti_3d_multi_main/results
 output/kitti_3d_multi_main/weights
 
+data/kitti_split1/devkit/cpp/evaluate_object
+data/kitti_split2/devkit/cpp/evaluate_object
+lib/nms/cpu_nms.cpython-38-x86_64-linux-gnu.so
+lib/nms/gpu_nms.cpython-38-x86_64-linux-gnu.so
