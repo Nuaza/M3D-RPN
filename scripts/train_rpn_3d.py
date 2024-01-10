@@ -123,6 +123,7 @@ def main(argv):
     # 自定义预训练网络
     if 'pretrained' in conf:
 
+        logging.info('使用预训练模型: ' + str(conf.pretrained))
         load_weights(rpn_net, conf.pretrained)
 
     # 继续训练
