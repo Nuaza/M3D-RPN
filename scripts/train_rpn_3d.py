@@ -112,10 +112,10 @@ def main(argv):
     logging.info('装载完成')
     sleep(3)
 
-    # 显示网络结构
-    logging.info('神经网络结构一览')
-    sleep(2)
-    logging.info(rpn_net)
+    # 显示网络结构      算了别显示了，log里面全是这玩意儿
+    # logging.info('神经网络结构一览')
+    # sleep(2)
+    # logging.info(rpn_net)
 
     # 设置损失
     criterion_det = RPN_3D_loss(conf)
