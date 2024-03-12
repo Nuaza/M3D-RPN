@@ -556,8 +556,7 @@ def compute_stats(tracker, stats):
 
 def next_iteration(loader, iterator):
     """
-    Loads the next iteration of 'iterator' OR makes a new epoch using 'loader'.
-
+    加载iterator的下一次迭代，或者使用loader开一个新的循环
     Args:
         loader (object): PyTorch DataLoader object
         iterator (object): python in-built iter(loader) object
@@ -638,8 +637,7 @@ def init_torch(rng_seed, cuda_seed):
 
 def init_visdom(conf_name, visdom_port):
     """
-    Simply initializes a visdom session (if possible) then closes all windows within it.
-    If there is no visdom server running (externally), then function will return 'None'.
+    初始化visdom进程，如果没有用visdom那么这个函数就返回None
     """
     try:
         vis = visdom.Visdom(port=visdom_port, env=conf_name)
@@ -698,9 +696,15 @@ def checkpoint_names(weights_dir, iteration):
     Single function to determine the saving format for
     resuming and saving models/optim.
     """
+    # TODO: 如果用到了restore参数可能得改改这里
+    # 如果在训练时指定了restore参数，则形参iteration对应的就是restore
+    # optimpath = os.path.join(weights_dir, 'optim_{}_pkl'.format(iteration))
+    # modelpath = os.path.join(weights_dir, 'model_{}_pkl'.format(iteration))
 
-    optimpath = os.path.join(weights_dir, 'optim_{}_pkl'.format(iteration))
-    modelpath = os.path.join(weights_dir, 'model_{}_pkl'.format(iteration))
+    # 保存的权重文件名称，后缀用pkl或者pth或者pt都一样，torch.load()一样读
+    # 顺便一提保存的类型是有序字典 collections.OrderedDict
+    optimpath = os.path.join(weights_dir, 'optim_{}.pt'.format(iteration))
+    modelpath = os.path.join(weights_dir, 'model_{}.pt'.format(iteration))
 
     return optimpath, modelpath
 

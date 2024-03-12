@@ -129,7 +129,7 @@ def Config():
     # visdom
     conf.visdom_port = 8100
     
-    conf.pretrained = 'output/kitti_3d_multi_warmup/weights/model_50000_pkl'
+    conf.pretrained = 'output/kitti_3d_multi_warmup/weights/model_50000.pt'
 
     return conf
 
