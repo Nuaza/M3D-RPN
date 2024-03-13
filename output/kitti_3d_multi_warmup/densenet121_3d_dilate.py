@@ -45,7 +45,7 @@ class RPN(nn.Module):
 
         # Replace RefConv
         # self.base.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock2.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
         self.base.denseblock3.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
         self.base.denseblock4.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
 
