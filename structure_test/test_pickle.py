@@ -3,7 +3,7 @@ from torchvision import transforms
 
 if __name__ == '__main__':
     # 取出训练好的权重文件，这是一个有序字典
-    with open('../output/kitti_3d_multi_main/weights/model_30000_pkl', 'rb') as file:
+    with open('../output/kitti_3d_multi_main/weights/exp1-4.pt', 'rb') as file:
         data = torch.load(file)
     # keys()查看它里面的所有键
     print(data.keys())
