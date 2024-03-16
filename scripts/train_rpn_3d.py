@@ -3,6 +3,7 @@
 # -----------------------------------------
 import logging
 
+import torch
 from easydict import EasyDict as edict
 from getopt import getopt
 import numpy as np
@@ -116,6 +117,9 @@ def main(argv):
     # logging.info('神经网络结构一览')
     # sleep(2)
     # logging.info(rpn_net)
+
+    # 保存网络结构
+    torch.save(rpn_net, "rpn_net.pt")
 
     # 设置损失
     criterion_det = RPN_3D_loss(conf)
