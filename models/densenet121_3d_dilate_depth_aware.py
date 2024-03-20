@@ -95,7 +95,8 @@ class RPN(nn.Module):
         # 这些个LocalConv2d本质都是分组卷积
         # TODO: 试试换成RefConv看看
         # bbox 3d
-        self.bbox_x3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        # self.bbox_x3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        self.bbox_x3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 1, 1)
         self.bbox_y3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
         self.bbox_z3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
         self.bbox_w3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
