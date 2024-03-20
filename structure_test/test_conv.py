@@ -2,7 +2,6 @@ import logging
 import torch
 import torch.nn as nn
 from torchvision import models
-from torchinfo import summary
 from backbones.densenet121 import DenseNet
 from models.PConv import PConv
 from models.RefConv import RefConv
