@@ -46,8 +46,20 @@ class RPN(nn.Module):
         # Replace RefConv
         # self.base.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
         self.base.denseblock2.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer2.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer3.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+
         self.base.denseblock3.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer2.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer3.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer4.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer5.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer6.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+
         self.base.denseblock4.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer2.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer3.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer4.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
 
         # settings
         self.phase = phase
