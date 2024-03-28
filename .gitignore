@@ -1,6 +1,8 @@
 .DS_Store
 .idea
 
+test
+
 data/kitti
 data/kitti_split1/training
 data/kitti_split1/validation
