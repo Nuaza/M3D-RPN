@@ -395,7 +395,7 @@ def load_weights(model, path, remove_module=False):
         for key in dst_keys:
             if key not in src_keys: src_weights[key] = dst_weights[key]
 
-    model.load_state_dict(src_weights)
+    model.load_state_dict(src_weights, strict=False)
 
 
 def log_stats(tracker, iteration, start_time, start_iter, max_iter, skip=1):

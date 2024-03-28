@@ -18,8 +18,8 @@ np.set_printoptions(suppress=True)
 # -----------------------------------------
 from lib.imdb_util import *
 
-conf_path = '/home/garrick/Desktop/M3D-RPN-Release/m3d_rpn_depth_aware_test_config.pkl'
-weights_path = '/home/garrick/Desktop/M3D-RPN-Release/m3d_rpn_depth_aware_test'
+conf_path = '/home/carrylee/projects/M3D-RPN/test/m3d_rpn_depth_aware_test_config.pkl'
+weights_path = '/home/carrylee/projects/M3D-RPN/test/m3d_rpn_depth_aware_test'
 
 # load config
 conf = edict(pickle_read(conf_path))
