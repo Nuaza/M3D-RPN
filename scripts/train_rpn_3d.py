@@ -113,10 +113,10 @@ def main(argv):
     logging.info('装载完成')
     sleep(3)
 
-    # 显示网络结构      算了别显示了，log里面全是这玩意儿
-    # logging.info('神经网络结构一览')
-    # sleep(2)
-    # logging.info(rpn_net)
+    # 显示网络结构
+    logging.info('神经网络结构一览')
+    sleep(2)
+    logging.info(rpn_net)
 
     # TODO: 保存网络结构      这个网络结构没法直接保存，，，会报错。只能保存state_dict
     # torch.save(rpn_net, "rpn_net.pt")
