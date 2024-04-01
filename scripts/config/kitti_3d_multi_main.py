@@ -124,7 +124,7 @@ def Config():
     
     conf.hill_climbing = True
     
-    conf.bins = 64
+    conf.bins = 32
     
     # visdom
     conf.visdom_port = 8100
