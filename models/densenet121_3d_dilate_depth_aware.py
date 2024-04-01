@@ -44,9 +44,21 @@ class RPN(nn.Module):
 
         # Replace RefConv
         # self.base.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock2.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock3.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock4.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+
+        self.base.denseblock3.denselayer19.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer20.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer21.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer22.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer23.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer24.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+
+        self.base.denseblock4.denselayer13.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer14.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
 
         # settings
         self.phase = phase
@@ -99,17 +111,17 @@ class RPN(nn.Module):
 
         # 这些个LocalConv2d本质都是分组卷积
         # bbox 3d
-        self.bbox_x3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_y3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_z3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        # self.bbox_x3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        # self.bbox_y3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        # self.bbox_z3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
         self.bbox_w3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
         self.bbox_h3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
         self.bbox_l3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
         self.bbox_rY3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
 
-        # self.bbox_x3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
-        # self.bbox_y3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
-        # self.bbox_z3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
+        self.bbox_x3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
+        self.bbox_y3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
+        self.bbox_z3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
         # self.bbox_w3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
         # self.bbox_h3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
         # self.bbox_l3d_loc = RefConv(self.prop_feats[0].out_channels, self.num_anchors, 3, 1)
