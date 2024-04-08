@@ -1,3 +1,8 @@
+"""
+https://arxiv.org/abs/2310.10563
+重聚焦重参数化卷积模块
+"""
+
 import torch
 import torch.nn as nn
 from torch.nn import functional as F

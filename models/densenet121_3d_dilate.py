@@ -2,6 +2,7 @@ import torch.nn as nn
 from torchvision import models
 from models.PConv import PConv
 from models.RefConv import RefConv
+from models.OREPA import OREPA
 from lib.rpn_util import *
 import torch
 
@@ -44,22 +45,22 @@ class RPN(nn.Module):
         # self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
         # Replace RefConv
-        self.base.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock2.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock2.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock1.denselayer1.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer10.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer11.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock2.denselayer12.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
 
-        self.base.denseblock3.denselayer19.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer20.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer21.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer22.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer23.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer24.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer19.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer20.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer21.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer22.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer23.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock3.denselayer24.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
 
-        self.base.denseblock4.denselayer13.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock4.denselayer14.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer13.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer14.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer15.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock4.denselayer16.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
 
         # settings
         self.phase = phase

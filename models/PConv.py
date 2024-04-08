@@ -1,3 +1,8 @@
+"""
+https://openaccess.thecvf.com/content/CVPR2023/html/Chen_Run_Dont_Walk_Chasing_Higher_FLOPS_for_Faster_Neural_Networks_CVPR_2023_paper.html
+部分卷积模块
+"""
+
 import torch
 import torch.nn as nn
 from torch import Tensor
