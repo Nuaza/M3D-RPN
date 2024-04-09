@@ -14,8 +14,8 @@ class RefConv(nn.Module):
                  map_k=3):
         super(RefConv, self).__init__()
         assert map_k <= kernel_size
-	self.out_channels = out_channels
-	self.origin_kernel_shape = (out_channels, in_channels // groups, kernel_size, kernel_size)
+        self.out_channels = out_channels
+        self.origin_kernel_shape = (out_channels, in_channels // groups, kernel_size, kernel_size)
         self.register_buffer('weight', torch.zeros(*self.origin_kernel_shape))
         G = in_channels * out_channels // (groups ** 2)
         self.num_2d_kernels = out_channels * in_channels // groups
