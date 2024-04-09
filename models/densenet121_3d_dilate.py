@@ -102,11 +102,17 @@ class RPN(nn.Module):
 
         batch_size = x.size(0)
 
-        # resnet
+        # Encoder
+        # backbone
         x = self.base(x)
 
+        # neck
+        # TODO: 加点什么当颈部
+
+        # proposal feature extraction layer
         prop_feats = self.prop_feats(x)
 
+        # class
         cls = self.cls(prop_feats)
 
         # bbox 2d
