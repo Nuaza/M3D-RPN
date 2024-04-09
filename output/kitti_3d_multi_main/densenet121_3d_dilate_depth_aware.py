@@ -3,6 +3,7 @@ from torchvision import models
 from lib.rpn_util import *
 from models.PConv import PConv
 from models.RefConv import RefConv
+from models.OREPA import OREPA
 from models.LocalConv2d import LocalConv2d
 import torch
 

@@ -2,6 +2,7 @@ import torch.nn as nn
 from torchvision import models
 from models.PConv import PConv
 from models.RefConv import RefConv
+from models.OREPA import OREPA
 from lib.rpn_util import *
 import torch
 
@@ -44,7 +45,7 @@ class RPN(nn.Module):
         # self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
         # Replace RefConv
-        self.base.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        self.base.denseblock1.denselayer1.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
         self.base.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
         self.base.denseblock2.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
         self.base.denseblock2.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
