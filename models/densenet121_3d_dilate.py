@@ -44,6 +44,13 @@ class RPN(nn.Module):
         # Replace PConv
         # self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
+        # neck
+        self.neck = nn.Sequential(
+            nn.ReLU(),
+            nn.Conv2d(1024, 1024, 3, 3),
+            nn.BatchNorm2d(1024)
+        )
+
         # Replace RefConv
         # self.base.denseblock1.denselayer1.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
         # self.base.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
