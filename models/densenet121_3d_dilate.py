@@ -75,7 +75,7 @@ class RPN(nn.Module):
         self.num_anchors = conf['anchors'].shape[0]
 
         self.prop_feats = nn.Sequential(
-            RefConv(self.base[-1].num_features, 512, kernel_size=3, padding=1),
+            RefConv(self.base[-1].num_features, 512, stride=1, kernel_size=3, padding=1),
             # nn.Conv2d(self.base[-1].num_features, 512, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
         )

@@ -46,28 +46,28 @@ class RPN(nn.Module):
 
         # neck
         self.neck = nn.Sequential(
-	    nn.ReLU(),
-	    nn.Conv2d(1024, 1024, 3, 3),
-	    nn.BatchNorm2d(1024)
+            nn.ReLU(),
+            nn.Conv2d(1024, 1024, 3, 3),
+            nn.BatchNorm2d(1024)
         )
 
         # Replace RefConv
-        self.base.denseblock1.denselayer1.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock2.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock2.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-
-        self.base.denseblock3.denselayer19.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer20.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer21.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer22.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer23.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock3.denselayer24.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-
-        self.base.denseblock4.denselayer13.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock4.denselayer14.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        self.base.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock1.denselayer1.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock2.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock2.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        #
+        # self.base.denseblock3.denselayer19.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock3.denselayer20.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock3.denselayer21.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock3.denselayer22.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock3.denselayer23.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock3.denselayer24.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        #
+        # self.base.denseblock4.denselayer13.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock4.denselayer14.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        # self.base.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
 
         # settings
         self.phase = phase
@@ -75,7 +75,8 @@ class RPN(nn.Module):
         self.num_anchors = conf['anchors'].shape[0]
 
         self.prop_feats = nn.Sequential(
-            nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
+            RefConv(self.base[-1].num_features, 512, stride=1, kernel_size=3, padding=1),
+            # nn.Conv2d(self.base[-1].num_features, 512, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
         )
 
@@ -113,12 +114,8 @@ class RPN(nn.Module):
         # backbone
         x = self.base(x)
 
-        # neck
-        # TODO: 加点什么当颈部
-        neck = self.neck(x)
-
         # proposal feature extraction layer
-        prop_feats = self.prop_feats(neck)
+        prop_feats = self.prop_feats(x)
 
         # class
         cls = self.cls(prop_feats)
