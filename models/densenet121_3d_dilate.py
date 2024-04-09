@@ -111,10 +111,10 @@ class RPN(nn.Module):
 
         # neck
         # TODO: 加点什么当颈部
-        test = self.test()
+        test = self.test(x)
 
         # proposal feature extraction layer
-        prop_feats = self.prop_feats(x)
+        prop_feats = self.prop_feats(test)
 
         # class
         cls = self.cls(prop_feats)

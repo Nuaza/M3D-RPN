@@ -44,6 +44,9 @@ class RPN(nn.Module):
         # Replace PConv
         # self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
+        # test
+        self.test = RefConv(128, 32, stride=1, kernel_size=3)
+
         # Replace RefConv
         self.base.denseblock1.denselayer1.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
         self.base.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
@@ -102,11 +105,18 @@ class RPN(nn.Module):
 
         batch_size = x.size(0)
 
-        # resnet
+        # Encoder
+        # backbone
         x = self.base(x)
 
-        prop_feats = self.prop_feats(x)
+        # neck
+        # TODO: 加点什么当颈部
+        test = self.test(x)
 
+        # proposal feature extraction layer
+        prop_feats = self.prop_feats(test)
+
+        # class
         cls = self.cls(prop_feats)
 
         # bbox 2d
