@@ -46,8 +46,9 @@ class RPN(nn.Module):
 
         # neck
         self.neck = nn.Sequential(
-            nn.Conv2d(1024, 512, 3, 3),
-            nn.Conv2d(512, 128 ,3, 1)
+	    nn.ReLU(),
+	    nn.Conv2d(1024, 1024, 3, 3),
+	    nn.BatchNorm2d(1024)
         )
 
         # Replace RefConv
