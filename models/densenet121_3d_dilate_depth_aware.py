@@ -158,27 +158,23 @@ class RPN(nn.Module):
 
         batch_size = x.size(0)
 
-        # Encoder
-        # backbone
+        # 骨干网络
         x = self.base(x)
-
-        # neck
-        # TODO: 加点什么当颈部
 
         # proposal feature extraction layer
         prop_feats = self.prop_feats(x)
         prop_feats_loc = self.prop_feats_loc(x)
 
-        # class
+        # 类别
         cls = self.cls(prop_feats)
 
-        # bbox 2d
+        # 二维边界框
         bbox_x = self.bbox_x(prop_feats)
         bbox_y = self.bbox_y(prop_feats)
         bbox_w = self.bbox_w(prop_feats)
         bbox_h = self.bbox_h(prop_feats)
 
-        # bbox 3d
+        # 三维边界框
         bbox_x3d = self.bbox_x3d(prop_feats)
         bbox_y3d = self.bbox_y3d(prop_feats)
         bbox_z3d = self.bbox_z3d(prop_feats)
@@ -189,13 +185,13 @@ class RPN(nn.Module):
 
         cls_loc = self.cls_loc(prop_feats_loc)
 
-        # bbox 2d
+        # 二维边界框(Local局部卷积走深度感知版)
         bbox_x_loc = self.bbox_x_loc(prop_feats_loc)
         bbox_y_loc = self.bbox_y_loc(prop_feats_loc)
         bbox_w_loc = self.bbox_w_loc(prop_feats_loc)
         bbox_h_loc = self.bbox_h_loc(prop_feats_loc)
 
-        # bbox 3d
+        # 三维边界框(Local局部卷积走深度感知版)
         bbox_x3d_loc = self.bbox_x3d_loc(prop_feats_loc)
         bbox_y3d_loc = self.bbox_y3d_loc(prop_feats_loc)
         bbox_z3d_loc = self.bbox_z3d_loc(prop_feats_loc)
@@ -206,13 +202,13 @@ class RPN(nn.Module):
 
         cls_ble = self.sigmoid(self.cls_ble)
 
-        # bbox 2d
+        # 二维边界框blend
         bbox_x_ble = self.sigmoid(self.bbox_x_ble)
         bbox_y_ble = self.sigmoid(self.bbox_y_ble)
         bbox_w_ble = self.sigmoid(self.bbox_w_ble)
         bbox_h_ble = self.sigmoid(self.bbox_h_ble)
 
-        # bbox 3d
+        # 三维边界框blend
         bbox_x3d_ble = self.sigmoid(self.bbox_x3d_ble)
         bbox_y3d_ble = self.sigmoid(self.bbox_y3d_ble)
         bbox_z3d_ble = self.sigmoid(self.bbox_z3d_ble)
@@ -221,7 +217,7 @@ class RPN(nn.Module):
         bbox_l3d_ble = self.sigmoid(self.bbox_l3d_ble)
         bbox_rY3d_ble = self.sigmoid(self.bbox_rY3d_ble)
 
-        # blend
+        # blend 这是注意力？
         cls = (cls * cls_ble) + (cls_loc * (1 - cls_ble))
 
         bbox_x = (bbox_x * bbox_x_ble) + (bbox_x_loc * (1 - bbox_x_ble))
@@ -240,13 +236,13 @@ class RPN(nn.Module):
         feat_h = cls.size(2)
         feat_w = cls.size(3)
 
-        # reshape for cross entropy
+        # 为Cross Entropy重塑张量形态
         cls = cls.view(batch_size, self.num_classes, feat_h * self.num_anchors, feat_w)
 
-        # score probabilities
+        # 概率得分
         prob = self.softmax(cls)
 
-        # reshape for consistency
+        # 为Consistency重塑张量形态
         bbox_x = flatten_tensor(bbox_x.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_y = flatten_tensor(bbox_y.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_w = flatten_tensor(bbox_w.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
@@ -260,7 +256,7 @@ class RPN(nn.Module):
         bbox_l3d = flatten_tensor(bbox_l3d.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_rY3d = flatten_tensor(bbox_rY3d.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
 
-        # bundle
+        # 组合
         bbox_2d = torch.cat((bbox_x, bbox_y, bbox_w, bbox_h), dim=2)
         bbox_3d = torch.cat((bbox_x3d, bbox_y3d, bbox_z3d, bbox_w3d, bbox_h3d, bbox_l3d, bbox_rY3d), dim=2)
 

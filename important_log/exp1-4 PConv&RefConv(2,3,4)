@@ -1,4 +1,4 @@
-exp1-3 warmup加PConv和RefConv，main加RefConv
+exp1-4 warmup加PConv和RefConv，main加RefConv
 3月13日V100上跑，21.18.比上一次涨0.19个点
 [INFO]: 2024-03-13 09:48:44,030 ==开始处理数据集==
 [INFO]: 2024-03-13 09:48:44,030 命中imdb缓存.

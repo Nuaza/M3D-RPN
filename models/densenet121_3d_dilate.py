@@ -75,8 +75,8 @@ class RPN(nn.Module):
         self.num_anchors = conf['anchors'].shape[0]
 
         self.prop_feats = nn.Sequential(
-            RefConv(self.base[-1].num_features, 512, stride=1, kernel_size=3, padding=1),
-            # nn.Conv2d(self.base[-1].num_features, 512, kernel_size=3, padding=1),
+            OREPA(self.base[-1].num_features, 512, stride=1, kernel_size=3, padding=1),
+            nn.Conv2d(self.base[-1].num_features, 512, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
         )
 
@@ -110,23 +110,22 @@ class RPN(nn.Module):
 
         batch_size = x.size(0)
 
-        # Encoder
-        # backbone
+        # 骨干网络
         x = self.base(x)
 
         # proposal feature extraction layer
         prop_feats = self.prop_feats(x)
 
-        # class
+        # 类别
         cls = self.cls(prop_feats)
 
-        # bbox 2d
+        # 二维边界框
         bbox_x = self.bbox_x(prop_feats)
         bbox_y = self.bbox_y(prop_feats)
         bbox_w = self.bbox_w(prop_feats)
         bbox_h = self.bbox_h(prop_feats)
 
-        # bbox 3d
+        # 三维边界框
         bbox_x3d = self.bbox_x3d(prop_feats)
         bbox_y3d = self.bbox_y3d(prop_feats)
         bbox_z3d = self.bbox_z3d(prop_feats)
@@ -138,13 +137,13 @@ class RPN(nn.Module):
         feat_h = cls.size(2)
         feat_w = cls.size(3)
 
-        # reshape for cross entropy
+        # 为Cross Entropy重塑张量形态
         cls = cls.view(batch_size, self.num_classes, feat_h * self.num_anchors, feat_w)
 
-        # score probabilities
+        # 概率得分
         prob = self.softmax(cls)
 
-        # reshape for consistency
+        # 为Consistency重塑张量形态
         bbox_x = flatten_tensor(bbox_x.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_y = flatten_tensor(bbox_y.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_w = flatten_tensor(bbox_w.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
@@ -158,7 +157,7 @@ class RPN(nn.Module):
         bbox_l3d = flatten_tensor(bbox_l3d.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_rY3d = flatten_tensor(bbox_rY3d.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
 
-        # bundle
+        # 组合
         bbox_2d = torch.cat((bbox_x, bbox_y, bbox_w, bbox_h), dim=2)
         bbox_3d = torch.cat((bbox_x3d, bbox_y3d, bbox_z3d, bbox_w3d, bbox_h3d, bbox_l3d, bbox_rY3d), dim=2)
 
