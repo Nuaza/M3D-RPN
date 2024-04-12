@@ -3,6 +3,7 @@ from torchvision import models
 from models.PConv import PConv
 from models.RefConv import RefConv
 from models.OREPA import OREPA
+from models.DEConv import DEConv
 from lib.rpn_util import *
 import torch
 
@@ -45,11 +46,11 @@ class RPN(nn.Module):
         # self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
         # neck
-        self.neck = nn.Sequential(
-            nn.ReLU(),
-            nn.Conv2d(1024, 1024, 3, 3),
-            nn.BatchNorm2d(1024)
-        )
+        # self.neck = nn.Sequential(
+        #     nn.ReLU(),
+        #     nn.Conv2d(1024, 1024, 3, 3),
+        #     nn.BatchNorm2d(1024)
+        # )
 
         # Replace RefConv
         # self.base.denseblock1.denselayer1.conv2 = OREPA(128, 32, stride=1, kernel_size=3)
@@ -75,8 +76,9 @@ class RPN(nn.Module):
         self.num_anchors = conf['anchors'].shape[0]
 
         self.prop_feats = nn.Sequential(
-            OREPA(self.base[-1].num_features, 512, kernel_size=3, padding=1),
+            # OREPA(self.base[-1].num_features, 512, kernel_size=3, padding=1),
             # nn.Conv2d(self.base[-1].num_features, 512, kernel_size=3, padding=1),
+            DEConv(dim=1024),
             nn.ReLU(inplace=True),
         )
 

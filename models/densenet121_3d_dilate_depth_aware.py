@@ -61,6 +61,11 @@ class RPN(nn.Module):
         # self.base.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
         # self.base.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
 
+        # Cross-Dimension Focusing Module
+        self.CDF = nn.Sequential(
+            RefConv(128, 32, stride=1, kernel_size=3)
+        )
+
         # settings
         self.phase = phase
         self.num_classes = len(conf['lbls']) + 1
@@ -69,7 +74,7 @@ class RPN(nn.Module):
         self.num_rows = int(min(conf.bins, calc_output_size(conf.test_scale, conf.feat_stride)))
 
         self.prop_feats = nn.Sequential(
-            nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
+            # nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
             nn.ReLU(inplace=True)
         )
         # outputs
@@ -91,7 +96,7 @@ class RPN(nn.Module):
         self.bbox_rY3d = nn.Conv2d(self.prop_feats[0].out_channels, self.num_anchors, 1)
 
         self.prop_feats_loc = nn.Sequential(
-            LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
+            # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
             nn.ReLU(inplace=True)
         )
 

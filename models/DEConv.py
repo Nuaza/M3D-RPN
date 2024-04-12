@@ -152,17 +152,3 @@ class DEConv(nn.Module):
         res = nn.functional.conv2d(input=x, weight=w, bias=b, stride=1, padding=1, groups=1)
 
         return res
-
-
-if __name__ == '__main__':
-    # 初始化DEConv模块，dim为输入和输出的通道数
-    block = DEConv(dim=16)
-    # 创建一个随机输入张量，假设输入尺寸为(batch_size, channels, height, width)
-    input_tensor = torch.rand(4, 16, 64, 64)
-    # 将输入传递给DEConv模块
-    output_tensor = block(input_tensor)
-    # 打印输入和输出张量的尺寸
-    print("输入尺寸:", input_tensor.size())
-    print("输出尺寸:", output_tensor.size())
-
-
