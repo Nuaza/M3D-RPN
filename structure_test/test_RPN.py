@@ -1,4 +1,7 @@
 import torch
+import torch.nn as nn
+
+
 
 if __name__ == '__main__':
-    net = torch.load("../rpn_net.pt")
+    print(nn.Sigmoid())

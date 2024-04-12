@@ -4,6 +4,7 @@ from lib.rpn_util import *
 from models.PConv import PConv
 from models.RefConv import RefConv
 from models.OREPA import OREPA
+from models.DEConv import DEConv
 from models.LocalConv2d import LocalConv2d
 import torch
 
@@ -75,7 +76,8 @@ class RPN(nn.Module):
 
         self.prop_feats = nn.Sequential(
             # nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
-            nn.ReLU(inplace=True)
+            DEConv(dim=1024),
+            nn.ReLU(inplace=True),
         )
         # outputs
         self.cls = nn.Conv2d(self.prop_feats[0].out_channels, self.num_classes * self.num_anchors, 1, )
@@ -97,7 +99,8 @@ class RPN(nn.Module):
 
         self.prop_feats_loc = nn.Sequential(
             # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
-            nn.ReLU(inplace=True)
+            DEConv(dim=1024),
+            nn.ReLU(inplace=True),
         )
 
         # outputs
