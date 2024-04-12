@@ -308,11 +308,11 @@ def build(conf, phase='train'):
                        'bbox_l3d', 'bbox_z3d', 'bbox_rY3d']
 
         # prop_feats
-        src_weight_key = 'module.{}.0.weight'.format('prop_feats')
-        src_bias_key = 'module.{}.0.bias'.format('prop_feats')
+        src_weight_key = 'module.{}.0.weight.conv1-5'.format('prop_feats')
+        src_bias_key = 'module.{}.0.bias.conv1-5'.format('prop_feats')
 
-        dst_weight_key = 'module.{}.0.group_conv.weight'.format('prop_feats_loc')
-        dst_bias_key = 'module.{}.0.group_conv.bias'.format('prop_feats_loc')
+        dst_weight_key = 'module.{}.0.group_conv.weight.conv1-5'.format('prop_feats_loc')
+        dst_bias_key = 'module.{}.0.group_conv.bias.conv1-5'.format('prop_feats_loc')
 
         src_weights[dst_weight_key] = src_weights[src_weight_key].repeat(conf.bins, 1, 1, 1)
         src_weights[dst_bias_key] = src_weights[src_bias_key].repeat(conf.bins, )
