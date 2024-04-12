@@ -134,6 +134,7 @@ class Conv2d_vd(nn.Module):
 class DEConv(nn.Module):
     def __init__(self, dim):
         super(DEConv, self).__init__()
+        self.out_channels = dim
         self.conv1_1 = Conv2d_cd(dim, dim, 3, bias=True)
         self.conv1_2 = Conv2d_hd(dim, dim, 3, bias=True)
         self.conv1_3 = Conv2d_vd(dim, dim, 3, bias=True)
