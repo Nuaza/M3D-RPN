@@ -4,7 +4,9 @@
 import logging
 
 import torch
+from torchsummary import summary
 from easydict import EasyDict as edict
+from torchsummary import summary
 from getopt import getopt
 import numpy as np
 import sys
@@ -118,8 +120,8 @@ def main(argv):
     sleep(2)
     logging.info(rpn_net)
 
-    # TODO: 保存网络结构      这个网络结构没法直接保存，，，会报错。只能保存state_dict
-    # torch.save(rpn_net, "rpn_net.pt")
+    # 显示网络参数
+    summary(rpn_net, (3, 384, 1280))
 
     # 设置损失
     criterion_det = RPN_3D_loss(conf)
