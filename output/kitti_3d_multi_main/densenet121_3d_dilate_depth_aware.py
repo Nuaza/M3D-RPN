@@ -4,6 +4,7 @@ from lib.rpn_util import *
 from models.PConv import PConv
 from models.RefConv import RefConv
 from models.OREPA import OREPA
+from models.DEConv import DEConv
 from models.LocalConv2d import LocalConv2d
 import torch
 
@@ -61,6 +62,11 @@ class RPN(nn.Module):
         # self.base.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
         # self.base.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
 
+        # Cross-Dimension Focusing Module
+        self.CDF = nn.Sequential(
+            RefConv(128, 32, stride=1, kernel_size=3)
+        )
+
         # settings
         self.phase = phase
         self.num_classes = len(conf['lbls']) + 1
@@ -69,8 +75,9 @@ class RPN(nn.Module):
         self.num_rows = int(min(conf.bins, calc_output_size(conf.test_scale, conf.feat_stride)))
 
         self.prop_feats = nn.Sequential(
-            nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
-            nn.ReLU(inplace=True)
+            # nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
+            DEConv(dim=1024),
+            nn.ReLU(inplace=True),
         )
         # outputs
         self.cls = nn.Conv2d(self.prop_feats[0].out_channels, self.num_classes * self.num_anchors, 1, )
@@ -91,8 +98,9 @@ class RPN(nn.Module):
         self.bbox_rY3d = nn.Conv2d(self.prop_feats[0].out_channels, self.num_anchors, 1)
 
         self.prop_feats_loc = nn.Sequential(
-            LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
-            nn.ReLU(inplace=True)
+            # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
+            DEConv(dim=1024),
+            nn.ReLU(inplace=True),
         )
 
         # outputs
@@ -158,21 +166,23 @@ class RPN(nn.Module):
 
         batch_size = x.size(0)
 
-        # densenet
+        # 骨干网络
         x = self.base(x)
 
+        # proposal feature extraction layer
         prop_feats = self.prop_feats(x)
         prop_feats_loc = self.prop_feats_loc(x)
 
+        # 类别
         cls = self.cls(prop_feats)
 
-        # bbox 2d
+        # 二维边界框
         bbox_x = self.bbox_x(prop_feats)
         bbox_y = self.bbox_y(prop_feats)
         bbox_w = self.bbox_w(prop_feats)
         bbox_h = self.bbox_h(prop_feats)
 
-        # bbox 3d
+        # 三维边界框
         bbox_x3d = self.bbox_x3d(prop_feats)
         bbox_y3d = self.bbox_y3d(prop_feats)
         bbox_z3d = self.bbox_z3d(prop_feats)
@@ -183,13 +193,13 @@ class RPN(nn.Module):
 
         cls_loc = self.cls_loc(prop_feats_loc)
 
-        # bbox 2d
+        # 二维边界框(Local局部卷积走深度感知版)
         bbox_x_loc = self.bbox_x_loc(prop_feats_loc)
         bbox_y_loc = self.bbox_y_loc(prop_feats_loc)
         bbox_w_loc = self.bbox_w_loc(prop_feats_loc)
         bbox_h_loc = self.bbox_h_loc(prop_feats_loc)
 
-        # bbox 3d
+        # 三维边界框(Local局部卷积走深度感知版)
         bbox_x3d_loc = self.bbox_x3d_loc(prop_feats_loc)
         bbox_y3d_loc = self.bbox_y3d_loc(prop_feats_loc)
         bbox_z3d_loc = self.bbox_z3d_loc(prop_feats_loc)
@@ -200,13 +210,13 @@ class RPN(nn.Module):
 
         cls_ble = self.sigmoid(self.cls_ble)
 
-        # bbox 2d
+        # 二维边界框blend
         bbox_x_ble = self.sigmoid(self.bbox_x_ble)
         bbox_y_ble = self.sigmoid(self.bbox_y_ble)
         bbox_w_ble = self.sigmoid(self.bbox_w_ble)
         bbox_h_ble = self.sigmoid(self.bbox_h_ble)
 
-        # bbox 3d
+        # 三维边界框blend
         bbox_x3d_ble = self.sigmoid(self.bbox_x3d_ble)
         bbox_y3d_ble = self.sigmoid(self.bbox_y3d_ble)
         bbox_z3d_ble = self.sigmoid(self.bbox_z3d_ble)
@@ -215,7 +225,7 @@ class RPN(nn.Module):
         bbox_l3d_ble = self.sigmoid(self.bbox_l3d_ble)
         bbox_rY3d_ble = self.sigmoid(self.bbox_rY3d_ble)
 
-        # blend
+        # blend 这是注意力？
         cls = (cls * cls_ble) + (cls_loc * (1 - cls_ble))
 
         bbox_x = (bbox_x * bbox_x_ble) + (bbox_x_loc * (1 - bbox_x_ble))
@@ -234,13 +244,13 @@ class RPN(nn.Module):
         feat_h = cls.size(2)
         feat_w = cls.size(3)
 
-        # reshape for cross entropy
+        # 为Cross Entropy重塑张量形态
         cls = cls.view(batch_size, self.num_classes, feat_h * self.num_anchors, feat_w)
 
-        # score probabilities
+        # 概率得分
         prob = self.softmax(cls)
 
-        # reshape for consistency
+        # 为Consistency重塑张量形态
         bbox_x = flatten_tensor(bbox_x.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_y = flatten_tensor(bbox_y.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_w = flatten_tensor(bbox_w.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
@@ -254,7 +264,7 @@ class RPN(nn.Module):
         bbox_l3d = flatten_tensor(bbox_l3d.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
         bbox_rY3d = flatten_tensor(bbox_rY3d.view(batch_size, 1, feat_h * self.num_anchors, feat_w))
 
-        # bundle
+        # 组合
         bbox_2d = torch.cat((bbox_x, bbox_y, bbox_w, bbox_h), dim=2)
         bbox_3d = torch.cat((bbox_x3d, bbox_y3d, bbox_z3d, bbox_w3d, bbox_h3d, bbox_l3d, bbox_rY3d), dim=2)
 
@@ -298,11 +308,11 @@ def build(conf, phase='train'):
                        'bbox_l3d', 'bbox_z3d', 'bbox_rY3d']
 
         # prop_feats
-        src_weight_key = 'module.{}.0.weight'.format('prop_feats')
-        src_bias_key = 'module.{}.0.bias'.format('prop_feats')
+        src_weight_key = 'module.{}.0.conv1_5.weight'.format('prop_feats')
+        src_bias_key = 'module.{}.0.conv1_5.bias'.format('prop_feats')
 
-        dst_weight_key = 'module.{}.0.group_conv.weight'.format('prop_feats_loc')
-        dst_bias_key = 'module.{}.0.group_conv.bias'.format('prop_feats_loc')
+        dst_weight_key = 'module.{}.0.group_conv.conv1_5.weight'.format('prop_feats_loc')
+        dst_bias_key = 'module.{}.0.group_conv.conv1_5.bias'.format('prop_feats_loc')
 
         src_weights[dst_weight_key] = src_weights[src_weight_key].repeat(conf.bins, 1, 1, 1)
         src_weights[dst_bias_key] = src_weights[src_bias_key].repeat(conf.bins, )
