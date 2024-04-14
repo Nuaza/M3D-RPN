@@ -27,9 +27,8 @@ def Config():
     conf.lr_target = conf.lr * 0.00001
     
     # random
-    # http://arxiv.org/abs/2109.08203 [玄学随机数3407]
-    conf.rng_seed = 3407
-    conf.cuda_seed = 3407
+    conf.rng_seed = 114514
+    conf.cuda_seed = 114514
     
     # misc network
     conf.image_means = [0.485, 0.456, 0.406]
