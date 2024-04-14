@@ -100,6 +100,7 @@ class RPN(nn.Module):
         self.prop_feats_loc = nn.Sequential(
             # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
             DEConv(dim=1024),
+            RefConv(1024, 128, 3, 1),
             nn.ReLU(inplace=True),
         )
 
@@ -114,20 +115,13 @@ class RPN(nn.Module):
         self.bbox_h_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
 
         # bbox 3d
-        # self.bbox_x3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        # self.bbox_y3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        # self.bbox_z3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        # self.bbox_w3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        # self.bbox_h3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        # self.bbox_l3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        # self.bbox_rY3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_x3d_loc = RefConv(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_y3d_loc = RefConv(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_z3d_loc = RefConv(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_w3d_loc = RefConv(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_h3d_loc = RefConv(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_l3d_loc = RefConv(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
-        self.bbox_rY3d_loc = RefConv(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        self.bbox_x3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        self.bbox_y3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        self.bbox_z3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        self.bbox_w3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        self.bbox_h3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        self.bbox_l3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
+        self.bbox_rY3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
 
         self.cls_ble = nn.Parameter(torch.tensor(10e-5).type(torch.cuda.FloatTensor))
 
