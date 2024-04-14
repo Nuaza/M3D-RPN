@@ -121,7 +121,7 @@ def main(argv):
     logging.info(rpn_net)
 
     # 显示网络参数
-    logging.info(summary(rpn_net, (3, 512, 1760), batch_dim=None, verbose=0))
+    logging.info(summary(rpn_net, (3, 512, 1760), batch_dim=None, verbose=0, col_names=["kernel_size", "output_size", "num_params", "mult_adds"]))
 
     # 设置损失
     criterion_det = RPN_3D_loss(conf)
