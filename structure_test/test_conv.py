@@ -43,4 +43,4 @@ if __name__ == '__main__':
     # logging.info(densenet121_model)
 
     input_shape = (3, 384, 1280)
-    summary(densenet121_model, input_shape)
+    logging.info(summary(densenet121_model, input_shape, verbose=0))

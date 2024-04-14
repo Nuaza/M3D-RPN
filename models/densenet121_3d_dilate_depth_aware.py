@@ -218,7 +218,7 @@ class RPN(nn.Module):
 
         # 三维边界框blend
         bbox_x3d_ble = self.sigmoid(self.bbox_x3d_ble)
-	bbox_y3d_ble = self.sigmoid(self.bbox_y3d_ble)
+        bbox_y3d_ble = self.sigmoid(self.bbox_y3d_ble)
         bbox_z3d_ble = self.sigmoid(self.bbox_z3d_ble)
         bbox_w3d_ble = self.sigmoid(self.bbox_w3d_ble)
         bbox_h3d_ble = self.sigmoid(self.bbox_h3d_ble)
