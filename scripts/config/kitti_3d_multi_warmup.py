@@ -43,10 +43,8 @@ def Config():
     # ----------------------------------------
 
     # scale sampling  
-    # conf.test_scale = 512
-    # conf.crop_size = [512, 1760]
-    conf.test_scale = 384
-    conf.crop_size = [384, 1280]
+    conf.test_scale = 512
+    conf.crop_size = [512, 1760]
     conf.mirror_prob = 0.50
     conf.distort_prob = -1
     
