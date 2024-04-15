@@ -100,6 +100,9 @@ class RPN(nn.Module):
         self.prop_feats_loc = nn.Sequential(
             # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
             DEConv(dim=1024),
+            nn.BatchNorm2d(1024),
+            nn.ReLU(inplace=True),
+            RefConv(1024, 1024, 3, 1),
             nn.ReLU(inplace=True),
         )
 
@@ -113,7 +116,6 @@ class RPN(nn.Module):
         self.bbox_w_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
         self.bbox_h_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
 
-        # 这些个LocalConv2d本质都是分组卷积
         # bbox 3d
         self.bbox_x3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
         self.bbox_y3d_loc = LocalConv2d(self.num_rows, self.prop_feats[0].out_channels, self.num_anchors, 1)
