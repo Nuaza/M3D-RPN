@@ -13,6 +13,7 @@ from models.OREPA import OREPA
 from models.DEConv import DEConv
 from models.LocalConv2d import LocalConv2d
 
+
 def _bn_function_factory(norm, relu, conv):
     def bn_function(*inputs):
         concated_features = torch.cat(inputs, 1)
@@ -28,11 +29,11 @@ class _DenseLayer(nn.Module):
         self.add_module('norm1', nn.BatchNorm2d(num_input_features)),
         self.add_module('relu1', nn.ReLU(inplace=True)),
         self.add_module('conv1', nn.Conv2d(num_input_features, bn_size * growth_rate,
-                        kernel_size=1, stride=1, bias=False)),
+                                           kernel_size=1, stride=1, bias=False)),
         self.add_module('norm2', nn.BatchNorm2d(bn_size * growth_rate)),
         self.add_module('relu2', nn.ReLU(inplace=True)),
         self.add_module('conv2', nn.Conv2d(bn_size * growth_rate, growth_rate,
-                        kernel_size=3, stride=1, padding=1, bias=False)),
+                                           kernel_size=3, stride=1, padding=1, bias=False)),
         self.drop_rate = drop_rate
         self.efficient = efficient
 
@@ -93,6 +94,7 @@ class DenseNet(nn.Module):
         small_inputs (bool) - set to True if images are 32x32. Otherwise assumes images are larger.
         efficient (bool) - set to True to use checkpointing. Much more memory efficient, but slower.
     """
+
     def __init__(self, growth_rate=32, block_config=(6, 12, 24, 16), compression=0.5,
                  num_init_features=64, bn_size=4, drop_rate=0,
                  num_classes=1000, small_inputs=False, efficient=False):
@@ -159,9 +161,11 @@ class DenseNet(nn.Module):
         out = self.classifier(out)
         return out
 
+
 def dilate_layer(layer, val):
     layer.dilation = val
     layer.padding = val
+
 
 def replace_refconv(net):
     net.features.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
@@ -226,8 +230,8 @@ def replace_refconv(net):
     net.features.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
     net.features.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
 
-def change(net):
-    # dilate
+
+def dilate_layers(net):
     dilate_layer(net.features.denseblock4.denselayer1.conv2, (2, 2))
     dilate_layer(net.features.denseblock4.denselayer2.conv2, (2, 2))
     dilate_layer(net.features.denseblock4.denselayer3.conv2, (2, 2))
@@ -245,13 +249,27 @@ def change(net):
     dilate_layer(net.features.denseblock4.denselayer15.conv2, (2, 2))
     dilate_layer(net.features.denseblock4.denselayer16.conv2, (2, 2))
 
-    # replace_refconv(net)
 
+def change(net):
+    dilate_layers(net)
+    replace_refconv(net)
 
-    # net.features.CDF = nn.Sequential(
-    #     RefConv(1024, 1024, stride=1, kernel_size=3)
-    # )
-
+    net.features.CDF = nn.Sequential(
+        RefConv(1024, 1024, stride=1, kernel_size=3)
+    )
+    net.features.prop_feats = nn.Sequential(
+        # nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
+        DEConv(dim=1024),
+        nn.ReLU(inplace=True),
+    )
+    net.features.prop_feats_loc = nn.Sequential(
+        # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
+        DEConv(dim=1024),
+        nn.BatchNorm2d(1024),
+        nn.ReLU(inplace=True),
+        RefConv(1024, 1024, stride=1, kernel_size=3),
+        nn.ReLU(inplace=True),
+    )
 
 if __name__ == '__main__':
     net = DenseNet()
@@ -261,6 +279,5 @@ if __name__ == '__main__':
     print("Number of parameter: %.2fM" % (total / 1e6))
     print("==========================================================================================")
     # flops, params = profile(net, (torch.randn(1, 3, 384, 1280).cuda(),))
-    flops, params = profile(net, (torch.randn(1, 3, 384, 1280).cuda(),))
+    flops, params = profile(net, (torch.randn(1, 3, 320, 320).cuda(),))
     print('flops: %.2f M, params: %.2f M' % (flops / 1e6, params / 1e6))
-

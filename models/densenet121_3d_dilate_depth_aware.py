@@ -148,7 +148,6 @@ class RPN(nn.Module):
         self.prop_feats_loc = nn.Sequential(
             # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
             DEConv(dim=1024),
-            nn.BatchNorm2d(1024),
             nn.ReLU(inplace=True),
             self.CDF,
             nn.ReLU(inplace=True),
