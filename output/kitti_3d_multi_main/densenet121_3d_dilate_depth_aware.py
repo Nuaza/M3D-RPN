@@ -14,6 +14,69 @@ def dilate_layer(layer, val):
     layer.padding = val
 
 
+def replace_refconv(net):
+    net.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock1.denselayer2.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock1.denselayer3.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock1.denselayer4.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock1.denselayer5.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock1.denselayer6.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+
+    net.denseblock2.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer2.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer3.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer4.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer5.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer6.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer7.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer8.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer9.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock2.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+
+    net.denseblock3.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer2.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer3.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer4.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer5.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer6.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer7.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer8.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer9.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer13.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer14.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer17.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer18.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer19.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer20.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer21.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer22.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer23.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock3.denselayer24.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+
+    net.denseblock4.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer2.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer3.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer4.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer5.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer6.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer7.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer8.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer9.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer13.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer14.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+    net.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+
 class RPN(nn.Module):
 
     def __init__(self, phase, base, conf):
@@ -45,26 +108,11 @@ class RPN(nn.Module):
         # self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
         # Replace RefConv
-        # self.base.denseblock1.denselayer1.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock2.denselayer10.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock2.denselayer11.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock2.denselayer12.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        #
-        # self.base.denseblock3.denselayer19.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock3.denselayer20.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock3.denselayer21.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock3.denselayer22.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock3.denselayer23.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock3.denselayer24.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        #
-        # self.base.denseblock4.denselayer13.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock4.denselayer14.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock4.denselayer15.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
-        # self.base.denseblock4.denselayer16.conv2 = RefConv(128, 32, stride=1, kernel_size=3)
+        replace_refconv(self.base)
 
         # Cross-Dimension Focusing Module
         self.CDF = nn.Sequential(
-            RefConv(128, 32, stride=1, kernel_size=3)
+            RefConv(1024, 1024, stride=1, kernel_size=3)
         )
 
         # settings
@@ -102,7 +150,7 @@ class RPN(nn.Module):
             DEConv(dim=1024),
             nn.BatchNorm2d(1024),
             nn.ReLU(inplace=True),
-            RefConv(1024, 1024, 3, 1),
+            self.CDF,
             nn.ReLU(inplace=True),
         )
 

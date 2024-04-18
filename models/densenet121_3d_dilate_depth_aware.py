@@ -150,7 +150,7 @@ class RPN(nn.Module):
             DEConv(dim=1024),
             nn.BatchNorm2d(1024),
             nn.ReLU(inplace=True),
-            self.CDF(),
+            self.CDF,
             nn.ReLU(inplace=True),
         )
 
