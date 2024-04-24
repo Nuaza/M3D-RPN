@@ -112,7 +112,8 @@ class RPN(nn.Module):
 
         # Cross-Dimension Focusing Module
         self.CDF = nn.Sequential(
-            RefConv(1024, 1024, stride=1, kernel_size=3)
+            # RefConv(1024, 1024, stride=1, kernel_size=3)
+            OREPA(1024, 1024)
         )
 
         # settings

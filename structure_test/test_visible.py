@@ -1,13 +1,13 @@
 # https://zhuanlan.zhihu.com/p/523211244
 import torch
-from torchvision.models.segmentation import deeplabv3_resnet50
-from torchvision import models
 from torchvision import transforms
 import numpy as np
 import torchvision
 from PIL import Image
 import cv2
 import os
+
+from test_RPN import DenseNet, change
 
 
 def forward_hook(module, data_input, data_output):
@@ -21,9 +21,10 @@ if __name__ == '__main__':
     images = os.listdir(img_dir)
 
     # TODO:怎么导入训练好的pt权重
-    weight = "../output/kitti_3d_multi_main/weights/exp1-4.pt"
+    weight = "../output/kitti_3d_multi_main/weights/exp3-1.pt"
     state_dict = torch.load(weight)
-    model = models.densenet121(pretrained=False)
+    model = DenseNet()
+    # change(model)
     model.load_state_dict(state_dict, strict=False)
     # model = deeplabv3_resnet50(weights=True, progress=False)
     # model = model.eval()
@@ -32,9 +33,9 @@ if __name__ == '__main__':
     input_H, input_W = 256, 256
     # 生成一个和输入图像大小相同的零矩阵，用于更新梯度
     heatmap = np.zeros([input_H, input_W])
-    # print(model)
+    print(model)
 
-    layer = model.features.denseblock4.denselayer1
+    layer = model.features.denseblock3.denselayer24
     # print(layer)
 
     # 遍历文件夹中的所有图像
@@ -70,7 +71,7 @@ if __name__ == '__main__':
         feature_map = fmap_block[0].mean(dim=1, keepdim=False).squeeze()
 
         # 对二维张量中心点(标量)进行backward
-        feature_map[(feature_map.shape[0]//2-1)][(feature_map.shape[1]//2-1)].backward(retain_graph=True)
+        feature_map[(feature_map.shape[0] // 2 - 1)][(feature_map.shape[1] // 2 - 1)].backward(retain_graph=True)
 
         # 对输入层的梯度求绝对值
         grad = torch.abs(input_tensor.grad)
@@ -87,6 +88,6 @@ if __name__ == '__main__':
     cam = cam / cam.max()
 
     # 可视化
-    cam = cv2.applyColorMap(np.uint8(cam*255), cv2.COLORMAP_JET)
+    cam = cv2.applyColorMap(np.uint8(cam * 255), cv2.COLORMAP_TURBO)
     cam = cv2.cvtColor(cam, cv2.COLOR_BGR2RGB)
     Image.fromarray(cam).save("heatmap4_1.png")

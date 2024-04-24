@@ -255,29 +255,34 @@ def change(net):
     replace_refconv(net)
 
     net.features.CDF = nn.Sequential(
-        RefConv(1024, 1024, stride=1, kernel_size=3)
+        # DEConv(dim=1024),
+        # RefConv(1024, 1024, stride=1, kernel_size=3, groups=1024)
+        OREPA(1024, 1024)
     )
-    net.features.prop_feats = nn.Sequential(
-        # nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
-        DEConv(dim=1024),
-        nn.ReLU(inplace=True),
-    )
-    net.features.prop_feats_loc = nn.Sequential(
-        # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
-        DEConv(dim=1024),
-        nn.BatchNorm2d(1024),
-        nn.ReLU(inplace=True),
-        RefConv(1024, 1024, stride=1, kernel_size=3),
-        nn.ReLU(inplace=True),
-    )
+    # net.features.prop_feats = nn.Sequential(
+    #     # nn.Conv2d(1024, 512, 3, padding=1),
+    #     DEConv(dim=1024),
+    #     nn.ReLU(inplace=True),
+    # )
+    # net.features.prop_feats_loc = nn.Sequential(
+    #     # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
+    #     DEConv(dim=1024),
+    #     nn.BatchNorm2d(1024),
+    #     # nn.ReLU(inplace=True),
+    #     # RefConv(1024, 1024, stride=1, kernel_size=3),
+    #     # nn.ReLU(inplace=True),
+    # )
 
 if __name__ == '__main__':
     net = DenseNet()
     change(net)
-    summary(net, (3, 384, 1280))
+    print(net)
+
+    # summary(net, (3, 512, 1760))
+    summary(net, (3, 224, 224))
     total = sum([param.nelement() for param in net.parameters()])
     print("Number of parameter: %.2fM" % (total / 1e6))
     print("==========================================================================================")
-    # flops, params = profile(net, (torch.randn(1, 3, 384, 1280).cuda(),))
-    flops, params = profile(net, (torch.randn(1, 3, 320, 320).cuda(),))
+    flops, params = profile(net, (torch.randn(1, 3, 224, 224).cuda(),))
+    # flops, params = profile(net, (torch.randn(1, 3, 512, 1760).cuda(),))
     print('flops: %.2f M, params: %.2f M' % (flops / 1e6, params / 1e6))
