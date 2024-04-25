@@ -108,11 +108,12 @@ class RPN(nn.Module):
         # self.base.denseblock2.denselayer1.conv1 = PConv(128, 1, kernel_size=1)
 
         # Replace RefConv
-        replace_refconv(self.base)
+        # replace_refconv(self.base)
 
         # Cross-Dimension Focusing Module
         self.CDF = nn.Sequential(
-            RefConv(1024, 1024, stride=1, kernel_size=3)
+            # RefConv(1024, 1024, stride=1, kernel_size=3)
+            OREPA(1024, 1024)
         )
 
         # settings
@@ -125,7 +126,7 @@ class RPN(nn.Module):
         self.prop_feats = nn.Sequential(
             # nn.Conv2d(self.base[-1].num_features, 512, 3, padding=1),
             DEConv(dim=1024),
-            nn.ReLU(inplace=True),
+            # nn.ReLU(inplace=True),
         )
         # outputs
         self.cls = nn.Conv2d(self.prop_feats[0].out_channels, self.num_classes * self.num_anchors, 1, )
@@ -148,9 +149,9 @@ class RPN(nn.Module):
         self.prop_feats_loc = nn.Sequential(
             # LocalConv2d(self.num_rows, self.base[-1].num_features, 512, 3, padding=1),
             DEConv(dim=1024),
-            nn.ReLU(inplace=True),
+            # nn.ReLU(inplace=True),
             self.CDF,
-            nn.ReLU(inplace=True),
+            # nn.ReLU(inplace=True),
         )
 
         # outputs
